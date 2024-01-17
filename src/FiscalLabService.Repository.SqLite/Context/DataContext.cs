@@ -10,12 +10,13 @@ public class DataContext : DbContext
     public DataContext(
         DbContextOptions<DataContext> options) : base(options)
     {
+        Database.EnsureCreated();
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfiguration(new PlantConfig());
-        modelBuilder.ApplyConfiguration(new PlantEmailConfig());
-        base.OnModelCreating(modelBuilder);
-    }
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     modelBuilder.ApplyConfiguration(new PlantConfig());
+    //     modelBuilder.ApplyConfiguration(new PlantEmailConfig());
+    //     base.OnModelCreating(modelBuilder);
+    // }
 }

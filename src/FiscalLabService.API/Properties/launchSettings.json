@@ -3,9 +3,9 @@
     "FiscalLabService.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5020",
+      "applicationUrl": "http://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

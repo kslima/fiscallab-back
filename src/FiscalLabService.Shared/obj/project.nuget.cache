@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "p3G/geZ5c70YvYFPIwXq5an0HzldWa/ZYFyzUufMTtk4VgqBOvv2jTw/n/d66fIB2dfz3JpAVL3HLIM4Q04fTw==",
+  "dgSpecHash": "YsfmYxRh7/YbbMuyJ9fgMKxOGZgDGdcZ/CdyIytftMQVgujdHewr/21Eg1P4rvwmXS9wXVWovSBWUfDmmSFOUA==",
   "success": true,
   "projectFilePath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Shared\\FiscalLabService.Shared.csproj",
   "expectedPackageFiles": [
@@ -36,7 +36,10 @@
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\system.diagnostics.eventlog\\8.0.0\\system.diagnostics.eventlog.8.0.0.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
-    "C:\\Users\\kleuber.lima\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
+    "C:\\Users\\kleuber.lima\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
+    "C:\\Users\\kleuber.lima\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.26\\microsoft.netcore.app.ref.6.0.26.nupkg.sha512",
+    "C:\\Users\\kleuber.lima\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.26\\microsoft.windowsdesktop.app.ref.6.0.26.nupkg.sha512",
+    "C:\\Users\\kleuber.lima\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.26\\microsoft.aspnetcore.app.ref.6.0.26.nupkg.sha512"
   ],
   "logs": []
 }
