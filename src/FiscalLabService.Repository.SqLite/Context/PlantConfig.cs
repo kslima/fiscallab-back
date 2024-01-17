@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FiscalLabService.Repository.PostgreSql.Context;
+namespace FiscalLabService.Repository.SqLite.Context;
 
 public class PlantConfig : IEntityTypeConfiguration<Plant>
 {

@@ -1,9 +1,9 @@
 ﻿using FiscalLabService.Domain.Entities;
 using FiscalLabService.Domain.Interfaces;
-using FiscalLabService.Repository.PostgreSql.Context;
+using FiscalLabService.Repository.SqLite.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace FiscalLabService.Repository.PostgreSql.Repositories;
+namespace FiscalLabService.Repository.SqLite.Repositories;
 
 public class PlantRepository : IPlantRepository
 {

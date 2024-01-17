@@ -1,7 +1,7 @@
 ﻿using FiscalLabService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace FiscalLabService.Repository.PostgreSql.Context;
+namespace FiscalLabService.Repository.SqLite.Context;
 
 public class DataContext : DbContext
 {
@@ -10,7 +10,6 @@ public class DataContext : DbContext
     public DataContext(
         DbContextOptions<DataContext> options) : base(options)
     {
-        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
