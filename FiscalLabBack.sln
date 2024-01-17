@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiscalLabService.Domain", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiscalLabService.App", "src\FiscalLabService.App\FiscalLabService.App.csproj", "{64C88C0E-E679-435B-8931-EE7DFAB19C06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiscalLabService.Repository.PostgreSql", "src\FiscalLabService.Repository.PostgreSql\FiscalLabService.Repository.PostgreSql.csproj", "{DCEAB664-1A22-4917-B443-8A755D516A18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiscalLabService.Repository.SqLite", "src\FiscalLabService.Repository.SqLite\FiscalLabService.Repository.SqLite.csproj", "{DCEAB664-1A22-4917-B443-8A755D516A18}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiscalLabService.Shared", "src\FiscalLabService.Shared\FiscalLabService.Shared.csproj", "{06474672-9E77-43BD-A255-0C1B8CE57173}"
 EndProject

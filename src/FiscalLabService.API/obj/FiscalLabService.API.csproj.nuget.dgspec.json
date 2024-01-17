@@ -29,8 +29,8 @@
               "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.App\\FiscalLabService.App.csproj": {
                 "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.App\\FiscalLabService.App.csproj"
               },
-              "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\FiscalLabService.Repository.PostgreSql.csproj": {
-                "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\FiscalLabService.Repository.PostgreSql.csproj"
+              "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.SqLite\\FiscalLabService.Repository.SqLite.csproj": {
+                "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.SqLite\\FiscalLabService.Repository.SqLite.csproj"
               }
             }
           }
@@ -189,14 +189,14 @@
         }
       }
     },
-    "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\FiscalLabService.Repository.PostgreSql.csproj": {
+    "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.SqLite\\FiscalLabService.Repository.SqLite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\FiscalLabService.Repository.PostgreSql.csproj",
-        "projectName": "FiscalLabService.Repository.PostgreSql",
-        "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\FiscalLabService.Repository.PostgreSql.csproj",
+        "projectUniqueName": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.SqLite\\FiscalLabService.Repository.SqLite.csproj",
+        "projectName": "FiscalLabService.Repository.SqLite",
+        "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.SqLite\\FiscalLabService.Repository.SqLite.csproj",
         "packagesPath": "C:\\Users\\kleuber.lima\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\obj\\",
+        "outputPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.SqLite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kleuber.lima\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -233,9 +233,9 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.1, )"
             }
           },
           "imports": [
