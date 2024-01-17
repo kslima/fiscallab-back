@@ -1,0 +1,17 @@
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\bin\Debug\net8.0\FiscalLabService.Repository.PostgreSql.deps.json
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\bin\Debug\net8.0\FiscalLabService.Repository.PostgreSql.dll
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\bin\Debug\net8.0\FiscalLabService.Repository.PostgreSql.pdb
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\bin\Debug\net8.0\FiscalLabService.Domain.dll
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\bin\Debug\net8.0\FiscalLabService.Domain.pdb
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\FiscalLabService.Repository.PostgreSql.csproj.AssemblyReference.cache
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\FiscalLabService.Repository.PostgreSql.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\FiscalLabService.Repository.PostgreSql.AssemblyInfoInputs.cache
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\FiscalLabService.Repository.PostgreSql.AssemblyInfo.cs
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\FiscalLabService.Repository.PostgreSql.csproj.CoreCompileInputs.cache
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\FiscalLabService.Repository.PostgreSql.csproj.CopyComplete
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\FiscalLabService.Repository.PostgreSql.dll
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\refint\FiscalLabService.Repository.PostgreSql.dll
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\FiscalLabService.Repository.PostgreSql.pdb
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\ref\FiscalLabService.Repository.PostgreSql.dll
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\bin\Debug\net8.0\FiscalLabService.Repository.PostgreSql.runtimeconfig.json
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Repository.PostgreSql\obj\Debug\net8.0\FiscalLabService.Repository.PostgreSql.genruntimeconfig.cache

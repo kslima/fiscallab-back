@@ -1,0 +1,11 @@
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\bin\Debug\net8.0\FiscalLabService.Domain.deps.json
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\bin\Debug\net8.0\FiscalLabService.Domain.dll
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\bin\Debug\net8.0\FiscalLabService.Domain.pdb
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\obj\Debug\net8.0\FiscalLabService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\obj\Debug\net8.0\FiscalLabService.Domain.AssemblyInfoInputs.cache
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\obj\Debug\net8.0\FiscalLabService.Domain.AssemblyInfo.cs
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\obj\Debug\net8.0\FiscalLabService.Domain.csproj.CoreCompileInputs.cache
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\obj\Debug\net8.0\FiscalLabService.Domain.dll
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\obj\Debug\net8.0\refint\FiscalLabService.Domain.dll
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\obj\Debug\net8.0\FiscalLabService.Domain.pdb
+C:\Users\kleuder.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.Domain\obj\Debug\net8.0\ref\FiscalLabService.Domain.dll

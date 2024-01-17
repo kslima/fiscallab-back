@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "+HC4NNm7MuuVVePbsS1daqC/QovFa3R41MhHAqy55gA=",
+  "Source": "FiscalLabService.API",
+  "BasePath": "_content/FiscalLabService.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
