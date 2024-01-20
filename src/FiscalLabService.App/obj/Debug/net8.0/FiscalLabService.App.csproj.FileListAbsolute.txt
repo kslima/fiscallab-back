@@ -29,3 +29,5 @@ C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\Fiscal
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\refint\FiscalLabService.App.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\FiscalLabService.App.pdb
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\ref\FiscalLabService.App.dll
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\bin\Debug\net8.0\FiscalLabService.Shared.dll
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\bin\Debug\net8.0\FiscalLabService.Shared.pdb

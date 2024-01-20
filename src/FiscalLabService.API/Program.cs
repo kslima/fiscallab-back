@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using FiscalLabService.App.Extensions;
 using FiscalLabService.Repository.PostgreSql.Extensions;
 
@@ -6,6 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
     .AddUserSecrets<Program>();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

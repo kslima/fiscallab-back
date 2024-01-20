@@ -21,6 +21,24 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("FiscalLabService.Domain.Entities.Association", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("associations", (string)null);
+                });
+
             modelBuilder.Entity("FiscalLabService.Domain.Entities.Plant", b =>
                 {
                     b.Property<string>("Id")
@@ -43,6 +61,64 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("plants", (string)null);
+                });
+
+            modelBuilder.Entity("FiscalLabService.Domain.Entities.Association", b =>
+                {
+                    b.OwnsOne("FiscalLabService.Domain.ValueObjects.Address", "Address", b1 =>
+                        {
+                            b1.Property<string>("AssociationId")
+                                .HasColumnType("character varying(36)");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
+                                .HasColumnName("city");
+
+                            b1.Property<string>("State")
+                                .IsRequired()
+                                .HasMaxLength(2)
+                                .HasColumnType("character varying(2)")
+                                .HasColumnName("state");
+
+                            b1.HasKey("AssociationId");
+
+                            b1.ToTable("associations");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AssociationId");
+                        });
+
+                    b.OwnsMany("FiscalLabService.Domain.ValueObjects.Email", "Emails", b1 =>
+                        {
+                            b1.Property<string>("association_id")
+                                .HasColumnType("character varying(36)");
+
+                            b1.Property<int>("id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("id"));
+
+                            b1.Property<string>("Address")
+                                .IsRequired()
+                                .HasMaxLength(255)
+                                .HasColumnType("character varying(255)")
+                                .HasColumnName("email_address");
+
+                            b1.HasKey("association_id", "id");
+
+                            b1.ToTable("emails", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("association_id");
+                        });
+
+                    b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("Emails");
                 });
 
             modelBuilder.Entity("FiscalLabService.Domain.Entities.Plant", b =>

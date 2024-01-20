@@ -721,6 +721,7 @@
       "FiscalLabService.App/1.0.0": {
         "dependencies": {
           "FiscalLabService.Domain": "1.0.0",
+          "FiscalLabService.Shared": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
         },
         "runtime": {

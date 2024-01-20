@@ -6,6 +6,7 @@ namespace FiscalLabService.Repository.PostgreSql.Context;
 public class ApplicationContext : DbContext
 {
     public DbSet<Plant> Plants { get; set; }
+    public DbSet<Association> Associations { get; set; }
     
     public ApplicationContext(
         DbContextOptions<ApplicationContext> options) : base(options)
@@ -16,6 +17,7 @@ public class ApplicationContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new PlantConfig());
+        modelBuilder.ApplyConfiguration(new AssociationConfig());
         base.OnModelCreating(modelBuilder);
     }
 }

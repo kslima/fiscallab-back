@@ -23,6 +23,7 @@ public static class DependencyInjection
         );
 
         services.AddScoped<IPlantRepository, PlantRepository>();
+        services.AddScoped<IAssociationRepository, AssociationRepository>();
         return services;
     }
 

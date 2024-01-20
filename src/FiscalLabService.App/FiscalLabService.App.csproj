@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\FiscalLabService.Domain\FiscalLabService.Domain.csproj" />
+      <ProjectReference Include="..\FiscalLabService.Shared\FiscalLabService.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>

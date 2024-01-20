@@ -4,6 +4,7 @@ using FiscalLabService.App.Interfaces;
 using FiscalLabService.App.Models;
 using FiscalLabService.Domain.Entities;
 using FiscalLabService.Domain.Interfaces;
+using FiscalLabService.Shared.Responses;
 
 namespace FiscalLabService.App.Services;
 
@@ -16,7 +17,7 @@ public class PlantService : IPlantService
         _plantRepository = plantRepository;
     }
 
-    public async Task<UpsertPlantDto> UpsertPlantAsync(UpsertPlantsModel model)
+    public async Task<Result<UpsertPlantDto>> UpsertAsync(UpsertPlantsModel model)
     {
         var toUpsertPlantIds = model.Plants.Select(p => p.Id).ToList();
         var existingPlants = await _plantRepository.GetByIdsAsync(toUpsertPlantIds);
@@ -44,6 +45,16 @@ public class PlantService : IPlantService
             .Select(p => p.AsPlantDto())
             .ToList();
 
-        return new UpsertPlantDto { Plants = allPlants };
+        var dto = new UpsertPlantDto { Plants = allPlants };
+        return Result<UpsertPlantDto>.Success(dto);
+    }
+
+    public async Task<Result<List<PlantDto>>> GetAllAsync()
+    {
+        var plants = await _plantRepository.GetAllAsync();
+
+        var plantsDto = plants.Select(p => p.AsPlantDto()).ToList();
+        return Result<List<PlantDto>>
+            .Success(plantsDto);
     }
 }

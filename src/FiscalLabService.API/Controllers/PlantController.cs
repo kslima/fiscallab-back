@@ -18,7 +18,14 @@ public class PlantController : ControllerBase
     [HttpPost("upsert")]
     public async Task<IActionResult> UpsertAsync(UpsertPlantsModel model)
     {
-        var result = await _plantService.UpsertPlantAsync(model);
+        var result = await _plantService.UpsertAsync(model);
+        return Ok(result);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        var result = await _plantService.GetAllAsync();
         return Ok(result);
     }
 }
