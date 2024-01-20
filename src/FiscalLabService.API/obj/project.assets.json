@@ -3984,6 +3984,7 @@
       "FiscalLabService.App >= 1.0.0",
       "FiscalLabService.Repository.PostgreSql >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.1",
+      "Microsoft.Extensions.Configuration.UserSecrets >= 8.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
@@ -4036,6 +4037,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[8.0.1, )"
+          },
+          "Microsoft.Extensions.Configuration.UserSecrets": {
+            "target": "Package",
+            "version": "[8.0.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

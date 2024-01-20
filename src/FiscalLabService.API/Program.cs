@@ -4,6 +4,9 @@ using FiscalLabService.Repository.PostgreSql.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 
+builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+    .AddUserSecrets<Program>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -11,8 +11,7 @@ public class DataContextFactory : IDesignTimeDbContextFactory<ApplicationContext
     {
         var configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .AddEnvironmentVariables()
+            .AddUserSecrets<Program>()
             .Build();
 
         var postgresOptions = configuration
