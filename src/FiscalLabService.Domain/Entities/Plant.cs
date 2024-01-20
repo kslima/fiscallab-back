@@ -1,8 +1,10 @@
-﻿namespace FiscalLabService.Domain.Entities;
+﻿using FiscalLabService.Domain.ValueObjects;
+
+namespace FiscalLabService.Domain.Entities;
 
 public class Plant
 {
-    public long Id { get; set; }
+    public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
-    public List<PlantEmail> Emails { get; set; } = new();
+    public Address Address { get; set; } = null!;
 }

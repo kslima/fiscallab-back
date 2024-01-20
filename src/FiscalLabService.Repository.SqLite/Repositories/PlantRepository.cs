@@ -8,7 +8,6 @@ namespace FiscalLabService.Repository.SqLite.Repositories;
 public class PlantRepository : IPlantRepository
 {
     private readonly DataContext _context;
-
     public PlantRepository(DataContext context)
     {
         _context = context;
@@ -21,18 +20,17 @@ public class PlantRepository : IPlantRepository
         return plant;
     }
 
-    public async Task<Plant> UpdateAsync(long id, Plant plant)
+    public async Task<Plant> UpdateAsync(string id, Plant plant)
     {
-        plant.Id = id;
         _context.Update(plant);
         await _context.SaveChangesAsync();
         return plant;
     }
 
-    public async Task<Plant?> GetAsync(long id)
+    public async Task<Plant?> GetAsync(string id)
     {
         return await _context.Plants
-            .Include(p => p.Emails)
+            .Include(p => p.Address)
             .FirstOrDefaultAsync(p => p.Id.Equals(id));
     }
 
@@ -40,7 +38,7 @@ public class PlantRepository : IPlantRepository
     {
         return await _context.Plants
             .AsNoTracking()
-            .Include(p => p.Emails)
+            .Include(p => p.Address)
             .ToListAsync();
     }
 }
