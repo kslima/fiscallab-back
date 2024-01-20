@@ -12,33 +12,47 @@ public class PlantRepository : IPlantRepository
     {
         _context = context;
     }
-
-    public async Task<Plant> CreateAsync(Plant plant)
+    
+    public async Task<List<Plant>> CreateManyAsync(List<Plant> plants)
     {
-        await _context.Plants.AddAsync(plant);
+        await _context.Plants.AddRangeAsync(plants);
         await _context.SaveChangesAsync();
-        return plant;
+        return plants;
     }
 
-    public async Task<Plant> UpdateAsync(string id, Plant plant)
+    public async Task<List<Plant>> UpdateManyAsync(List<Plant> plants)
     {
-        _context.Update(plant);
+        var plantsToUpdateIds = plants.Select(p => p.Id);
+
+        var plantsToUpdate = _context.Plants
+            .Where(p => plantsToUpdateIds.Contains(p.Id))
+            .ToList();
+        
+        foreach (var plant in plantsToUpdate)
+        {
+            var updatedPlant = plants.First(p => p.Id.Equals(plant.Id));
+            plant.Name = updatedPlant.Name;
+            plant.Cnpj = updatedPlant.Cnpj;
+            plant.Address = updatedPlant.Address;
+        }
+        
+        _context.Plants.UpdateRange(plantsToUpdate);
         await _context.SaveChangesAsync();
-        return plant;
+        return plantsToUpdate;
     }
 
-    public async Task<Plant?> GetAsync(string id)
+    public async Task<List<Plant>> GetByIdsAsync(List<string> ids)
     {
         return await _context.Plants
-            .Include(p => p.Address)
-            .FirstOrDefaultAsync(p => p.Id.Equals(id));
+            .AsNoTracking()
+            .Where(p => ids.Contains(p.Id))
+            .ToListAsync();
     }
 
     public async Task<List<Plant>> GetAllAsync()
     {
         return await _context.Plants
             .AsNoTracking()
-            .Include(p => p.Address)
             .ToListAsync();
     }
 }

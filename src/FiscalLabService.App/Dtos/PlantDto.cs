@@ -2,7 +2,8 @@
 
 public class PlantDto
 {
-    public long Id { get; set; } 
+    public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
-    public List<string> Emails { get; set; } = new();
+    public string Cnpj { get; set; } = string.Empty;
+    public AddressDto Address { get; set; } = null!;
 }

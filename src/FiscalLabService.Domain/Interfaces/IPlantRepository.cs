@@ -4,8 +4,8 @@ namespace FiscalLabService.Domain.Interfaces;
 
 public interface IPlantRepository
 {
-    Task<Plant> CreateAsync(Plant plant);
-    Task<Plant> UpdateAsync(string id, Plant plant);
-    Task<Plant?> GetAsync(string id);
+    Task<List<Plant>> CreateManyAsync(List<Plant> plants);
+    Task<List<Plant>> UpdateManyAsync(List<Plant> plants);
+    Task<List<Plant>> GetByIdsAsync(List<string> ids);
     Task<List<Plant>> GetAllAsync();
 }

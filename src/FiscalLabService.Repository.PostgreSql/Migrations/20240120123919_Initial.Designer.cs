@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FiscalLabService.Repository.PostgreSql.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240120120150_Initial")]
+    [Migration("20240120123919_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -27,12 +27,20 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
             modelBuilder.Entity("FiscalLabService.Domain.Entities.Plant", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
                         .HasColumnName("id");
+
+                    b.Property<string>("Cnpj")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("character varying(14)")
+                        .HasColumnName("cnpj");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasColumnName("name");
 
                     b.HasKey("Id");
@@ -45,16 +53,18 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                     b.OwnsOne("FiscalLabService.Domain.ValueObjects.Address", "Address", b1 =>
                         {
                             b1.Property<string>("PlantId")
-                                .HasColumnType("text");
+                                .HasColumnType("character varying(36)");
 
                             b1.Property<string>("City")
                                 .IsRequired()
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("address");
 
                             b1.Property<string>("State")
                                 .IsRequired()
-                                .HasColumnType("text")
+                                .HasMaxLength(2)
+                                .HasColumnType("character varying(2)")
                                 .HasColumnName("state");
 
                             b1.HasKey("PlantId");
