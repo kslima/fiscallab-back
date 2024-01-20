@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FiscalLabService.API.Handlers;
 using FiscalLabService.App.Extensions;
 using FiscalLabService.Repository.PostgreSql.Extensions;
 
@@ -19,6 +20,10 @@ builder.Services.AddControllers()
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services
     .AddSqLiteRepositoryDependencies(builder.Configuration)
     .AddAppDependencies();
@@ -43,10 +48,11 @@ if (app.Environment.IsDevelopment())
     app.UseCors(devCorsPolicy);
 }
 
-app.UseHttpsRedirection();
 
+app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseExceptionHandler();
 
 app.Run();
