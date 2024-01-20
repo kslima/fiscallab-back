@@ -2,7 +2,7 @@
 
 namespace FiscalLabService.App.Models;
 
-public class UpsertAssociationModel
+public class UpsertAssociationsModel
 {
     public List<AssociationDto> Associations { get; set; } = [];
 }

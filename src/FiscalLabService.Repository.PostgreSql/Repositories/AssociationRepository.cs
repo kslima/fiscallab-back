@@ -22,10 +22,10 @@ public class AssociationRepository : IAssociationRepository
 
     public async Task<List<Association>> UpdateManyAsync(List<Association> associations)
     {
-        var associationsToUpdateIds = associations.Select(p => p.Id);
+        var associationIds = associations.Select(p => p.Id);
 
         var associationsToUpdate = _context.Associations
-            .Where(p => associationsToUpdateIds.Contains(p.Id))
+            .Where(p => associationIds.Contains(p.Id))
             .ToList();
         
         foreach (var association in associationsToUpdate)

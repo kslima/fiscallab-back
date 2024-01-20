@@ -4,8 +4,8 @@ using FiscalLabService.Shared.Responses;
 
 namespace FiscalLabService.App.Interfaces;
 
-public interface IPlantService
+public interface IMenuService
 {
-    Task<Result<UpsertPlantsDto>> UpsertAsync(UpsertPlantsModel model);
-    Task<Result<List<PlantDto>>> GetAllAsync();
+    Task<Result<UpsertMenusDto>> UpsertAsync(UpsertMenusModel model);
+    Task<Result<List<MenuDto>>> GetAllAsync();
 }

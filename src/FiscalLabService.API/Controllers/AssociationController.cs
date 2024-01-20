@@ -16,7 +16,7 @@ public class AssociationController : ControllerBase
     }
 
     [HttpPost("upsert")]
-    public async Task<IActionResult> UpsertAsync(UpsertAssociationModel model)
+    public async Task<IActionResult> UpsertAsync(UpsertAssociationsModel model)
     {
         var result = await _associationService.UpsertAsync(model);
         return Ok(result);

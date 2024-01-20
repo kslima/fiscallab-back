@@ -49,7 +49,7 @@ public class AssociationConfig : IEntityTypeConfiguration<Association>
                     .HasForeignKey("association_id");
                 email.ToTable("emails")
                     .Property(e => e.Address)
-                    .HasColumnName("email_address")
+                    .HasColumnName("address")
                     .HasMaxLength(255)
                     .IsRequired();
             });

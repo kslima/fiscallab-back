@@ -7,6 +7,7 @@ public class ApplicationContext : DbContext
 {
     public DbSet<Plant> Plants { get; set; }
     public DbSet<Association> Associations { get; set; }
+    public DbSet<Menu> Menus { get; set; }
     
     public ApplicationContext(
         DbContextOptions<ApplicationContext> options) : base(options)
@@ -18,6 +19,7 @@ public class ApplicationContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new PlantConfig());
         modelBuilder.ApplyConfiguration(new AssociationConfig());
+        modelBuilder.ApplyConfiguration(new MenuConfig());
         base.OnModelCreating(modelBuilder);
     }
 }

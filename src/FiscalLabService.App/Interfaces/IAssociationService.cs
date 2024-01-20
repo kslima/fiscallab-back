@@ -6,6 +6,6 @@ namespace FiscalLabService.App.Interfaces;
 
 public interface IAssociationService
 {
-    Task<Result<UpsertAssociationDto>> UpsertAsync(UpsertAssociationModel model);
+    Task<Result<UpsertAssociationsDto>> UpsertAsync(UpsertAssociationsModel model);
     Task<Result<List<AssociationDto>>> GetAllAsync();
 }

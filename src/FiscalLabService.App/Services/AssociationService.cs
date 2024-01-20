@@ -17,7 +17,7 @@ public class AssociationService : IAssociationService
         _associationRepository = associationRepository;
     }
     
-    public async Task<Result<UpsertAssociationDto>> UpsertAsync(UpsertAssociationModel model)
+    public async Task<Result<UpsertAssociationsDto>> UpsertAsync(UpsertAssociationsModel model)
     {
         var toUpsertAssociationsIds = model.Associations.Select(a => a.Id).ToList();
         var existingAssociations = await _associationRepository.GetByIdsAsync(toUpsertAssociationsIds);
@@ -45,8 +45,8 @@ public class AssociationService : IAssociationService
             .Select(a => a.AsAssociationDto())
             .ToList();
 
-        var dto = new UpsertAssociationDto { Associations = allAssociations };
-        return Result<UpsertAssociationDto>.Success(dto);
+        var dto = new UpsertAssociationsDto { Associations = allAssociations };
+        return Result<UpsertAssociationsDto>.Success(dto);
     }
 
     public async Task<Result<List<AssociationDto>>> GetAllAsync()

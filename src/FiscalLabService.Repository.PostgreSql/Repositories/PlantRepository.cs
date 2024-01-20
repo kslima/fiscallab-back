@@ -22,10 +22,10 @@ public class PlantRepository : IPlantRepository
 
     public async Task<List<Plant>> UpdateManyAsync(List<Plant> plants)
     {
-        var plantsToUpdateIds = plants.Select(p => p.Id);
+        var plantIds = plants.Select(p => p.Id);
 
         var plantsToUpdate = _context.Plants
-            .Where(p => plantsToUpdateIds.Contains(p.Id))
+            .Where(p => plantIds.Contains(p.Id))
             .ToList();
         
         foreach (var plant in plantsToUpdate)

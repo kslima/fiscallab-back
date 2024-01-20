@@ -17,7 +17,7 @@ public class PlantService : IPlantService
         _plantRepository = plantRepository;
     }
 
-    public async Task<Result<UpsertPlantDto>> UpsertAsync(UpsertPlantsModel model)
+    public async Task<Result<UpsertPlantsDto>> UpsertAsync(UpsertPlantsModel model)
     {
         var toUpsertPlantIds = model.Plants.Select(p => p.Id).ToList();
         var existingPlants = await _plantRepository.GetByIdsAsync(toUpsertPlantIds);
@@ -45,8 +45,8 @@ public class PlantService : IPlantService
             .Select(p => p.AsPlantDto())
             .ToList();
 
-        var dto = new UpsertPlantDto { Plants = allPlants };
-        return Result<UpsertPlantDto>.Success(dto);
+        var dto = new UpsertPlantsDto { Plants = allPlants };
+        return Result<UpsertPlantsDto>.Success(dto);
     }
 
     public async Task<Result<List<PlantDto>>> GetAllAsync()

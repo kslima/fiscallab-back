@@ -24,6 +24,7 @@ public static class DependencyInjection
 
         services.AddScoped<IPlantRepository, PlantRepository>();
         services.AddScoped<IAssociationRepository, AssociationRepository>();
+        services.AddScoped<IMenuRepository, MenuRepository>();
         return services;
     }
 

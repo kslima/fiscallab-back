@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FiscalLabService.Repository.PostgreSql.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240120183807_Initial")]
+    [Migration("20240120190744_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -40,6 +40,30 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("associations", (string)null);
+                });
+
+            modelBuilder.Entity("FiscalLabService.Domain.Entities.Menu", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Page")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("page");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("menus", (string)null);
                 });
 
             modelBuilder.Entity("FiscalLabService.Domain.Entities.Plant", b =>
@@ -108,7 +132,7 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                                 .IsRequired()
                                 .HasMaxLength(255)
                                 .HasColumnType("character varying(255)")
-                                .HasColumnName("email_address");
+                                .HasColumnName("address");
 
                             b1.HasKey("association_id", "id");
 
@@ -122,6 +146,35 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         .IsRequired();
 
                     b.Navigation("Emails");
+                });
+
+            modelBuilder.Entity("FiscalLabService.Domain.Entities.Menu", b =>
+                {
+                    b.OwnsMany("FiscalLabService.Domain.ValueObjects.Option", "Options", b1 =>
+                        {
+                            b1.Property<string>("menu_id")
+                                .HasColumnType("character varying(36)");
+
+                            b1.Property<int>("id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("id"));
+
+                            b1.Property<string>("Description")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("description");
+
+                            b1.HasKey("menu_id", "id");
+
+                            b1.ToTable("options", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("menu_id");
+                        });
+
+                    b.Navigation("Options");
                 });
 
             modelBuilder.Entity("FiscalLabService.Domain.Entities.Plant", b =>
