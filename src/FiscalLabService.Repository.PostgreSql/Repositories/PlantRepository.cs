@@ -1,14 +1,14 @@
 ﻿using FiscalLabService.Domain.Entities;
 using FiscalLabService.Domain.Interfaces;
-using FiscalLabService.Repository.SqLite.Context;
+using FiscalLabService.Repository.PostgreSql.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace FiscalLabService.Repository.SqLite.Repositories;
+namespace FiscalLabService.Repository.PostgreSql.Repositories;
 
 public class PlantRepository : IPlantRepository
 {
-    private readonly DataContext _context;
-    public PlantRepository(DataContext context)
+    private readonly ApplicationContext _context;
+    public PlantRepository(ApplicationContext context)
     {
         _context = context;
     }

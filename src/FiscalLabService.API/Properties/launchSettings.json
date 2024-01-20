@@ -7,7 +7,12 @@
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:7001",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "POSTGRES_HOST": "144.22.188.96",
+        "POSTGRES_PORT": "5432",
+        "POSTGRES_USER": "fiscallab",
+        "POSTGRES_PASSWORD": "6)g7u!xfeXK1$BDx",
+        "POSTGRES_DB": "fiscallabdb"
       }
     }
   }

@@ -1,5 +1,5 @@
 using FiscalLabService.App.Extensions;
-using FiscalLabService.Repository.SqLite.Extensions;
+using FiscalLabService.Repository.PostgreSql.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
-    .AddSqLiteRepositoryDependencies()
+    .AddSqLiteRepositoryDependencies(builder.Configuration)
     .AddAppDependencies();
 
 const string devCorsPolicy = "devCorsPolicy";

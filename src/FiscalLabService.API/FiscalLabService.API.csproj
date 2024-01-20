@@ -16,6 +16,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\FiscalLabService.App\FiscalLabService.App.csproj" />
-      <ProjectReference Include="..\FiscalLabService.Repository.SqLite\FiscalLabService.Repository.SqLite.csproj" />
+      <ProjectReference Include="..\FiscalLabService.Repository.PostgreSql\FiscalLabService.Repository.PostgreSql.csproj" />
     </ItemGroup>
 </Project>

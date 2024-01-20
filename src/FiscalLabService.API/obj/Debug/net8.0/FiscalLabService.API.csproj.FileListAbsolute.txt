@@ -122,9 +122,7 @@ C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\Fiscal
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.App.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.Domain.dll
-C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.Repository.SqLite.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.App.pdb
-C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.Repository.SqLite.pdb
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.Domain.pdb
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\FiscalLabService.API.csproj.AssemblyReference.cache
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\FiscalLabService.API.GeneratedMSBuildEditorConfig.editorconfig
@@ -148,4 +146,10 @@ C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\Fiscal
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\FiscalLabService.API.pdb
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\FiscalLabService.API.genruntimeconfig.cache
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\ref\FiscalLabService.API.dll
-C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\Npgsql.dll
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.Repository.PostgreSql.dll
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.Shared.dll
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.Repository.PostgreSql.pdb
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FiscalLabService.Shared.pdb
