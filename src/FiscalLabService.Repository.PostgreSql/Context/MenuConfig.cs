@@ -22,10 +22,19 @@ public class MenuConfig : IEntityTypeConfiguration<Menu>
             .HasColumnName("page")
             .HasMaxLength(128);
         
-        builder.Property(m => m.Code)
+        builder.Property(m => m.Name)
             .IsRequired()
             .HasColumnName("code")
             .HasMaxLength(128);
+        
+        builder.Property(m => m.DisplayName)
+            .IsRequired()
+            .HasColumnName("display_name")
+            .HasMaxLength(128);
+        
+        builder.Property(m => m.HasPercentageOptions)
+            .IsRequired()
+            .HasColumnName("has_percentage_options");
 
         builder
             .OwnsMany(m => m.Options, option =>

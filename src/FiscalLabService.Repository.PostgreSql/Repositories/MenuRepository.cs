@@ -31,7 +31,9 @@ public class MenuRepository : IMenuRepository
         {
             var updatedMenu = menus.First(m => m.Id.Equals(menu.Id));
             menu.Page = updatedMenu.Page;
-            menu.Code = updatedMenu.Code;
+            menu.Name = updatedMenu.Name;
+            menu.DisplayName = updatedMenu.DisplayName;
+            menu.HasPercentageOptions = updatedMenu.HasPercentageOptions;
             menu.Options = updatedMenu.Options;
         }
         

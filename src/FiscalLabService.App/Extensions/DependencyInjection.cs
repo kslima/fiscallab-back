@@ -11,6 +11,7 @@ public static class DependencyInjection
         services.AddScoped<IPlantService, PlantService>();
         services.AddScoped<IAssociationService, AssociationService>();
         services.AddScoped<IMenuService, MenuService>();
+        services.AddScoped<IVisitPageService, VisitPageService>();
         return services;
     }
 }

@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FiscalLabService.Repository.PostgreSql.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240120190744_Initial")]
+    [Migration("20240121153008_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -88,6 +88,89 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("plants", (string)null);
+                });
+
+            modelBuilder.Entity("FiscalLabService.Domain.Entities.VisitPage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("display_name");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("visit_pages", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DisplayName = "Principal",
+                            Name = "Main"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DisplayName = "Balança de Cana",
+                            Name = "SugarcaneBalance"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DisplayName = "Sonda/Desintegrador",
+                            Name = "DesintegratorProbe"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DisplayName = "Balança Analítica/Temperatura",
+                            Name = "AnalyticalBalance"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DisplayName = "Prensa/Refratômetro",
+                            Name = "PressRefractometer"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DisplayName = "Clarificação/Sacarímetro",
+                            Name = "ClarificationSaccharimeter"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DisplayName = "Equipamentos de Aferição/Medias",
+                            Name = "BenchmarkingEquipment"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DisplayName = "Consistência do Sistema",
+                            Name = "SystemConsistency"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DisplayName = "Conclusão",
+                            Name = "Conclusion"
+                        });
                 });
 
             modelBuilder.Entity("FiscalLabService.Domain.Entities.Association", b =>

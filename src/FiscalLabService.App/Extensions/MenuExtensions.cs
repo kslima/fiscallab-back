@@ -11,19 +11,23 @@ public static class MenuExtensions
         {
             Id = menuDto.Id,
             Page = menuDto.Page,
-            Code = menuDto.Code,
+            Name = menuDto.Name,
+            DisplayName = menuDto.DisplayName,
+            HasPercentageOptions = menuDto.HasPercentageOptions,
             Options = menuDto.Options.Select(o => o.AsOption()).ToList()
         };
     }
     
-    public static MenuDto AsMenuDto(this Menu menuDto)
+    public static MenuDto AsMenuDto(this Menu menu)
     {
         return new MenuDto
         {
-            Id = menuDto.Id,
-            Page = menuDto.Page,
-            Code = menuDto.Code,
-            Options = menuDto.Options.Select(o => o.AsOptionDto()).ToList()
+            Id = menu.Id,
+            Page = menu.Page,
+            Name = menu.Name,
+            DisplayName = menu.DisplayName,
+            HasPercentageOptions = menu.HasPercentageOptions,
+            Options = menu.Options.Select(o => o.AsOptionDto()).ToList()
         };
     }
 }

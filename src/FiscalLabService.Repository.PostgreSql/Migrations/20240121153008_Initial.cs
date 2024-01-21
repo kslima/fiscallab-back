@@ -3,6 +3,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace FiscalLabService.Repository.PostgreSql.Migrations
 {
     /// <inheritdoc />
@@ -54,6 +56,20 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "visit_pages",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", maxLength: 36, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    display_name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_visit_pages", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "emails",
                 columns: table => new
                 {
@@ -92,6 +108,22 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "visit_pages",
+                columns: new[] { "id", "display_name", "name" },
+                values: new object[,]
+                {
+                    { 1, "Principal", "Main" },
+                    { 2, "Balança de Cana", "SugarcaneBalance" },
+                    { 3, "Sonda/Desintegrador", "DesintegratorProbe" },
+                    { 4, "Balança Analítica/Temperatura", "AnalyticalBalance" },
+                    { 5, "Prensa/Refratômetro", "PressRefractometer" },
+                    { 6, "Clarificação/Sacarímetro", "ClarificationSaccharimeter" },
+                    { 7, "Equipamentos de Aferição/Medias", "BenchmarkingEquipment" },
+                    { 8, "Consistência do Sistema", "SystemConsistency" },
+                    { 9, "Conclusão", "Conclusion" }
+                });
         }
 
         /// <inheritdoc />
@@ -105,6 +137,9 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
             migrationBuilder.DropTable(
                 name: "plants");
+
+            migrationBuilder.DropTable(
+                name: "visit_pages");
 
             migrationBuilder.DropTable(
                 name: "associations");

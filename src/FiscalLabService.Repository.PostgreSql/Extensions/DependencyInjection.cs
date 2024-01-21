@@ -1,7 +1,7 @@
 ﻿using FiscalLabService.Domain.Interfaces;
 using FiscalLabService.Repository.PostgreSql.Context;
 using FiscalLabService.Repository.PostgreSql.Repositories;
-using FiscalLabService.Repository.PostgreSql.Settings;
+using FiscalLabService.Repository.PostgreSql.Resources;
 using FiscalLabService.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,9 +22,16 @@ public static class DependencyInjection
                 .EnableSensitiveDataLogging()
         );
 
+        var seedDataOptions = configuration
+            .GetRequiredSection(nameof(SeedDataOptions))
+            .Get<SeedDataOptions>()!;
+
+        services.AddSingleton(seedDataOptions);
+        
         services.AddScoped<IPlantRepository, PlantRepository>();
         services.AddScoped<IAssociationRepository, AssociationRepository>();
         services.AddScoped<IMenuRepository, MenuRepository>();
+        services.AddScoped<IVisitPageRepository, VisitPageRepository>();
         return services;
     }
 

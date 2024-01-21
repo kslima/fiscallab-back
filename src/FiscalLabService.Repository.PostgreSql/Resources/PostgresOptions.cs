@@ -1,4 +1,4 @@
-﻿namespace FiscalLabService.Repository.PostgreSql.Settings;
+﻿namespace FiscalLabService.Repository.PostgreSql.Resources;
 
 public class PostgresOptions
 {
