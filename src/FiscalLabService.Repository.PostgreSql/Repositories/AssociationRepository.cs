@@ -49,7 +49,7 @@ public class AssociationRepository : IAssociationRepository
             .ToListAsync();
     }
 
-    public async Task<List<Association>> GetAllAsync()
+    public async Task<List<Association>> ListAsync()
     {
         return await _context.Associations
             .AsNoTracking()

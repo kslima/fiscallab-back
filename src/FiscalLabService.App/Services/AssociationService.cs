@@ -51,7 +51,7 @@ public class AssociationService : IAssociationService
 
     public async Task<Result<List<AssociationDto>>> GetAllAsync()
     {
-        var associations = await _associationRepository.GetAllAsync();
+        var associations = await _associationRepository.ListAsync();
 
         var plantsDto = associations.Select(a => a.AsAssociationDto()).ToList();
         return Result<List<AssociationDto>>

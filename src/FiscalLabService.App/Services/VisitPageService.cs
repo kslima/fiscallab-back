@@ -10,7 +10,7 @@ public class VisitPageService(IVisitPageRepository visitPageRepository) : IVisit
 {
     public async Task<Result<List<VisitPageDto>>> GetAllAsync()
     {
-        var visitPages = await visitPageRepository.GetAllAsync();
+        var visitPages = await visitPageRepository.ListAsync();
         var dtos = visitPages.Select(v => v.AsVisitPageDto()).ToList();
         return Result<List<VisitPageDto>>.Success(dtos);
     }

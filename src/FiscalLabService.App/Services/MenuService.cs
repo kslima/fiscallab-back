@@ -50,7 +50,7 @@ public class MenuService : IMenuService
 
     public async Task<Result<List<MenuDto>>> GetAllAsync()
     {
-        var menus = await _menuRepository.GetAllAsync();
+        var menus = await _menuRepository.ListAsync();
 
         var menusDto = menus.Select(a => a.AsMenuDto()).ToList();
         return Result<List<MenuDto>>

@@ -4,5 +4,5 @@ namespace FiscalLabService.Domain.Interfaces;
 
 public interface IVisitPageRepository
 {
-    Task<List<VisitPage>> GetAllAsync();
+    Task<List<VisitPage>> ListAsync();
 }

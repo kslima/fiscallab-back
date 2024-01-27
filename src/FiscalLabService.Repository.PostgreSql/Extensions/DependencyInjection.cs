@@ -32,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<IAssociationRepository, AssociationRepository>();
         services.AddScoped<IMenuRepository, MenuRepository>();
         services.AddScoped<IVisitPageRepository, VisitPageRepository>();
+        services.AddScoped<IVisitRepository, VisitRepository>();
         return services;
     }
 

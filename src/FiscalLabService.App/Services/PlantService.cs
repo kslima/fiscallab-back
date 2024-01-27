@@ -51,7 +51,7 @@ public class PlantService : IPlantService
 
     public async Task<Result<List<PlantDto>>> GetAllAsync()
     {
-        var plants = await _plantRepository.GetAllAsync();
+        var plants = await _plantRepository.ListAsync();
 
         var plantsDto = plants.Select(p => p.AsPlantDto()).ToList();
         return Result<List<PlantDto>>

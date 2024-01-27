@@ -49,7 +49,7 @@ public class PlantRepository : IPlantRepository
             .ToListAsync();
     }
 
-    public async Task<List<Plant>> GetAllAsync()
+    public async Task<List<Plant>> ListAsync()
     {
         return await _context.Plants
             .AsNoTracking()

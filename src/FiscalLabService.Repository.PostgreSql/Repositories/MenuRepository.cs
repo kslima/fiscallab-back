@@ -50,7 +50,7 @@ public class MenuRepository : IMenuRepository
             .ToListAsync();
     }
 
-    public async Task<List<Menu>> GetAllAsync()
+    public async Task<List<Menu>> ListAsync()
     {
         return await _context.Menus
             .AsNoTracking()

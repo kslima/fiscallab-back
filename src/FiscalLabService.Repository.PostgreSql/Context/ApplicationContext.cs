@@ -10,6 +10,7 @@ public class ApplicationContext : DbContext
     public DbSet<Association> Associations { get; set; }
     public DbSet<Menu> Menus { get; set; }
     public DbSet<VisitPage> VisitPages { get; set; }
+    public DbSet<Visit> Visits { get; set; }
 
     private readonly SeedDataOptions _seedDataOptions;
     
@@ -26,6 +27,7 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration(new AssociationConfig());
         modelBuilder.ApplyConfiguration(new MenuConfig());
         modelBuilder.ApplyConfiguration(new VisitPageConfig(_seedDataOptions));
+        modelBuilder.ApplyConfiguration(new VisitConfig());
         base.OnModelCreating(modelBuilder);
     }
 }
