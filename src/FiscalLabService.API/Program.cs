@@ -3,10 +3,11 @@ using System.Text.Json.Serialization;
 using FiscalLabService.API.Handlers;
 using FiscalLabService.App.Extensions;
 using FiscalLabService.Repository.PostgreSql.Extensions;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+QuestPDF.Settings.License = LicenseType.Community;
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
     .AddUserSecrets<Program>();
 

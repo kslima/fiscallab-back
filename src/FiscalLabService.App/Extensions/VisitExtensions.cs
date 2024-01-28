@@ -20,7 +20,14 @@ public static class VisitExtensions
             ClarificationSaccharimeter = source.ClarificationSaccharimeter.AsClarificationSaccharimeterDto(),
             BenchmarkingEquipment = source.BenchmarkingEquipment.AsBenchmarkingEquipmentDto(),
             SystemConsistency = source.SystemConsistency.AsSystemConsistencyDto(),
-            Conclusion = source.Conclusion.AsConclusionDto()
+            Conclusion = source.Conclusion.AsConclusionDto(),
+            CreatedAt = source.CreatedAt,
+            Images = source.Images.Select(i => new ImageDto
+            {
+                Name = i.Name,
+                Url = i.Url,
+                Description = i.Description
+            }).ToList()
         };
     }
 
@@ -35,8 +42,7 @@ public static class VisitExtensions
             Leader = source.Leader,
             LaboratoryLeader = source.LaboratoryLeader,
             VisitDate = source.VisitDate,
-            VisitTime = source.VisitTime,
-            CreatedAt = source.CreatedAt,
+            VisitTime = source.VisitTime
         };
     }
 
@@ -244,7 +250,14 @@ public static class VisitExtensions
             ClarificationSaccharimeter = source.ClarificationSaccharimeter.AsClarificationSaccharimeter(),
             BenchmarkingEquipment = source.BenchmarkingEquipment.AsBenchmarkingEquipment(),
             SystemConsistency = source.SystemConsistency.AsSystemConsistency(),
-            Conclusion = source.Conclusion.AsConclusion()
+            Conclusion = source.Conclusion.AsConclusion(),
+            CreatedAt = source.CreatedAt,
+            Images = source.Images.Select(i => new Image
+            {
+                Name = i.Name,
+                Url = i.Url,
+                Description = i.Description
+            }).ToList()
         };
     }
     
@@ -259,8 +272,7 @@ public static class VisitExtensions
             Leader = source.Leader,
             LaboratoryLeader = source.LaboratoryLeader,
             VisitDate = source.VisitDate,
-            VisitTime = source.VisitTime,
-            CreatedAt = source.CreatedAt,
+            VisitTime = source.VisitTime
         };
     }
 

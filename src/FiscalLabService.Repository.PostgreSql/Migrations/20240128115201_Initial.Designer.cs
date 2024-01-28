@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FiscalLabService.Repository.PostgreSql.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240127132155_VisitRefactor")]
-    partial class VisitRefactor
+    [Migration("20240128115201_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +107,10 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("character varying(36)")
                         .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.HasKey("Id");
 
@@ -324,43 +328,42 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                             b1.Property<string>("AverageAmbientTemperature")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("average_ambient_temperature");
+                                .HasColumnName("analytical_balance_average_ambient_temperature");
 
                             b1.Property<string>("CalibratedBalance")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("final_weight");
+                                .HasColumnName("analytical_balance_calibrated_balance");
 
                             b1.Property<string>("CalibrationCertificateBalance")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("calibration_certificate_balance");
+                                .HasColumnName("analytical_balance_calibration_certificate_balance");
 
                             b1.Property<string>("FinalWeight")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("tube_inserted");
+                                .HasColumnName("analytical_balance_final_weight");
 
                             b1.Property<string>("HomogeneousWeight")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("homogeneous_weight");
+                                .HasColumnName("analytical_balance_homogeneous_weight");
 
                             b1.Property<string>("LeveledBalance")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("leveled_balance");
+                                .HasColumnName("analytical_balance_leveled_balance");
 
                             b1.Property<string>("Observations5")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations5");
+                                .HasColumnName("analytical_balance_observations5");
 
                             b1.Property<string>("Observations6")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations6");
+                                .HasColumnName("analytical_balance_observations6");
 
                             b1.HasKey("VisitId");
 
@@ -378,48 +381,44 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                             b1.Property<string>("AssociationId")
                                 .IsRequired()
                                 .HasColumnType("character varying(36)")
-                                .HasColumnName("association_id");
+                                .HasColumnName("basic_information_association_id");
 
                             b1.Property<string>("Consultant")
                                 .IsRequired()
                                 .HasMaxLength(128)
                                 .HasColumnType("character varying(128)")
-                                .HasColumnName("consultant");
-
-                            b1.Property<DateTime>("CreatedAt")
-                                .HasColumnType("timestamp with time zone")
-                                .HasColumnName("created_at");
+                                .HasColumnName("basic_information_consultant");
 
                             b1.Property<string>("Inspector")
                                 .IsRequired()
                                 .HasMaxLength(128)
                                 .HasColumnType("character varying(128)")
-                                .HasColumnName("inspector");
+                                .HasColumnName("basic_information_inspector");
 
                             b1.Property<string>("LaboratoryLeader")
                                 .IsRequired()
                                 .HasMaxLength(128)
                                 .HasColumnType("character varying(128)")
-                                .HasColumnName("laboratory_leader");
+                                .HasColumnName("basic_information_laboratory_leader");
 
                             b1.Property<string>("Leader")
                                 .IsRequired()
                                 .HasMaxLength(128)
                                 .HasColumnType("character varying(128)")
-                                .HasColumnName("leader");
+                                .HasColumnName("basic_information_leader");
 
                             b1.Property<string>("PlantId")
                                 .IsRequired()
                                 .HasColumnType("character varying(36)")
-                                .HasColumnName("plant_id");
+                                .HasColumnName("basic_information_plant_id");
 
                             b1.Property<DateOnly>("VisitDate")
                                 .HasColumnType("date")
-                                .HasColumnName("visit_date");
+                                .HasColumnName("basic_information_visit_date");
 
                             b1.Property<TimeOnly>("VisitTime")
                                 .HasColumnType("time without time zone")
-                                .HasColumnName("visit_time");
+                                .HasColumnName("basic_information_visit_time");
 
                             b1.HasKey("VisitId");
 
@@ -456,133 +455,132 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
                             b1.Property<decimal>("AccomplishedCrop")
                                 .HasColumnType("numeric")
-                                .HasColumnName("accomplished_crop");
+                                .HasColumnName("benchmarking_equipment_accomplished_crop");
 
                             b1.Property<decimal>("AtrVariation")
                                 .HasColumnType("numeric")
-                                .HasColumnName("atr_variation");
+                                .HasColumnName("benchmarking_equipment_atr_variation");
 
                             b1.Property<decimal>("CurrentAtr")
                                 .HasColumnType("numeric")
-                                .HasColumnName("current_atr");
+                                .HasColumnName("benchmarking_equipment_current_atr");
 
                             b1.Property<decimal>("CurrentFiber")
                                 .HasColumnType("numeric")
-                                .HasColumnName("current_fiber");
+                                .HasColumnName("benchmarking_equipment_current_fiber");
 
                             b1.Property<decimal>("ExpectedCrop")
                                 .HasColumnType("numeric")
-                                .HasColumnName("expected_crop");
+                                .HasColumnName("benchmarking_equipment_expected_crop");
 
                             b1.Property<decimal>("FiberVariation")
                                 .HasColumnType("numeric")
-                                .HasColumnName("fiber_variation");
+                                .HasColumnName("benchmarking_equipment_fiber_variation");
 
                             b1.Property<string>("Gm1")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("gm1");
+                                .HasColumnName("benchmarking_equipment_gm1");
 
                             b1.Property<string>("Gm100")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("gm100");
+                                .HasColumnName("benchmarking_equipment_gm100");
 
                             b1.Property<string>("Gm500")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("gm500");
+                                .HasColumnName("benchmarking_equipment_gm500");
 
                             b1.Property<string>("LoadCell")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("load_cell");
+                                .HasColumnName("benchmarking_equipment_load_cell");
 
                             b1.Property<string>("Observations11")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations11");
+                                .HasColumnName("benchmarking_equipment_observations11");
 
                             b1.Property<string>("Observations12")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations12");
+                                .HasColumnName("benchmarking_equipment_observations12");
 
                             b1.Property<string>("Pachymeter")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("pachymeter");
+                                .HasColumnName("benchmarking_equipment_pachymeter");
 
                             b1.Property<decimal>("PercentageRealized")
                                 .HasColumnType("numeric")
-                                .HasColumnName("percentage_realized");
+                                .HasColumnName("benchmarking_equipment_percentage_realized");
 
                             b1.Property<decimal>("PreviousAtr")
                                 .HasColumnType("numeric")
-                                .HasColumnName("previous_atr");
+                                .HasColumnName("benchmarking_equipment_previous_atr");
 
                             b1.Property<decimal>("PreviousCrop")
                                 .HasColumnType("numeric")
-                                .HasColumnName("previous_crop");
+                                .HasColumnName("benchmarking_equipment_previous_crop");
 
                             b1.Property<decimal>("PreviousFiber")
                                 .HasColumnType("numeric")
-                                .HasColumnName("previous_fiber");
+                                .HasColumnName("benchmarking_equipment_previous_fiber");
 
                             b1.Property<string>("Range10")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("range10");
+                                .HasColumnName("benchmarking_equipment_range10");
 
                             b1.Property<string>("Range20")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("range20");
+                                .HasColumnName("benchmarking_equipment_range20");
 
                             b1.Property<string>("Range30")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("range30");
+                                .HasColumnName("benchmarking_equipment_range30");
 
                             b1.Property<string>("SucroseTest")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("sucrose_test");
+                                .HasColumnName("benchmarking_equipment_sucrose_test");
 
                             b1.Property<string>("Tachometer")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("tachometer");
+                                .HasColumnName("benchmarking_equipment_tachometer");
 
                             b1.Property<string>("Thermometer")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("thermometer");
+                                .HasColumnName("benchmarking_equipment_thermometer");
 
                             b1.Property<decimal>("VariationBetweenCrops")
                                 .HasColumnType("numeric")
-                                .HasColumnName("variation_between_crops");
+                                .HasColumnName("benchmarking_equipment_variation_between_crops");
 
                             b1.Property<string>("Z100")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("z100");
+                                .HasColumnName("benchmarking_equipment_z100");
 
                             b1.Property<string>("Z25")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("quartz_result");
+                                .HasColumnName("benchmarking_equipment_z25");
 
                             b1.Property<string>("Z50")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("z50");
+                                .HasColumnName("benchmarking_equipment_z50");
 
                             b1.Property<string>("Z75")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("z75");
+                                .HasColumnName("benchmarking_equipment_z75");
 
                             b1.HasKey("VisitId");
 
@@ -600,96 +598,92 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                             b1.Property<string>("Agitation")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("agitation");
+                                .HasColumnName("clarification_saccharimeter_agitation");
 
                             b1.Property<string>("Benchmarking")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("benchmarking");
+                                .HasColumnName("clarification_saccharimeter_benchmarking");
 
                             b1.Property<string>("Bottle")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("bottle");
+                                .HasColumnName("clarification_saccharimeter_bottle");
 
                             b1.Property<string>("BottleAfterClarifiedVolume")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("bottle_after_clarified_volume");
+                                .HasColumnName("clarification_saccharimeter_bottle_after_clarified_volume");
 
                             b1.Property<string>("BottleClarifiedVolume")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("bottle_clarified_volume");
+                                .HasColumnName("clarification_saccharimeter_bottle_clarified_volume");
 
                             b1.Property<string>("CalibrationCertificate")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("calibration_certificate");
+                                .HasColumnName("clarification_saccharimeter_calibration_certificate");
 
                             b1.Property<string>("Clarifier")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("clarifier");
+                                .HasColumnName("clarification_saccharimeter_clarifier");
 
                             b1.Property<string>("ClarifierAmount")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("clarifier_amount");
+                                .HasColumnName("clarification_saccharimeter_clarifier_amount");
 
                             b1.Property<string>("ClearCollingCooler")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("clear_colling_cooler");
+                                .HasColumnName("clarification_saccharimeter_clear_colling_cooler");
 
                             b1.Property<string>("HasDilution")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("has_dilution");
+                                .HasColumnName("clarification_saccharimeter_has_dilution");
 
                             b1.Property<string>("Observations10")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations10");
+                                .HasColumnName("clarification_saccharimeter_observations10");
 
                             b1.Property<string>("Observations9")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations9");
+                                .HasColumnName("clarification_saccharimeter_observations9");
 
                             b1.Property<string>("Pressure")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("pressure");
+                                .HasColumnName("clarification_saccharimeter_pressure");
 
                             b1.Property<string>("QuartzPattern")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("quartz_pattern");
+                                .HasColumnName("clarification_saccharimeter_quartz_pattern");
 
                             b1.Property<string>("QuartzReading")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("quartz_reading");
+                                .HasColumnName("clarification_saccharimeter_quartz_reading");
 
                             b1.Property<string>("QuartzResult")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("quartz_result");
+                                .HasColumnName("clarification_saccharimeter_quartz_result");
 
                             b1.Property<string>("Stabilization")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("stabilization");
+                                .HasColumnName("clarification_saccharimeter_stabilization");
 
                             b1.Property<string>("TubeCleaning")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("tube_cleaning");
+                                .HasColumnName("clarification_saccharimeter_tube_cleaning");
 
                             b1.HasKey("VisitId");
 
@@ -707,23 +701,22 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                             b1.Property<string>("InspectorPerformance")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("inspector_performance");
+                                .HasColumnName("conclusion_inspector_performance");
 
                             b1.Property<string>("LaboratoryReceptivity")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("laboratory_receptivity");
+                                .HasColumnName("conclusion_laboratory_receptivity");
 
                             b1.Property<string>("Observations")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("observations");
+                                .HasColumnName("conclusion_conclusion_observations");
 
                             b1.Property<string>("Pendencies")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("pendencies");
+                                .HasColumnName("conclusion_pendencies");
 
                             b1.HasKey("VisitId");
 
@@ -741,108 +734,107 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                             b1.Property<string>("AgainstKnifeConservation")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("against_knife_conservation");
+                                .HasColumnName("desintegrator_probe_against_knife_conservation");
 
                             b1.Property<string>("BrothExtraction")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("broth_extraction");
+                                .HasColumnName("desintegrator_probe_broth_extraction");
 
                             b1.Property<string>("CleanMixer")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("clean_mixer");
+                                .HasColumnName("desintegrator_probe_clean_mixer");
 
                             b1.Property<string>("Collect")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("collect");
+                                .HasColumnName("desintegrator_probe_collect");
 
                             b1.Property<string>("DesintegratorRpm")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("desintegrator_rpm");
+                                .HasColumnName("desintegrator_probe_desintegrator_rpm");
 
                             b1.Property<string>("HammerConservation")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("hammer_conservation");
+                                .HasColumnName("desintegrator_probe_hammer_conservation");
 
                             b1.Property<string>("HomogeneousSamples")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("homogeneous_samples");
+                                .HasColumnName("desintegrator_probe_homogeneous_samples");
 
                             b1.Property<string>("KnifeAgainstKnifeDistance")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("knife_against_knife_distance");
+                                .HasColumnName("desintegrator_probe_knife_against_knife_distance");
 
                             b1.Property<string>("KnifeConservation")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("knife_conservation");
+                                .HasColumnName("desintegrator_probe_knife_conservation");
 
                             b1.Property<string>("LastCrownChange")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("last_crown_change");
+                                .HasColumnName("desintegrator_probe_last_crown_change");
 
                             b1.Property<string>("LoadPosition")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("load_position");
+                                .HasColumnName("desintegrator_probe_load_position");
 
                             b1.Property<string>("Observations3")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations3");
+                                .HasColumnName("desintegrator_probe_observations3");
 
                             b1.Property<string>("Observations4")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations4");
+                                .HasColumnName("desintegrator_probe_observations4");
 
                             b1.Property<string>("PreparationIndex")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("preparation_index");
+                                .HasColumnName("desintegrator_probe_preparation_index");
 
                             b1.Property<string>("ProbeType")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("probe_type");
+                                .HasColumnName("desintegrator_probe_probe_type");
 
                             b1.Property<string>("SampleAmount")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("sample_amount");
+                                .HasColumnName("desintegrator_probe_sample_amount");
 
                             b1.Property<DateTime?>("SharpenedOrReplacedKnifeAt")
                                 .IsRequired()
                                 .HasColumnType("timestamp with time zone")
-                                .HasColumnName("sharpened_or_replaced_knife_at");
+                                .HasColumnName("desintegrator_probe_sharpened_or_replaced_knife_at");
 
                             b1.Property<string>("ToothedCrown")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("toothed_crown");
+                                .HasColumnName("desintegrator_probe_toothed_crown");
 
                             b1.Property<string>("ToothedCrownType")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("toothed_crown_type");
+                                .HasColumnName("desintegrator_probe_toothed_crown_type");
 
                             b1.Property<string>("TubeDischarged")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("tube_discharged");
+                                .HasColumnName("desintegrator_probe_tube_discharged");
 
                             b1.Property<string>("TubeInserted")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("tube_inserted");
+                                .HasColumnName("desintegrator_probe_tube_inserted");
 
                             b1.HasKey("VisitId");
 
@@ -860,73 +852,72 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                             b1.Property<string>("BrothHomogenization")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("broth_homogenization");
+                                .HasColumnName("press_refractometer_broth_homogenization");
 
                             b1.Property<string>("CollectorBottle")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("collector_bottle");
+                                .HasColumnName("press_refractometer_collector_bottle");
 
                             b1.Property<string>("DiscardCup")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("discard_cup");
+                                .HasColumnName("press_refractometer_discard_cup");
 
                             b1.Property<string>("InternalTemperature")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("internal_temperature");
+                                .HasColumnName("press_refractometer_internal_temperature");
 
                             b1.Property<string>("Observations7")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations7");
+                                .HasColumnName("press_refractometer_observations7");
 
                             b1.Property<string>("Observations8")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations8");
+                                .HasColumnName("press_refractometer_observations8");
 
                             b1.Property<string>("PrecisionReading")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("precision_reading");
+                                .HasColumnName("press_refractometer_precision_reading");
 
                             b1.Property<string>("PressCleaning")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("press_cleaning");
+                                .HasColumnName("press_refractometer_press_cleaning");
 
                             b1.Property<string>("Pressure")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("pressure");
+                                .HasColumnName("press_refractometer_pressure");
 
                             b1.Property<string>("PressureGaugeCertificated")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("pressure_gauge_certificated");
+                                .HasColumnName("press_refractometer_pressure_gauge_certificated");
 
                             b1.Property<string>("RefractometerBenchmarking")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("refractometer_benchmarking");
+                                .HasColumnName("press_refractometer_refractometer_benchmarking");
 
                             b1.Property<string>("RefractometerCalibrationCertificate")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("refractometer_calibration_certificate");
+                                .HasColumnName("press_refractometer_refractometer_calibration_certificate");
 
                             b1.Property<string>("RefractometerCleaning")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("refractometer_cleaning");
+                                .HasColumnName("press_refractometer_refractometer_cleaning");
 
                             b1.Property<string>("Timer")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("timer");
+                                .HasColumnName("press_refractometer_timer");
 
                             b1.HasKey("VisitId");
 
@@ -944,73 +935,72 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                             b1.Property<string>("Calibration1")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("calibration1");
+                                .HasColumnName("sugarcane_balance_calibration1");
 
                             b1.Property<string>("Calibration2")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("calibration2");
+                                .HasColumnName("sugarcane_balance_calibration2");
 
                             b1.Property<string>("CalibrationCertificate")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("calibration_certificate");
+                                .HasColumnName("sugarcane_balance_calibration_certificate");
 
                             b1.Property<string>("CargoDraw")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("cargo_draw");
+                                .HasColumnName("sugarcane_balance_cargo_draw");
 
                             b1.Property<string>("FarmProviderPercentage")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("farm_provider_percentage");
+                                .HasColumnName("sugarcane_balance_farm_provider_percentage");
 
                             b1.Property<string>("InScale")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("in_scale");
+                                .HasColumnName("sugarcane_balance_in_scale");
 
                             b1.Property<string>("Observations1")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations1");
+                                .HasColumnName("sugarcane_balance_observations1");
 
                             b1.Property<string>("Observations2")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("observations2");
+                                .HasColumnName("sugarcane_balance_observations2");
 
                             b1.Property<string>("OutScale")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("out_scale");
+                                .HasColumnName("sugarcane_balance_out_scale");
 
                             b1.Property<string>("PlantFarmPercentage")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("plant_farm_percentage");
+                                .HasColumnName("sugarcane_balance_plant_farm_percentage");
 
                             b1.Property<string>("PlantPercentage")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("plant_percentage");
+                                .HasColumnName("sugarcane_balance_plant_percentage");
 
                             b1.Property<string>("ProviderPercentage")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("provider_percentage");
+                                .HasColumnName("sugarcane_balance_provider_percentage");
 
                             b1.Property<string>("ResponsibleBody")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("responsible_body");
+                                .HasColumnName("sugarcane_balance_responsible_body");
 
                             b1.Property<string>("ScaleObservations")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("scale_observations");
+                                .HasColumnName("sugarcane_balance_scale_observations");
 
                             b1.HasKey("VisitId");
 
@@ -1027,54 +1017,52 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
                             b1.Property<string>("Clarifier")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("clarifier");
+                                .HasColumnName("system_consistency_clarifier");
 
                             b1.Property<decimal>("DifferenceAr")
                                 .HasColumnType("numeric")
-                                .HasColumnName("difference_ar");
+                                .HasColumnName("system_consistency_difference_ar");
 
                             b1.Property<decimal>("DifferenceAtr")
                                 .HasColumnType("numeric")
-                                .HasColumnName("difference_atr");
+                                .HasColumnName("system_consistency_difference_atr");
 
                             b1.Property<decimal>("DifferenceFiber")
                                 .HasColumnType("numeric")
-                                .HasColumnName("difference_fiber");
+                                .HasColumnName("system_consistency_difference_fiber");
 
                             b1.Property<decimal>("DifferencePcc")
                                 .HasColumnType("numeric")
-                                .HasColumnName("difference_pcc");
+                                .HasColumnName("system_consistency_difference_pcc");
 
                             b1.Property<decimal>("DifferencePol")
                                 .HasColumnType("numeric")
-                                .HasColumnName("difference_pol");
+                                .HasColumnName("system_consistency_difference_pol");
 
                             b1.Property<decimal>("DifferencePurity")
                                 .HasColumnType("numeric")
-                                .HasColumnName("difference_purity");
+                                .HasColumnName("system_consistency_difference_purity");
 
                             b1.Property<string>("Farm")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("farm");
+                                .HasColumnName("system_consistency_farm");
 
                             b1.Property<string>("Observations")
                                 .IsRequired()
-                                .ValueGeneratedOnUpdateSometimes()
                                 .HasColumnType("text")
-                                .HasColumnName("observations");
+                                .HasColumnName("system_consistency_observations");
 
                             b1.Property<string>("Oc")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("oc");
+                                .HasColumnName("system_consistency_oc");
 
                             b1.Property<string>("Owner")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("owner");
+                                .HasColumnName("system_consistency_owner");
 
                             b1.HasKey("VisitId");
 
@@ -1090,39 +1078,39 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
                                     b2.Property<decimal>("Ar")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("consecana_ar");
+                                        .HasColumnName("system_consistency_consecana_ar");
 
                                     b2.Property<decimal>("Atr")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("consecana_atr");
+                                        .HasColumnName("system_consistency_consecana_atr");
 
                                     b2.Property<decimal>("Brix")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("consecana_brix");
+                                        .HasColumnName("system_consistency_consecana_brix");
 
                                     b2.Property<decimal>("Fiber")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("consecana_fiber");
+                                        .HasColumnName("system_consistency_consecana_fiber");
 
                                     b2.Property<decimal>("Ls")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("consecana_ls");
+                                        .HasColumnName("system_consistency_consecana_ls");
 
                                     b2.Property<decimal>("Pbu")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("consecana_pbu");
+                                        .HasColumnName("system_consistency_consecana_pbu");
 
                                     b2.Property<decimal>("Pcc")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("consecana_pcc");
+                                        .HasColumnName("system_consistency_consecana_pcc");
 
                                     b2.Property<decimal>("Pol")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("consecana_pol");
+                                        .HasColumnName("system_consistency_consecana_pol");
 
                                     b2.Property<decimal>("Purity")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("consecana_purity");
+                                        .HasColumnName("system_consistency_consecana_purity");
 
                                     b2.HasKey("SystemConsistencyVisitId");
 
@@ -1139,39 +1127,39 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
                                     b2.Property<decimal>("Ar")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("plant_ar");
+                                        .HasColumnName("system_consistency_plant_ar");
 
                                     b2.Property<decimal>("Atr")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("plant_atr");
+                                        .HasColumnName("system_consistency_plant_atr");
 
                                     b2.Property<decimal>("Brix")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("plant_brix");
+                                        .HasColumnName("system_consistency_plant_brix");
 
                                     b2.Property<decimal>("Fiber")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("plant_fiber");
+                                        .HasColumnName("system_consistency_plant_fiber");
 
                                     b2.Property<decimal>("Ls")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("plant_ls");
+                                        .HasColumnName("system_consistency_plant_ls");
 
                                     b2.Property<decimal>("Pbu")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("plant_pbu");
+                                        .HasColumnName("system_consistency_plant_pbu");
 
                                     b2.Property<decimal>("Pcc")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("plant_pcc");
+                                        .HasColumnName("system_consistency_plant_pcc");
 
                                     b2.Property<decimal>("Pol")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("plant_pol");
+                                        .HasColumnName("system_consistency_plant_pol");
 
                                     b2.Property<decimal>("Purity")
                                         .HasColumnType("numeric")
-                                        .HasColumnName("plant_purity");
+                                        .HasColumnName("system_consistency_plant_purity");
 
                                     b2.HasKey("SystemConsistencyVisitId");
 
@@ -1186,6 +1174,40 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
                             b1.Navigation("PlantSugarcaneAnalysis")
                                 .IsRequired();
+                        });
+
+                    b.OwnsMany("FiscalLabService.Domain.ValueObjects.Image", "Images", b1 =>
+                        {
+                            b1.Property<string>("visit_id")
+                                .HasColumnType("character varying(36)");
+
+                            b1.Property<int>("id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("id"));
+
+                            b1.Property<string>("Description")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("description");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("name");
+
+                            b1.Property<string>("Url")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("url");
+
+                            b1.HasKey("visit_id", "id");
+
+                            b1.ToTable("visit_images", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("visit_id");
                         });
 
                     b.Navigation("AnalyticalBalance")
@@ -1205,6 +1227,8 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
                     b.Navigation("DesintegratorProbe")
                         .IsRequired();
+
+                    b.Navigation("Images");
 
                     b.Navigation("PressRefractometer")
                         .IsRequired();

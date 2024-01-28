@@ -17,6 +17,38 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
             .IsRequired()
             .HasColumnName("id")
             .HasMaxLength(36);
+        
+        builder.Property(p => p.CreatedAt)
+            .IsRequired()
+            .HasColumnName("created_at");
+        
+        builder
+            .OwnsMany(a => a.Images, image =>
+            {
+                image.Property<int>("id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer")
+                    .UseIdentityByDefaultColumn();
+
+                image
+                    .WithOwner()
+                    .HasForeignKey("visit_id");
+                
+                image.ToTable("visit_images")
+                    .Property(e => e.Name)
+                    .HasColumnName("name")
+                    .IsRequired();
+                
+                image.ToTable("visit_images")
+                    .Property(e => e.Url)
+                    .HasColumnName("url")
+                    .IsRequired();
+                
+                image.ToTable("visit_images")
+                    .Property(e => e.Description)
+                    .HasColumnName("description")
+                    .IsRequired();
+            });
 
         builder.OwnsOne(v => v.BasicInformation,
             navigationBuilder =>
@@ -71,10 +103,6 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
                 navigationBuilder.Property(p => p.VisitTime)
                     .IsRequired()
                     .HasColumnName("basic_information_visit_time");
-
-                navigationBuilder.Property(p => p.CreatedAt)
-                    .IsRequired()
-                    .HasColumnName("basic_information_created_at");
             });
 
         builder.OwnsOne(v => v.SugarcaneBalance,

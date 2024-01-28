@@ -105,6 +105,10 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         .HasColumnType("character varying(36)")
                         .HasColumnName("id");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
                     b.HasKey("Id");
 
                     b.ToTable("visits", (string)null);
@@ -381,10 +385,6 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                                 .HasMaxLength(128)
                                 .HasColumnType("character varying(128)")
                                 .HasColumnName("basic_information_consultant");
-
-                            b1.Property<DateTime>("CreatedAt")
-                                .HasColumnType("timestamp with time zone")
-                                .HasColumnName("basic_information_created_at");
 
                             b1.Property<string>("Inspector")
                                 .IsRequired()
@@ -1173,6 +1173,40 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                                 .IsRequired();
                         });
 
+                    b.OwnsMany("FiscalLabService.Domain.ValueObjects.Image", "Images", b1 =>
+                        {
+                            b1.Property<string>("visit_id")
+                                .HasColumnType("character varying(36)");
+
+                            b1.Property<int>("id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("id"));
+
+                            b1.Property<string>("Description")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("description");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("name");
+
+                            b1.Property<string>("Url")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("url");
+
+                            b1.HasKey("visit_id", "id");
+
+                            b1.ToTable("visit_images", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("visit_id");
+                        });
+
                     b.Navigation("AnalyticalBalance")
                         .IsRequired();
 
@@ -1190,6 +1224,8 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
                     b.Navigation("DesintegratorProbe")
                         .IsRequired();
+
+                    b.Navigation("Images");
 
                     b.Navigation("PressRefractometer")
                         .IsRequired();

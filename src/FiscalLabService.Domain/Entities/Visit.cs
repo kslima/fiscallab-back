@@ -14,4 +14,6 @@ public class Visit
     public BenchmarkingEquipment BenchmarkingEquipment { get; set; } = null!;
     public SystemConsistency SystemConsistency { get; set; } = null!;
     public Conclusion Conclusion { get; set; } = null!;
+    public DateTime CreatedAt { get; set; }
+    public List<Image> Images { get; set; } = [];
 }

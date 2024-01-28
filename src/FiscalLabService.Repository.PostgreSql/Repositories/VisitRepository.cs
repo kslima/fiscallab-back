@@ -14,7 +14,7 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
         return await GetById(visit.Id);
     }
     
-    private async Task<Visit> GetById(string id)
+    public async Task<Visit> GetById(string id)
     {
         return await context.Visits
             .AsNoTracking()

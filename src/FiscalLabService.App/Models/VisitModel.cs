@@ -12,4 +12,6 @@ public class VisitModel
     public BenchmarkingEquipmentModel BenchmarkingEquipment { get; set; } = null!;
     public SystemConsistencyModel SystemConsistency { get; set; } = null!;
     public ConclusionModel Conclusion { get; set; } = null!;
+    public DateTime CreatedAt { get; set; }
+    public List<ImageModel> Images { get; set; } = [];
 }

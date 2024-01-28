@@ -8,4 +8,5 @@ public interface IVisitService
 {
     Task<Result<VisitDto>> CreateAsync(VisitModel visitModel);
     Task<Result<List<VisitDto>>> ListAsync();
+    Task<Result<VisitDto>> GetByIdAsync(string id);
 }

@@ -23,4 +23,10 @@ public class VisitService(IVisitRepository visitRepository) : IVisitService
         var dtos = visits.Select(v => v.AsVisitDto()).ToList();
         return Result<List<VisitDto>>.Success(dtos);
     }
+
+    public async Task<Result<VisitDto>> GetByIdAsync(string id)
+    {
+        var visit = await visitRepository.GetById(id);
+        return Result<VisitDto>.Success(visit.AsVisitDto());
+    }
 }
