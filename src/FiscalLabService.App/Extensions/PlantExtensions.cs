@@ -1,19 +1,18 @@
-﻿using FiscalLabService.App.Dtos;
-using FiscalLabService.App.Models;
+using FiscalLabService.App.Dtos;
 using FiscalLabService.Domain.Entities;
 
 namespace FiscalLabService.App.Extensions;
 
 public static class PlantExtensions
 {
-    public static Plant AsPlant(this PlantModel model)
+    public static Plant AsPlant(this PlantDto plantDto)
     {
         return new Plant
         {
-            Name = model.Name,
-            Emails = model.Emails
-                .Select(e => e.AsPlantEmail())
-                .ToList()
+            Id = plantDto.Id,
+            Name = plantDto.Name,
+            Cnpj = plantDto.Cnpj,
+            Address = plantDto.Address.AsAddress()
         };
     }
     
@@ -23,17 +22,8 @@ public static class PlantExtensions
         {
             Id = plant.Id,
             Name = plant.Name,
-            Emails = plant.Emails
-                .Select(e => e.Address)
-                .ToList()
-        };
-    }
-    
-    private static PlantEmail AsPlantEmail(this string email)
-    {
-        return new PlantEmail
-        {
-            Address = email
+            Cnpj = plant.Cnpj,
+            Address = plant.Address.AsAddressDto()
         };
     }
 }

@@ -15,32 +15,17 @@ public class PlantController : ControllerBase
         _plantService = plantService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateAsync(PlantModel model)
+    [HttpPost("upsert")]
+    public async Task<IActionResult> UpsertAsync(UpsertPlantsModel model)
     {
-        var plant = await _plantService.CreateAsync(model);
-        return Created(string.Empty, plant);
-    }
-
-    [HttpPut("{plantId}/emails")]
-
-    public async Task<IActionResult> AddEmailAsync([FromRoute] long plantId, [FromBody] AddEmailModel model)
-    {
-        var plant = await _plantService.AddEmailAsync(plantId, model);
-        return Ok(plant);
-    }
-    
-    [HttpDelete("{plantId}/emails/{email}")]
-
-    public async Task<IActionResult> RemoveEmailAsync([FromRoute] long plantId, [FromRoute] string email)
-    {
-        await _plantService.RemoveEmailAsync(plantId, email);
-        return Accepted();
+        var result = await _plantService.UpsertAsync(model);
+        return Ok(result);
     }
     
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
-        return Ok(await _plantService.GetAllAsync());
+        var result = await _plantService.GetAllAsync();
+        return Ok(result);
     }
 }

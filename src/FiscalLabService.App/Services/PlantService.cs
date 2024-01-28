@@ -1,9 +1,10 @@
-﻿using FiscalLabService.App.Dtos;
+using FiscalLabService.App.Dtos;
 using FiscalLabService.App.Extensions;
 using FiscalLabService.App.Interfaces;
 using FiscalLabService.App.Models;
 using FiscalLabService.Domain.Entities;
 using FiscalLabService.Domain.Interfaces;
+using FiscalLabService.Shared.Responses;
 
 namespace FiscalLabService.App.Services;
 
@@ -16,46 +17,44 @@ public class PlantService : IPlantService
         _plantRepository = plantRepository;
     }
 
-    public async Task<PlantDto> CreateAsync(PlantModel model)
+    public async Task<Result<UpsertPlantsDto>> UpsertAsync(UpsertPlantsModel model)
     {
-        var plant = model.AsPlant();
-        plant = await _plantRepository.CreateAsync(plant);
-        return plant.AsPlantDto();
-    }
+        var toUpsertPlantIds = model.Plants.Select(p => p.Id).ToList();
+        var existingPlants = await _plantRepository.GetByIdsAsync(toUpsertPlantIds);
 
-    public async Task<PlantDto> AddEmailAsync(long plantId, AddEmailModel model)
-    {
-        var plant = (await _plantRepository.GetAsync(plantId))!;
-
-        if (plant.Emails.Exists(e => e.Address.Equals(model.Email)))
+        var toUpdatePlants = new List<Plant>();
+        var toInsertPlants = new List<Plant>();
+        
+        foreach (var modelPlant in model.Plants)
         {
-            return plant.AsPlantDto();
+            var toUpsertPlant = existingPlants.Find(p => p.Id.Equals(modelPlant.Id));
+            if (toUpsertPlant is null)
+            {
+                toInsertPlants.Add(modelPlant.AsPlant());
+                continue;
+            }
+            
+            toUpdatePlants.Add(modelPlant.AsPlant());
         }
         
-        plant.Emails.Add(new PlantEmail{Address = model.Email});
-        await _plantRepository.UpdateAsync(plantId, plant);
-        return (await _plantRepository.GetAsync(plantId))!.AsPlantDto();
-    }
-
-    public async Task<PlantDto> RemoveEmailAsync(long plantId, string email)
-    {
-        var plant = (await _plantRepository.GetAsync(plantId))!;
-
-        plant.Emails = plant.Emails
-            .Where(e => !e.Address.Equals(email))
-            .ToList();
+        var updatedPlants = await _plantRepository.UpdateManyAsync(toUpdatePlants);
+        var insertedPlants = await _plantRepository.CreateManyAsync(toInsertPlants);
         
-        plant = await _plantRepository.UpdateAsync(plantId, plant);
-        return plant.AsPlantDto();
-    }
-
-    public async Task<List<PlantDto>> GetAllAsync()
-    {
-        var plants = await _plantRepository
-            .GetAllAsync();
-
-        return plants
+        var allPlants = insertedPlants
+            .Concat(updatedPlants)
             .Select(p => p.AsPlantDto())
             .ToList();
+
+        var dto = new UpsertPlantsDto { Plants = allPlants };
+        return Result<UpsertPlantsDto>.Success(dto);
+    }
+
+    public async Task<Result<List<PlantDto>>> GetAllAsync()
+    {
+        var plants = await _plantRepository.ListAsync();
+
+        var plantsDto = plants.Select(p => p.AsPlantDto()).ToList();
+        return Result<List<PlantDto>>
+            .Success(plantsDto);
     }
 }

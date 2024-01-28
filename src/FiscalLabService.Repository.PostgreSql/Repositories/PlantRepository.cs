@@ -7,40 +7,52 @@ namespace FiscalLabService.Repository.PostgreSql.Repositories;
 
 public class PlantRepository : IPlantRepository
 {
-    private readonly DataContext _context;
-
-    public PlantRepository(DataContext context)
+    private readonly ApplicationContext _context;
+    public PlantRepository(ApplicationContext context)
     {
         _context = context;
     }
-
-    public async Task<Plant> CreateAsync(Plant plant)
+    
+    public async Task<List<Plant>> CreateManyAsync(List<Plant> plants)
     {
-        await _context.Plants.AddAsync(plant);
+        await _context.Plants.AddRangeAsync(plants);
         await _context.SaveChangesAsync();
-        return plant;
+        return plants;
     }
 
-    public async Task<Plant> UpdateAsync(long id, Plant plant)
+    public async Task<List<Plant>> UpdateManyAsync(List<Plant> plants)
     {
-        plant.Id = id;
-        _context.Update(plant);
+        var plantIds = plants.Select(p => p.Id);
+
+        var plantsToUpdate = _context.Plants
+            .Where(p => plantIds.Contains(p.Id))
+            .ToList();
+        
+        foreach (var plant in plantsToUpdate)
+        {
+            var updatedPlant = plants.First(p => p.Id.Equals(plant.Id));
+            plant.Name = updatedPlant.Name;
+            plant.Cnpj = updatedPlant.Cnpj;
+            plant.Address = updatedPlant.Address;
+        }
+        
+        _context.Plants.UpdateRange(plantsToUpdate);
         await _context.SaveChangesAsync();
-        return plant;
+        return plantsToUpdate;
     }
 
-    public async Task<Plant?> GetAsync(long id)
-    {
-        return await _context.Plants
-            .Include(p => p.Emails)
-            .FirstOrDefaultAsync(p => p.Id.Equals(id));
-    }
-
-    public async Task<List<Plant>> GetAllAsync()
+    public async Task<List<Plant>> GetByIdsAsync(List<string> ids)
     {
         return await _context.Plants
             .AsNoTracking()
-            .Include(p => p.Emails)
+            .Where(p => ids.Contains(p.Id))
+            .ToListAsync();
+    }
+
+    public async Task<List<Plant>> ListAsync()
+    {
+        return await _context.Plants
+            .AsNoTracking()
             .ToListAsync();
     }
 }

@@ -1,12 +1,11 @@
 ﻿using FiscalLabService.App.Dtos;
 using FiscalLabService.App.Models;
+using FiscalLabService.Shared.Responses;
 
 namespace FiscalLabService.App.Interfaces;
 
 public interface IPlantService
 {
-    Task<PlantDto> CreateAsync(PlantModel model);
-    Task<PlantDto> AddEmailAsync(long plantId, AddEmailModel model);
-    Task<PlantDto> RemoveEmailAsync(long plantId, string email);
-    Task<List<PlantDto>> GetAllAsync();
+    Task<Result<UpsertPlantsDto>> UpsertAsync(UpsertPlantsModel model);
+    Task<Result<List<PlantDto>>> GetAllAsync();
 }
