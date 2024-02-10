@@ -17,6 +17,13 @@ public class VisitService(IVisitRepository visitRepository) : IVisitService
         return Result<VisitDto>.Success(visit.AsVisitDto());
     }
 
+    public async Task<Result<bool>> CreateManyAsync(VisitModel[] visitModels)
+    {
+        var visits = visitModels.Select(x => x.AsVisit()).ToArray();
+        await visitRepository.CreateManyAsync(visits);
+        return Result<bool>.Success(true);
+    }
+
     public async Task<Result<List<VisitDto>>> ListAsync()
     {
         var visits = await visitRepository.ListAsync();

@@ -90,6 +90,7 @@ public class VisitDocument(VisitDto model) : IDocument
         {
             column.Spacing(10);
 
+            column.Item().Element(ComposeBasicData);
             column.Item().Element(ComposeCaneBalance);
             column.Item().Element(ComposeCaneBalanceCalibrations);
             column.Item().Element(ComposeCaneBalanceTests);
@@ -111,6 +112,45 @@ public class VisitDocument(VisitDto model) : IDocument
         });
     }
 
+    private void ComposeBasicData(IContainer container)
+    {
+        container
+            .Table(table =>
+            {
+                table.ColumnsDefinition(columns =>
+                {
+                    columns.ConstantColumn(100);
+                    columns.RelativeColumn();
+                    columns.ConstantColumn(100);
+                    columns.RelativeColumn();
+                });
+
+                table.ExtendLastCellsToTableBottom();
+                table.Cell().ColumnSpan(4).LabelTitleCell("Dados Básicos");
+
+                table.Cell().LabelCell("Consultor");
+                table.Cell().ValueCell(Model.BasicInformation.Consultant);
+                
+                table.Cell().LabelCell("Data");
+                table.Cell().ValueCell($"{Model.BasicInformation.VisitDate.ToString("dd/MM/yyyy")} {Model.BasicInformation.VisitTime.ToString("HH:mm:ss")}");
+                
+                table.Cell().LabelCell("Unidade Industrial");
+                table.Cell().ValueCell(Model.BasicInformation.Plant.Name);
+                
+                table.Cell().LabelCell("Associação/Fornecedor");
+                table.Cell().ValueCell(Model.BasicInformation.Association.Name);
+                
+                table.Cell().LabelCell("Líder do Turno");
+                table.Cell().ValueCell(Model.BasicInformation.Leader);
+
+                table.Cell().LabelCell("Fiscal do Turno");
+                table.Cell().ValueCell(Model.BasicInformation.Inspector);
+                
+                table.Cell().LabelCell("Encarregado(a) Lab. Sacarose");
+                table.Cell().ColumnSpan(3).ValueCell(Model.BasicInformation.LaboratoryLeader);
+            });
+    }
+    
     private void ComposeCaneBalance(IContainer container)
     {
         container

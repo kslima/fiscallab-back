@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "hCYAMddujGloxxTE2B4OInVFVn/ezwDvBcga/Id9cfzbS/1rEUoOwmK6MJLEJKfbYWCCX4ZB3SUuM4DvOZzt5Q==",
+  "dgSpecHash": "EoRrDijCZ7LwWNk3jmMZlBSnS1Ryq/MccD5zvRJg7IsFLPiJt4RaLBfEgr6e165bom2J7S8/eOSjEOBgl+JEew==",
   "success": true,
   "projectFilePath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.API\\FiscalLabService.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp\\7.3.0.1\\harfbuzzsharp.7.3.0.1.nupkg.sha512",
+    "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp.nativeassets.linux\\7.3.0.1\\harfbuzzsharp.nativeassets.linux.7.3.0.1.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp.nativeassets.macos\\7.3.0.1\\harfbuzzsharp.nativeassets.macos.7.3.0.1.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp.nativeassets.win32\\7.3.0.1\\harfbuzzsharp.nativeassets.win32.7.3.0.1.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -58,6 +59,7 @@
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\questpdf\\2023.12.3\\questpdf.2023.12.3.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\skiasharp\\2.88.7\\skiasharp.2.88.7.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\skiasharp.harfbuzz\\2.88.7\\skiasharp.harfbuzz.2.88.7.nupkg.sha512",
+    "C:\\Users\\kleuber.lima\\.nuget\\packages\\skiasharp.nativeassets.linux.nodependencies\\2.88.7\\skiasharp.nativeassets.linux.nodependencies.2.88.7.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.7\\skiasharp.nativeassets.macos.2.88.7.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.7\\skiasharp.nativeassets.win32.2.88.7.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",

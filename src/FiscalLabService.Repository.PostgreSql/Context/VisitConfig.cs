@@ -8,9 +8,8 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
 {
     public void Configure(EntityTypeBuilder<Visit> builder)
     {
-        builder.ToTable("visits");
-
-        //Main
+        builder.ToTable("visits"); 
+        
         builder.HasKey(p => p.Id);
 
         builder.Property(p => p.Id)
@@ -21,6 +20,17 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
         builder.Property(p => p.CreatedAt)
             .IsRequired()
             .HasColumnName("created_at");
+        
+        builder.Property(p => p.FinishedAt)
+            .IsRequired()
+            .HasColumnName("finished_at");
+        
+        builder.Property(p => p.SentAt)
+            .HasColumnName("sent_at");
+        
+        builder.Property(p => p.IsFinished)
+            .IsRequired()
+            .HasColumnName("is_finished");
         
         builder
             .OwnsMany(a => a.Images, image =>
@@ -265,7 +275,6 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
 
                 navigationBuilder
                     .Property(p => p.SharpenedOrReplacedKnifeAt)
-                    .IsRequired()
                     .HasColumnName("desintegrator_probe_sharpened_or_replaced_knife_at");
 
                 navigationBuilder
@@ -650,7 +659,6 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
 
                 navigationBuilder
                     .Property(p => p.Clarifier)
-                    .IsRequired()
                     .HasConversion<string>()
                     .HasColumnName("system_consistency_clarifier");
 

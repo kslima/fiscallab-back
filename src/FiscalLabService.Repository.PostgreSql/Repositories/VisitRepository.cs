@@ -13,6 +13,23 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
         await context.SaveChangesAsync();
         return await GetById(visit.Id);
     }
+
+    public async Task<Visit[]>CreateManyAsync(Visit[] visit)
+    {
+        await context.Visits.AddRangeAsync(visit);
+        await context.SaveChangesAsync();
+        return await GetByIds(visit.Select(x => x.Id).ToArray());
+    }
+
+    private async Task<Visit[]> GetByIds(string[] ids)
+    {
+        return await context.Visits
+            .AsNoTracking()
+            .Include(v => v.BasicInformation.Plant)
+            .Include(v => v.BasicInformation.Association)
+            .Where(v => ids.Contains(v.Id))
+            .ToArrayAsync();
+    }
     
     public async Task<Visit> GetById(string id)
     {

@@ -10,8 +10,10 @@
         "dependencies": {
           "FiscalLabService.App": "1.0.0",
           "FiscalLabService.Repository.PostgreSql": "1.0.0",
+          "HarfBuzzSharp.NativeAssets.Linux": "7.3.0.1",
           "Microsoft.EntityFrameworkCore.Design": "8.0.1",
           "Microsoft.Extensions.Configuration.UserSecrets": "8.0.0",
+          "SkiaSharp.NativeAssets.Linux.NoDependencies": "2.88.7",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "runtime": {
@@ -27,6 +29,33 @@
           "lib/net6.0/HarfBuzzSharp.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "7.3.0.1"
+          }
+        }
+      },
+      "HarfBuzzSharp.NativeAssets.Linux/7.3.0.1": {
+        "dependencies": {
+          "HarfBuzzSharp": "7.3.0.1"
+        },
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libHarfBuzzSharp.so": {
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-arm64/native/libHarfBuzzSharp.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-x64/native/libHarfBuzzSharp.so": {
+            "rid": "linux-musl-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libHarfBuzzSharp.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -662,6 +691,33 @@
           }
         }
       },
+      "SkiaSharp.NativeAssets.Linux.NoDependencies/2.88.7": {
+        "dependencies": {
+          "SkiaSharp": "2.88.7"
+        },
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libSkiaSharp.so": {
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-arm64/native/libSkiaSharp.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-musl-x64/native/libSkiaSharp.so": {
+            "rid": "linux-musl-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libSkiaSharp.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "SkiaSharp.NativeAssets.macOS/2.88.7": {
         "runtimeTargets": {
           "runtimes/osx/native/libSkiaSharp.dylib": {
@@ -876,6 +932,13 @@
       "sha512": "sha512-/6z6TQBqWWbVpLUw7E/82HZKLT3OAzg/w6z8I6JFNFcYa3nM9RnZ8XGos9nD4buAzThLHpqPw/rb8FdZXEORAQ==",
       "path": "harfbuzzsharp/7.3.0.1",
       "hashPath": "harfbuzzsharp.7.3.0.1.nupkg.sha512"
+    },
+    "HarfBuzzSharp.NativeAssets.Linux/7.3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8CH54W2peBhE3vBN10gx4+2lLTrVoHAY+OrTO2OqXo3QkKJaH3hMG6dTKSWOy88hr0xjQ4j4jBYdYBjMcCK8Xw==",
+      "path": "harfbuzzsharp.nativeassets.linux/7.3.0.1",
+      "hashPath": "harfbuzzsharp.nativeassets.linux.7.3.0.1.nupkg.sha512"
     },
     "HarfBuzzSharp.NativeAssets.macOS/7.3.0.1": {
       "type": "package",
@@ -1247,6 +1310,13 @@
       "sha512": "sha512-4Vd+GpokorZNpDvUp09zjK6CMXN35zyJtNvzkGtS1TsXlG/5yA3lWTsQIU0nSQjfgpYql0tSEU5+WTsjxljugg==",
       "path": "skiasharp.harfbuzz/2.88.7",
       "hashPath": "skiasharp.harfbuzz.2.88.7.nupkg.sha512"
+    },
+    "SkiaSharp.NativeAssets.Linux.NoDependencies/2.88.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KkMftfAz1lGPnuhyecuLJzeyvMjXtHp9cYVQc/oeLhF8KYrxtUxRy5LOX5oROhyLHy/CyqEl9MoAhqmSH7cV7g==",
+      "path": "skiasharp.nativeassets.linux.nodependencies/2.88.7",
+      "hashPath": "skiasharp.nativeassets.linux.nodependencies.2.88.7.nupkg.sha512"
     },
     "SkiaSharp.NativeAssets.macOS/2.88.7": {
       "type": "package",

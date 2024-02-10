@@ -3,6 +3,7 @@ using System;
 using FiscalLabService.Repository.PostgreSql.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FiscalLabService.Repository.PostgreSql.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240210171621_AddFields")]
+    partial class AddFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,8 +112,7 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<DateTime?>("FinishedAt")
-                        .IsRequired()
+                    b.Property<DateTime>("FinishedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("finished_at");
 
@@ -118,7 +120,7 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("is_finished");
 
-                    b.Property<DateTime?>("SentAt")
+                    b.Property<DateTime>("SentAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("sent_at");
 
@@ -822,6 +824,7 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                                 .HasColumnName("desintegrator_probe_sample_amount");
 
                             b1.Property<DateTime?>("SharpenedOrReplacedKnifeAt")
+                                .IsRequired()
                                 .HasColumnType("timestamp with time zone")
                                 .HasColumnName("desintegrator_probe_sharpened_or_replaced_knife_at");
 
@@ -1025,6 +1028,7 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                                 .HasColumnType("character varying(36)");
 
                             b1.Property<string>("Clarifier")
+                                .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("system_consistency_clarifier");
 

@@ -49,8 +49,7 @@ if (app.Environment.IsDevelopment())
     app.UseCors(devCorsPolicy);
 }
 
-
-app.UseHttpsRedirection();
+app.UseForwardedHeaders();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -11,9 +11,9 @@ namespace FiscalLabService.API.Controllers;
 public class VisitController(IVisitService visitService) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromBody] VisitModel visitModel)
+    public async Task<IActionResult> CreateAsync([FromBody] VisitModel[] visitModels)
     {
-        var result = await visitService.CreateAsync(visitModel);
+        var result = await visitService.CreateManyAsync(visitModels);
         return Ok(result);
     }
 

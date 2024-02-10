@@ -12,6 +12,9 @@ public class VisitDto
     public BenchmarkingEquipmentDto BenchmarkingEquipment { get; set; } = null!;
     public SystemConsistencyDto SystemConsistency { get; set; } = null!;
     public ConclusionDto Conclusion { get; set; } = null!;
-    public DateTime CreatedAt { get; set; }
+    public bool IsFinished { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? FinishedAt { get; set; }
+    public DateTime? SentAt { get; set; }
     public List<ImageDto> Images { get; set; } = [];
 }

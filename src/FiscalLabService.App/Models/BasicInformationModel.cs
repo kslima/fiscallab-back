@@ -10,5 +10,4 @@ public class BasicInformationModel
     public string LaboratoryLeader { get; set; } = string.Empty;
     public DateOnly VisitDate { get; set; }
     public TimeOnly VisitTime { get; set; }
-    public DateTime CreatedAt { get; set; }
 }
