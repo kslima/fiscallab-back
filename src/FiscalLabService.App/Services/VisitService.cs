@@ -19,7 +19,7 @@ public class VisitService(IVisitRepository visitRepository) : IVisitService
 
     public async Task<Result<bool>> CreateManyAsync(VisitModel[] visitModels)
     {
-        var visits = visitModels.Select(x => x.AsVisit()).ToArray();
+        var visits = visitModels.Select(x => x.AsVisit()).ToList();
         await visitRepository.CreateManyAsync(visits);
         return Result<bool>.Success(true);
     }

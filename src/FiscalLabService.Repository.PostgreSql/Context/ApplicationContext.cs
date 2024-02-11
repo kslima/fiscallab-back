@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FiscalLabService.Repository.PostgreSql.Context;
 
-public class ApplicationContext : DbContext
+public sealed class ApplicationContext : DbContext
 {
     public DbSet<Plant> Plants { get; set; }
     public DbSet<Association> Associations { get; set; }

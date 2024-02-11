@@ -13,6 +13,7 @@ public static class DependencyInjection
         services.AddScoped<IMenuService, MenuService>();
         services.AddScoped<IVisitPageService, VisitPageService>();
         services.AddScoped<IVisitService, VisitService>();
+        services.AddScoped<ISyncService, SyncService>();
         return services;
     }
 }

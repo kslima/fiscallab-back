@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FiscalLabService.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61ad02b0c5a6c916b35a8e84e47280f8f00754a4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27f851f7de2ddd30c9efd83a495aa6e6dfbb4012")]
 [assembly: System.Reflection.AssemblyProductAttribute("FiscalLabService.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FiscalLabService.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

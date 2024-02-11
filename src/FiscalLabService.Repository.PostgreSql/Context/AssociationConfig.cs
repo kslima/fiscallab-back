@@ -1,4 +1,5 @@
 ﻿using FiscalLabService.Domain.Entities;
+using FiscalLabService.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -37,21 +38,12 @@ public class AssociationConfig : IEntityTypeConfiguration<Association>
             .IsRequired();
 
         builder
-            .OwnsMany(a => a.Emails, email =>
-            {
-                email.Property<int>("id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("integer")
-                    .UseIdentityByDefaultColumn();
-
-                email
-                    .WithOwner()
-                    .HasForeignKey("association_id");
-                email.ToTable("emails")
-                    .Property(e => e.Address)
-                    .HasColumnName("address")
-                    .HasMaxLength(255)
-                    .IsRequired();
-            });
+            .Property(a => a.Emails)
+            .HasConversion(v => string.Join(";", v.Select(e => e.Address)),
+                v => v
+                    .Split(';', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => new Email(x))
+                    .ToList())
+            .IsRequired();
     }
 }

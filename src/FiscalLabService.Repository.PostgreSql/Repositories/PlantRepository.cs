@@ -23,8 +23,9 @@ public class PlantRepository : IPlantRepository
     public async Task<List<Plant>> UpdateManyAsync(List<Plant> plants)
     {
         var plantIds = plants.Select(p => p.Id);
-
+        
         var plantsToUpdate = _context.Plants
+            .AsNoTracking()
             .Where(p => plantIds.Contains(p.Id))
             .ToList();
         

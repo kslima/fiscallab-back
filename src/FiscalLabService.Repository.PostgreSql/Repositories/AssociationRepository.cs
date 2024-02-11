@@ -23,8 +23,9 @@ public class AssociationRepository : IAssociationRepository
     public async Task<List<Association>> UpdateManyAsync(List<Association> associations)
     {
         var associationIds = associations.Select(p => p.Id);
-
+        
         var associationsToUpdate = _context.Associations
+            .AsNoTracking()
             .Where(p => associationIds.Contains(p.Id))
             .ToList();
         
