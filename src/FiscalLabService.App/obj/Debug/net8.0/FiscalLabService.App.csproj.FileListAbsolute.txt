@@ -24,10 +24,10 @@ C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\Fiscal
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\FiscalLabService.App.AssemblyInfo.cs
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\FiscalLabService.App.csproj.CoreCompileInputs.cache
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\FiscalLabService.App.sourcelink.json
-C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\FiscalLabService.App.csproj.CopyComplete
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\FiscalLabService.App.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\refint\FiscalLabService.App.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\FiscalLabService.App.pdb
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\ref\FiscalLabService.App.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\bin\Debug\net8.0\FiscalLabService.Shared.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\bin\Debug\net8.0\FiscalLabService.Shared.pdb
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\obj\Debug\net8.0\FiscalLa.B9607E3D.Up2Date

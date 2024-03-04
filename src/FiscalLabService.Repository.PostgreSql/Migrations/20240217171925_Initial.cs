@@ -20,6 +20,7 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                 {
                     id = table.Column<string>(type: "character varying(36)", maxLength: 36, nullable: false),
                     name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    Emails = table.Column<string>(type: "text", nullable: false),
                     city = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
                     state = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: false)
                 },
@@ -73,37 +74,17 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "emails",
-                columns: table => new
-                {
-                    association_id = table.Column<string>(type: "character varying(36)", nullable: false),
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    address = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_emails", x => new { x.association_id, x.id });
-                    table.ForeignKey(
-                        name: "FK_emails_associations_association_id",
-                        column: x => x.association_id,
-                        principalTable: "associations",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "options",
                 columns: table => new
                 {
-                    menu_id = table.Column<string>(type: "character varying(36)", nullable: false),
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    description = table.Column<string>(type: "text", nullable: false)
+                    description = table.Column<string>(type: "text", nullable: false),
+                    menu_id = table.Column<string>(type: "character varying(36)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_options", x => new { x.menu_id, x.id });
+                    table.PrimaryKey("PK_options", x => x.id);
                     table.ForeignKey(
                         name: "FK_options_menus_menu_id",
                         column: x => x.menu_id,
@@ -158,7 +139,7 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                     desintegrator_probe_clean_mixer = table.Column<string>(type: "text", nullable: false),
                     desintegrator_probe_desintegrator_rpm = table.Column<string>(type: "text", nullable: false),
                     desintegrator_probe_preparation_index = table.Column<string>(type: "text", nullable: false),
-                    desintegrator_probe_sharpened_or_replaced_knife_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    desintegrator_probe_sharpened_or_replaced_knife_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     desintegrator_probe_observations4 = table.Column<string>(type: "text", nullable: false),
                     analytical_balance_homogeneous_weight = table.Column<string>(type: "text", nullable: false),
                     analytical_balance_final_weight = table.Column<string>(type: "text", nullable: false),
@@ -231,7 +212,7 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                     system_consistency_oc = table.Column<string>(type: "text", nullable: false),
                     system_consistency_farm = table.Column<string>(type: "text", nullable: false),
                     system_consistency_owner = table.Column<string>(type: "text", nullable: false),
-                    system_consistency_clarifier = table.Column<string>(type: "text", nullable: false),
+                    system_consistency_clarifier = table.Column<string>(type: "text", nullable: true),
                     system_consistency_plant_pbu = table.Column<decimal>(type: "numeric", nullable: false),
                     system_consistency_plant_brix = table.Column<decimal>(type: "numeric", nullable: false),
                     system_consistency_plant_ls = table.Column<decimal>(type: "numeric", nullable: false),
@@ -261,7 +242,11 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                     conclusion_laboratory_receptivity = table.Column<string>(type: "text", nullable: false),
                     conclusion_pendencies = table.Column<string>(type: "text", nullable: false),
                     conclusion_conclusion_observations = table.Column<string>(type: "text", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    is_finished = table.Column<bool>(type: "boolean", nullable: false),
+                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    finished_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    synced_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    sent_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -284,16 +269,16 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                 name: "visit_images",
                 columns: table => new
                 {
-                    visit_id = table.Column<string>(type: "character varying(36)", nullable: false),
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "text", nullable: false),
                     url = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false)
+                    description = table.Column<string>(type: "text", nullable: false),
+                    visit_id = table.Column<string>(type: "character varying(36)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_visit_images", x => new { x.visit_id, x.id });
+                    table.PrimaryKey("PK_visit_images", x => x.id);
                     table.ForeignKey(
                         name: "FK_visit_images_visits_visit_id",
                         column: x => x.visit_id,
@@ -319,6 +304,16 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_options_menu_id",
+                table: "options",
+                column: "menu_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_visit_images_visit_id",
+                table: "visit_images",
+                column: "visit_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_visits_basic_information_association_id",
                 table: "visits",
                 column: "basic_information_association_id");
@@ -332,9 +327,6 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "emails");
-
             migrationBuilder.DropTable(
                 name: "options");
 

@@ -17,4 +17,5 @@ public class VisitDto
     public DateTime? FinishedAt { get; set; }
     public DateTime? SentAt { get; set; }
     public List<ImageDto> Images { get; set; } = [];
+    public List<BalanceTestDto> BalanceTests { get; set; } = [];
 }

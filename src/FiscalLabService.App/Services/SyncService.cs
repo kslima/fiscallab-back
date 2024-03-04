@@ -24,6 +24,7 @@ public class SyncService(
         {
             x.BasicInformation.Plant = plants.Single(a => a.Id.Equals(x.BasicInformation.PlantId));
             x.BasicInformation.Association = associations.Single(a => a.Id.Equals(x.BasicInformation.AssociationId));
+            x.SyncedAt = DateTime.UtcNow;
         });
         var visits = await SyncVisits(syncModel.Visits);
 
@@ -140,15 +141,15 @@ public class SyncService(
                 toInsertVisits.Add(visit);
                 continue;
             }
-
+            
             toUpdateVisits.Add(visit);
         }
 
-        var updatedMenus = await visitRepository.UpdateManyAsync(toUpdateVisits);
-        var insertedMenus = await visitRepository.CreateManyAsync(toInsertVisits);
+        var updatedVisits = await visitRepository.UpdateManyAsync(toUpdateVisits);
+        var insertedVisits = await visitRepository.CreateManyAsync(toInsertVisits);
 
-        return insertedMenus
-            .Concat(updatedMenus)
+        return insertedVisits
+            .Concat(updatedVisits)
             .ToArray();
     }
 }

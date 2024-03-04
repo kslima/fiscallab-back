@@ -1,4 +1,5 @@
 ﻿using FiscalLabService.Domain.Entities;
+using FiscalLabService.Repository.PostgreSql.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -22,11 +23,16 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
             .HasColumnName("created_at");
         
         builder.Property(p => p.FinishedAt)
-            .IsRequired()
-            .HasColumnName("finished_at");
+            .HasColumnName("finished_at")
+            .HasConversion(PostgresHelper.DateTimeToUtcConverter());
+        
+        builder.Property(p => p.SyncedAt)
+            .HasColumnName("synced_at")
+            .HasConversion(PostgresHelper.DateTimeToUtcConverter());
         
         builder.Property(p => p.SentAt)
-            .HasColumnName("sent_at");
+            .HasColumnName("sent_at")
+            .HasConversion(PostgresHelper.DateTimeToUtcConverter());
         
         builder.Property(p => p.IsFinished)
             .IsRequired()
@@ -35,31 +41,61 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
         builder
             .OwnsMany(a => a.Images, image =>
             {
-                image.Property<int>("id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("integer")
-                    .UseIdentityByDefaultColumn();
-
+                image.ToTable("visit_images");
+                
                 image
                     .WithOwner()
                     .HasForeignKey("visit_id");
                 
-                image.ToTable("visit_images")
-                    .Property(e => e.Name)
+                image.Property<int>("id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer")
+                    .UseIdentityByDefaultColumn();
+                
+                image.HasKey("id");
+                
+                image.Property(e => e.Name)
                     .HasColumnName("name")
                     .IsRequired();
                 
-                image.ToTable("visit_images")
-                    .Property(e => e.Url)
+                image.Property(e => e.Url)
                     .HasColumnName("url")
                     .IsRequired();
                 
-                image.ToTable("visit_images")
-                    .Property(e => e.Description)
+                image.Property(e => e.Description)
                     .HasColumnName("description")
                     .IsRequired();
             });
 
+        builder
+            .OwnsMany(a => a.BalanceTests, balanceTest =>
+            {
+                balanceTest.ToTable("visit_balance_tests");
+                
+                balanceTest
+                    .WithOwner()
+                    .HasForeignKey("visit_id");
+                
+                balanceTest.Property<int>("id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer")
+                    .UseIdentityByDefaultColumn();
+                
+                balanceTest.HasKey("id");
+                
+                balanceTest.Property(e => e.TruckNumber)
+                    .HasColumnName("truck_number")
+                    .IsRequired();
+                
+                balanceTest.Property(e => e.InputBalanceWeight)
+                    .HasColumnName("input_balance_weight")
+                    .IsRequired();
+                
+                balanceTest.Property(e => e.OutputBalanceWeight)
+                    .HasColumnName("output_balance_weight")
+                    .IsRequired();
+            });
+        
         builder.OwnsOne(v => v.BasicInformation,
             navigationBuilder =>
             {
@@ -275,7 +311,8 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
 
                 navigationBuilder
                     .Property(p => p.SharpenedOrReplacedKnifeAt)
-                    .HasColumnName("desintegrator_probe_sharpened_or_replaced_knife_at");
+                    .HasColumnName("desintegrator_probe_sharpened_or_replaced_knife_at")
+                    .HasConversion(PostgresHelper.DateTimeToUtcConverter());
 
                 navigationBuilder
                     .Property(p => p.Observations4)

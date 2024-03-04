@@ -4,7 +4,7 @@ namespace FiscalLabService.Domain.Entities;
 
 public class Visit
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string Id { get; set; } = string.Empty;
     public BasicInformation BasicInformation { get; set; } = null!;
     public SugarcaneBalance SugarcaneBalance { get; set; } = null!;
     public DesintegratorProbe DesintegratorProbe { get; set; } = null!;
@@ -16,7 +16,9 @@ public class Visit
     public Conclusion Conclusion { get; set; } = null!;
     public bool IsFinished { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public DateTime FinishedAt { get; set; }
+    public DateTime? FinishedAt { get; set; }
+    public DateTime? SyncedAt { get; set; }
     public DateTime? SentAt { get; set; }
     public List<Image> Images { get; set; } = [];
+    public List<BalanceTest> BalanceTests { get; set; } = [];
 }

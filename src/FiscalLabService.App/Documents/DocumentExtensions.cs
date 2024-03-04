@@ -50,6 +50,11 @@ public static class DocumentExtensions
             .Padding(5)
             .DefaultTextStyle(style);
     }
+    
+    private static IContainer NumberValueCell(this IContainer container, float value)
+    {
+        return NumberValueCell(container, (decimal) value);
+    }
 
     private static IContainer TitleCell(this IContainer container)
     {
@@ -65,19 +70,46 @@ public static class DocumentExtensions
             .Padding(5)
             .DefaultTextStyle(titleStyle);
     }
+    
+    private static IContainer SubLabelCell(this IContainer container)
+    {
+        var style = TextStyle.Default
+            .FontSize(7)
+            .Bold();
 
+        return container
+            .Border(0.3f)
+            .BorderColor(Colors.Grey.Lighten1)
+            .Background(Colors.Grey.Lighten4)
+            .Padding(5)
+            .DefaultTextStyle(style);
+    }
+
+    public static void SubLabelCell(this IContainer container, string text) => container.SubLabelCell().Text(text.GetValueOrDefault()).Medium();
+    
     public static void LabelTitleCell(this IContainer container, string text) => container.TitleCell()
-        .Text(text).Bold();
+        .Text(text.GetValueOrDefault()).Bold();
 
-    public static void LabelCell(this IContainer container, string text) => container.LabelCell().Text(text).Medium();
+    public static void LabelCell(this IContainer container, string text) => container.LabelCell().Text(text.GetValueOrDefault()).Medium();
 
     public static IContainer ValueCell(this IContainer container, string tex)
     {
-        container.ValueCell().Text(tex);
+        container.ValueCell().Text(tex.GetValueOrDefault());
         return container;
+    }
+
+    private static string GetValueOrDefault(this string value)
+    {
+        return string.IsNullOrWhiteSpace(value) ? "-" : value;
     }
     
     public static IContainer DecimalValueCell(this IContainer container, decimal value)
+    {
+        container.NumberValueCell(value).Text(value.ToString("n", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")));
+        return container;
+    }
+    
+    public static IContainer DecimalValueCell(this IContainer container, float value)
     {
         container.NumberValueCell(value).Text(value.ToString("n", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")));
         return container;

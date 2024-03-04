@@ -5,7 +5,7 @@
 namespace FiscalLabService.Repository.PostgreSql.Migrations
 {
     /// <inheritdoc />
-    public partial class FixDateFields : Migration
+    public partial class DateConverter : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

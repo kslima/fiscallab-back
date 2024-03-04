@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FiscalLabService.Repository.PostgreSql.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240210184644_FixClarifier")]
-    partial class FixClarifier
+    [Migration("20240217171925_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,10 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("character varying(36)")
                         .HasColumnName("id");
+
+                    b.Property<string>("Emails")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -113,7 +117,6 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         .HasColumnName("created_at");
 
                     b.Property<DateTime?>("FinishedAt")
-                        .IsRequired()
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("finished_at");
 
@@ -124,6 +127,10 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                     b.Property<DateTime?>("SentAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("sent_at");
+
+                    b.Property<DateTime?>("SyncedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("synced_at");
 
                     b.HasKey("Id");
 
@@ -240,44 +247,14 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                                 .HasForeignKey("AssociationId");
                         });
 
-                    b.OwnsMany("FiscalLabService.Domain.ValueObjects.Email", "Emails", b1 =>
-                        {
-                            b1.Property<string>("association_id")
-                                .HasColumnType("character varying(36)");
-
-                            b1.Property<int>("id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer");
-
-                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("id"));
-
-                            b1.Property<string>("Address")
-                                .IsRequired()
-                                .HasMaxLength(255)
-                                .HasColumnType("character varying(255)")
-                                .HasColumnName("address");
-
-                            b1.HasKey("association_id", "id");
-
-                            b1.ToTable("emails", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("association_id");
-                        });
-
                     b.Navigation("Address")
                         .IsRequired();
-
-                    b.Navigation("Emails");
                 });
 
             modelBuilder.Entity("FiscalLabService.Domain.Entities.Menu", b =>
                 {
                     b.OwnsMany("FiscalLabService.Domain.ValueObjects.Option", "Options", b1 =>
                         {
-                            b1.Property<string>("menu_id")
-                                .HasColumnType("character varying(36)");
-
                             b1.Property<int>("id")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("integer");
@@ -289,7 +266,13 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                                 .HasColumnType("text")
                                 .HasColumnName("description");
 
-                            b1.HasKey("menu_id", "id");
+                            b1.Property<string>("menu_id")
+                                .IsRequired()
+                                .HasColumnType("character varying(36)");
+
+                            b1.HasKey("id");
+
+                            b1.HasIndex("menu_id");
 
                             b1.ToTable("options", (string)null);
 
@@ -1189,9 +1172,6 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
 
                     b.OwnsMany("FiscalLabService.Domain.ValueObjects.Image", "Images", b1 =>
                         {
-                            b1.Property<string>("visit_id")
-                                .HasColumnType("character varying(36)");
-
                             b1.Property<int>("id")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("integer");
@@ -1213,7 +1193,13 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                                 .HasColumnType("text")
                                 .HasColumnName("url");
 
-                            b1.HasKey("visit_id", "id");
+                            b1.Property<string>("visit_id")
+                                .IsRequired()
+                                .HasColumnType("character varying(36)");
+
+                            b1.HasKey("id");
+
+                            b1.HasIndex("visit_id");
 
                             b1.ToTable("visit_images", (string)null);
 

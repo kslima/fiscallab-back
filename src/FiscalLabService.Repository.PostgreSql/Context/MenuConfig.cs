@@ -39,14 +39,17 @@ public class MenuConfig : IEntityTypeConfiguration<Menu>
         builder
             .OwnsMany(m => m.Options, option =>
             {
+                option
+                    .WithOwner()
+                    .HasForeignKey("menu_id");
+                
                 option.Property<int>("id")
                     .ValueGeneratedOnAdd()
                     .HasColumnType("integer")
                     .UseIdentityByDefaultColumn();
 
-                option
-                    .WithOwner()
-                    .HasForeignKey("menu_id");
+                option.HasKey("id");
+                
                 option.ToTable("options")
                     .Property(e => e.Description)
                     .HasColumnName("description")

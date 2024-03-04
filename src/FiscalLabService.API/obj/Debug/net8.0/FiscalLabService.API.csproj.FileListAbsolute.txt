@@ -140,7 +140,6 @@ C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\Fiscal
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.FiscalLabService.API.props
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\scopedcss\bundle\FiscalLabService.API.styles.css
-C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\FiscalLabService.API.csproj.CopyComplete
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\FiscalLabService.API.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\refint\FiscalLabService.API.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\FiscalLabService.API.pdb
@@ -173,3 +172,4 @@ C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\Fiscal
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\runtimes\linux-arm64\native\libSkiaSharp.so
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\runtimes\linux-x64\native\libSkiaSharp.so
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\obj\Debug\net8.0\FiscalLa.FA58DF78.Up2Date

@@ -30,7 +30,8 @@ public static class VisitExtensions
                 Name = i.Name,
                 Url = i.Url,
                 Description = i.Description
-            }).ToList()
+            }).ToList(),
+            BalanceTests = source.BalanceTests.Select(i => new BalanceTestDto(i)).ToList()
         };
     }
 
@@ -62,6 +63,7 @@ public static class VisitExtensions
             ResponsibleBody = source.ResponsibleBody,
             CalibrationCertificate = source.CalibrationCertificate,
             Observations1 = source.Observations1,
+            Observations2 = source.Observations2,
             PlantPercentage = source.PlantPercentage,
             ProviderPercentage = source.ProviderPercentage,
             PlantFarmPercentage = source.PlantFarmPercentage,

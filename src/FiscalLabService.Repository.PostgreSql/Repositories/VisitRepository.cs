@@ -16,20 +16,6 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
 
     public async Task<List<Visit>> CreateManyAsync(List<Visit> visits)
     {
-        // visits.ForEach(x =>
-        // {
-        //     var association = context.Associations.Local.FirstOrDefault(v => v.Id.Equals(x.BasicInformation.AssociationId));
-        //     if (association is not null)
-        //     {
-        //         context.Entry(association).State = EntityState.Detached;
-        //     }
-        //     
-        //     var plant = context.Plants.Local.FirstOrDefault(v => v.Id.Equals(x.BasicInformation.PlantId));
-        //     if (plant is not null)
-        //     {
-        //         context.Entry(plant).State = EntityState.Detached;
-        //     }
-        // });
         await context.Visits.AddRangeAsync(visits);
         await context.SaveChangesAsync();
         return await GetByIds(visits.Select(x => x.Id).ToArray());
@@ -37,17 +23,35 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
 
     public async Task<List<Visit>> UpdateManyAsync(List<Visit> visits)
     {
-        // visits.ForEach(x =>
-        // {
-        //     var any = context.Associations.Local.FirstOrDefault(v => v.Id.Equals(x.BasicInformation.AssociationId));
-        //     if (any is not null)
-        //     {
-        //         context.Entry(any).State = EntityState.Detached;
-        //     }
-        // });
-        context.Visits.UpdateRange(visits);
+        var visitIds = visits.Select(p => p.Id);
+        var visitsToUpdate = context.Visits
+            .Where(p => visitIds.Contains(p.Id))
+            .ToList();
+        
+        foreach (var visit in visitsToUpdate)
+        {
+            var updatedVisit = visits.First(x => x.Id.Equals(visit.Id));
+            visit.BasicInformation = updatedVisit.BasicInformation;
+            visit.SugarcaneBalance = updatedVisit.SugarcaneBalance;
+            visit.DesintegratorProbe = updatedVisit.DesintegratorProbe;
+            visit.AnalyticalBalance = updatedVisit.AnalyticalBalance;
+            visit.PressRefractometer = updatedVisit.PressRefractometer;
+            visit.ClarificationSaccharimeter = updatedVisit.ClarificationSaccharimeter;
+            visit.BenchmarkingEquipment = updatedVisit.BenchmarkingEquipment;
+            visit.SystemConsistency = updatedVisit.SystemConsistency;
+            visit.Conclusion = updatedVisit.Conclusion;
+            visit.IsFinished = updatedVisit.IsFinished;
+            visit.CreatedAt = updatedVisit.CreatedAt;
+            visit.FinishedAt = updatedVisit.FinishedAt;
+            visit.SyncedAt = updatedVisit.SyncedAt;
+            visit.SentAt = updatedVisit.SentAt;
+            visit.Images = updatedVisit.Images;
+            visit.BalanceTests = updatedVisit.BalanceTests;
+        }
+        
+        context.Visits.UpdateRange(visitsToUpdate);
         await context.SaveChangesAsync();
-        return visits;
+        return visitsToUpdate;
     }
 
     private async Task<List<Visit>> GetByIds(string[] ids)
@@ -75,6 +79,8 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
             .AsNoTracking()
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
+            .Include(v => v.Images)
+            .Include(v => v.BalanceTests)
             .Where(p => ids.Contains(p.Id))
             .ToListAsync();
     }
@@ -85,6 +91,8 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
             .AsNoTracking()
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
+            .Include(v => v.Images)
+            .Include(v => v.BalanceTests)
             .ToListAsync();
     }
 }
