@@ -22,9 +22,9 @@ public static class VisitExtensions
             SystemConsistency = source.SystemConsistency.AsSystemConsistencyDto(),
             Conclusion = source.Conclusion.AsConclusionDto(),
             NotifyByEmail = source.NotifyByEmail,
+            NotifiedByEmailAt = source.NotifiedByEmailAt,
             CreatedAt = source.CreatedAt,
             FinishedAt = source.FinishedAt,
-            NotifiedByEmailAt = source.NotifiedByEmailAt,
             Images = source.Images.Select(i => new ImageDto
             {
                 Name = i.Name,

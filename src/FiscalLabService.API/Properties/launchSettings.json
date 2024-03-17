@@ -9,7 +9,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "EMAIL_TASK_CRON_EXPRESSION": "0 */30 * * * *",
-        "VISIT_EMAIL_TEMPLATE_PATH": "../FiscalLabService.App/Resources/EmailTemplates/visit.html"
+        "VISIT_EMAIL_TEMPLATE_PATH": "../FiscalLabService.API/visit.html"
       }
     }
   }

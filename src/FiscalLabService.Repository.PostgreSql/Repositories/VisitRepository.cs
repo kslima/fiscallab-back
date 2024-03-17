@@ -40,13 +40,15 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
             visit.BenchmarkingEquipment = updatedVisit.BenchmarkingEquipment;
             visit.SystemConsistency = updatedVisit.SystemConsistency;
             visit.Conclusion = updatedVisit.Conclusion;
-            visit.NotifyByEmail = updatedVisit.NotifyByEmail;
-            visit.CreatedAt = updatedVisit.CreatedAt;
             visit.FinishedAt = updatedVisit.FinishedAt;
-            visit.SyncedAt = updatedVisit.SyncedAt;
-            visit.NotifiedByEmailAt = updatedVisit.NotifiedByEmailAt;
             visit.Images = updatedVisit.Images;
             visit.BalanceTests = updatedVisit.BalanceTests;
+            
+            visit.SyncedAt = DateTime.UtcNow;
+
+            if (visit.NotifiedByEmailAt is not null) continue;
+            
+            visit.NotifyByEmail = updatedVisit.NotifyByEmail;
         }
         
         context.Visits.UpdateRange(visitsToUpdate);
