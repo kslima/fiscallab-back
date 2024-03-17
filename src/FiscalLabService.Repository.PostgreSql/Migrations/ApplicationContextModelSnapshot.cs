@@ -117,13 +117,13 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("finished_at");
 
-                    b.Property<bool>("IsFinished")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_finished");
-
-                    b.Property<DateTime?>("SentAt")
+                    b.Property<DateTime?>("NotifiedByEmailAt")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("sent_at");
+                        .HasColumnName("notified_by_email_at");
+
+                    b.Property<bool>("NotifyByEmail")
+                        .HasColumnType("boolean")
+                        .HasColumnName("notify_by_email");
 
                     b.Property<DateTime?>("SyncedAt")
                         .HasColumnType("timestamp with time zone")

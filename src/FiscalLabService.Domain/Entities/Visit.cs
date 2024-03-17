@@ -14,11 +14,11 @@ public class Visit
     public BenchmarkingEquipment BenchmarkingEquipment { get; set; } = null!;
     public SystemConsistency SystemConsistency { get; set; } = null!;
     public Conclusion Conclusion { get; set; } = null!;
-    public bool IsFinished { get; set; }
+    public bool NotifyByEmail { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? FinishedAt { get; set; }
     public DateTime? SyncedAt { get; set; }
-    public DateTime? SentAt { get; set; }
+    public DateTime? NotifiedByEmailAt { get; set; }
     public List<Image> Images { get; set; } = [];
     public List<BalanceTest> BalanceTests { get; set; } = [];
 }

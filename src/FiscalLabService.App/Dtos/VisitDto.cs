@@ -12,10 +12,10 @@ public class VisitDto
     public BenchmarkingEquipmentDto BenchmarkingEquipment { get; set; } = null!;
     public SystemConsistencyDto SystemConsistency { get; set; } = null!;
     public ConclusionDto Conclusion { get; set; } = null!;
-    public bool IsFinished { get; set; }
+    public bool NotifyByEmail { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? FinishedAt { get; set; }
-    public DateTime? SentAt { get; set; }
+    public DateTime? NotifiedByEmailAt { get; set; }
     public List<ImageDto> Images { get; set; } = [];
     public List<BalanceTestDto> BalanceTests { get; set; } = [];
 }

@@ -30,13 +30,13 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
             .HasColumnName("synced_at")
             .HasConversion(PostgresHelper.DateTimeToUtcConverter());
         
-        builder.Property(p => p.SentAt)
-            .HasColumnName("sent_at")
+        builder.Property(p => p.NotifiedByEmailAt)
+            .HasColumnName("notified_by_email_at")
             .HasConversion(PostgresHelper.DateTimeToUtcConverter());
         
-        builder.Property(p => p.IsFinished)
+        builder.Property(p => p.NotifyByEmail)
             .IsRequired()
-            .HasColumnName("is_finished");
+            .HasColumnName("notify_by_email");
         
         builder
             .OwnsMany(a => a.Images, image =>

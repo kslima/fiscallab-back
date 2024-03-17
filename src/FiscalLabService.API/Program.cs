@@ -25,7 +25,7 @@ builder.Services.AddProblemDetails();
 
 builder.Services
     .AddSqLiteRepositoryDependencies(builder.Configuration)
-    .AddAppDependencies();
+    .AddAppDependencies(builder.Configuration);
 
 const string devCorsPolicy = "devCorsPolicy";
 builder.Services.AddCors(options =>

@@ -40,11 +40,11 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
             visit.BenchmarkingEquipment = updatedVisit.BenchmarkingEquipment;
             visit.SystemConsistency = updatedVisit.SystemConsistency;
             visit.Conclusion = updatedVisit.Conclusion;
-            visit.IsFinished = updatedVisit.IsFinished;
+            visit.NotifyByEmail = updatedVisit.NotifyByEmail;
             visit.CreatedAt = updatedVisit.CreatedAt;
             visit.FinishedAt = updatedVisit.FinishedAt;
             visit.SyncedAt = updatedVisit.SyncedAt;
-            visit.SentAt = updatedVisit.SentAt;
+            visit.NotifiedByEmailAt = updatedVisit.NotifiedByEmailAt;
             visit.Images = updatedVisit.Images;
             visit.BalanceTests = updatedVisit.BalanceTests;
         }
@@ -71,6 +71,30 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
             .SingleAsync(v => v.Id.Equals(id));
+    }
+
+    public async Task MarkAsSentByEmail(string id)
+    {
+        var visit = context.Visits
+            .Single(p => p.Id.Equals(id));
+
+        visit.NotifiedByEmailAt = DateTime.UtcNow;
+        
+        context.Visits.Update(visit);
+        await context.SaveChangesAsync();
+    }
+
+    public async Task<List<Visit>> GetAllMarkedForMailing()
+    {
+        return await context.Visits
+            .AsNoTracking()
+            .Include(v => v.BasicInformation.Plant)
+            .Include(v => v.BasicInformation.Association)
+            .Include(v => v.Images)
+            .Include(v => v.BalanceTests)
+            .Where(x => x.NotifyByEmail)
+            .Where(x => x.NotifiedByEmailAt == null)
+            .ToListAsync();
     }
 
     public async Task<List<Visit>> GetByIdsAsync(string[] ids)

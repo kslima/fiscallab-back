@@ -21,10 +21,10 @@ public static class VisitExtensions
             BenchmarkingEquipment = source.BenchmarkingEquipment.AsBenchmarkingEquipmentDto(),
             SystemConsistency = source.SystemConsistency.AsSystemConsistencyDto(),
             Conclusion = source.Conclusion.AsConclusionDto(),
-            IsFinished = source.IsFinished,
+            NotifyByEmail = source.NotifyByEmail,
             CreatedAt = source.CreatedAt,
             FinishedAt = source.FinishedAt,
-            SentAt = source.SentAt,
+            NotifiedByEmailAt = source.NotifiedByEmailAt,
             Images = source.Images.Select(i => new ImageDto
             {
                 Name = i.Name,
@@ -257,9 +257,9 @@ public static class VisitExtensions
             SystemConsistency = source.SystemConsistency.AsSystemConsistency(),
             Conclusion = source.Conclusion.AsConclusion(),
             CreatedAt = source.CreatedAt,
-            IsFinished = source.IsFinished,
+            NotifyByEmail = source.IsFinished,
             FinishedAt = source.FinishedAt,
-            SentAt = source.SentAt,
+            NotifiedByEmailAt = source.SentAt,
             Images = source.Images.Select(i => new Image
             {
                 Name = i.Name,

@@ -1,5 +1,4 @@
 ﻿using FiscalLabService.App.Dtos;
-using FiscalLabService.Domain.Entities;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 

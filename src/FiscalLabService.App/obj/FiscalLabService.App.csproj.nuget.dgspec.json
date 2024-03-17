@@ -47,9 +47,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "NCrontab": {
+              "target": "Package",
+              "version": "[3.3.3, )"
             },
             "QuestPDF": {
               "target": "Package",

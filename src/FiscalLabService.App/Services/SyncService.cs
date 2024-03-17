@@ -13,13 +13,12 @@ public class SyncService(
     IVisitRepository visitRepository)
     : ISyncService
 {
-    
     public async Task<Result<SyncResult>> SyncDataASync(SyncModel syncModel)
     {
         var plants = await SyncPlantsASync(syncModel.Plants);
         var associations = await SyncAssociations(syncModel.Associations);
         var menus = await SyncMenus(syncModel.Menus);
-        
+
         syncModel.Visits.ToList().ForEach(x =>
         {
             x.BasicInformation.Plant = plants.Single(a => a.Id.Equals(x.BasicInformation.PlantId));
@@ -123,10 +122,10 @@ public class SyncService(
             .Concat(updatedMenus)
             .ToArray();
     }
-    
-    private async Task<Visit[]> SyncVisits(Visit[] visits)
+
+    private async Task<Visit[]> SyncVisits(IReadOnlyCollection<Visit> visits)
     {
-        if (visits.Length == 0) return (await visitRepository.ListAsync()).ToArray();
+        if (visits.Count == 0) return (await visitRepository.ListAsync()).ToArray();
         var visitIds = visits.Select(a => a.Id).ToArray();
         var existingVisits = await visitRepository.GetByIdsAsync(visitIds);
 
@@ -141,15 +140,13 @@ public class SyncService(
                 toInsertVisits.Add(visit);
                 continue;
             }
-            
+
             toUpdateVisits.Add(visit);
         }
 
-        var updatedVisits = await visitRepository.UpdateManyAsync(toUpdateVisits);
-        var insertedVisits = await visitRepository.CreateManyAsync(toInsertVisits);
+        await visitRepository.UpdateManyAsync(toUpdateVisits);
+        await visitRepository.CreateManyAsync(toInsertVisits);
 
-        return insertedVisits
-            .Concat(updatedVisits)
-            .ToArray();
+        return (await visitRepository.ListAsync()).ToArray();
     }
 }
