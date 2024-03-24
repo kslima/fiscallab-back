@@ -1,8 +1,12 @@
+using FiscalLabService.Domain.Enums;
+
 namespace FiscalLabService.App.Models;
 
 public class VisitModel
 {
     public string Id { get; set; } = string.Empty;
+    
+    public VisitStatus Status { get; set; } = VisitStatus.InProgress;
     public BasicInformationModel BasicInformation { get; set; } = null!;
     public SugarcaneBalanceModel SugarcaneBalance { get; set; } = null!;
     public DesintegratorProbeModel DesintegratorProbe { get; set; } = null!;

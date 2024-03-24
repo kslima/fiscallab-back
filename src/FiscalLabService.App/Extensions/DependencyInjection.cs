@@ -43,6 +43,7 @@ public static class DependencyInjection
         services.AddSingleton(emailTaskOptions);
         
         services.AddScoped<IEmailSender, EmailSender>();
+        
         services.AddHostedService<EmailTask>();
         return services;
     }

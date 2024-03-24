@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FiscalLabService.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c77f70a3855fc0da5520d0961184fa6694b32ab0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+787b3b54d6a7f3f78757319d8a33d7b92acf1c07")]
 [assembly: System.Reflection.AssemblyProductAttribute("FiscalLabService.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FiscalLabService.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

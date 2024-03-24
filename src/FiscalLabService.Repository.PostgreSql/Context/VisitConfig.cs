@@ -12,11 +12,16 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
         builder.ToTable("visits"); 
         
         builder.HasKey(p => p.Id);
-
+        
         builder.Property(p => p.Id)
             .IsRequired()
             .HasColumnName("id")
             .HasMaxLength(36);
+        
+        builder.Property(p => p.Status)
+            .HasColumnName("status")
+            .HasConversion<string>()
+            .HasMaxLength(16);
         
         builder.Property(p => p.CreatedAt)
             .IsRequired()

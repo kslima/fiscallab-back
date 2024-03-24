@@ -56,6 +56,16 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
         return visitsToUpdate;
     }
 
+    public async Task DeleteManyAsync(List<Visit> visits)
+    {
+        var visitIds = visits.Select(p => p.Id);
+        var visitsToDelete = context.Visits
+            .Where(p => visitIds.Contains(p.Id))
+            .ToList();
+        context.Visits.RemoveRange(visitsToDelete);
+        await context.SaveChangesAsync();
+    }
+
     private async Task<List<Visit>> GetByIds(string[] ids)
     {
         return await context.Visits

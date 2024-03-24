@@ -1,8 +1,11 @@
+using FiscalLabService.Domain.Enums;
+
 namespace FiscalLabService.App.Dtos;
 
 public class VisitDto
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string Id { get; set; } = string.Empty;
+    public VisitStatus? Status { get; set; }
     public BasicInformationDto BasicInformation { get; set; } = null!;
     public SugarcaneBalanceDto SugarcaneBalance { get; set; } = null!;
     public DesintegratorProbeDto DesintegratorProbe { get; set; } = null!;

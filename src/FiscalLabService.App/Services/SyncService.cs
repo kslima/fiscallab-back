@@ -1,6 +1,7 @@
 using FiscalLabService.App.Interfaces;
 using FiscalLabService.App.Models;
 using FiscalLabService.Domain.Entities;
+using FiscalLabService.Domain.Enums;
 using FiscalLabService.Domain.Interfaces;
 using FiscalLabService.Shared.Responses;
 
@@ -131,9 +132,15 @@ public class SyncService(
 
         var toUpdateVisits = new List<Visit>();
         var toInsertVisits = new List<Visit>();
+        var toDeleteVisits = new List<Visit>();
 
         foreach (var visit in visits)
         {
+            if (visit.Status == VisitStatus.Cancelled)
+            {
+                toDeleteVisits.Add(visit);
+                continue;
+            }
             var toUpsertVisit = existingVisits.Find(a => a.Id.Equals(visit.Id));
             if (toUpsertVisit is null)
             {
@@ -146,6 +153,7 @@ public class SyncService(
 
         await visitRepository.UpdateManyAsync(toUpdateVisits);
         await visitRepository.CreateManyAsync(toInsertVisits);
+        await visitRepository.DeleteManyAsync(toDeleteVisits);
 
         return (await visitRepository.ListAsync()).ToArray();
     }

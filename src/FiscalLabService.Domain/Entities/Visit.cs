@@ -1,3 +1,4 @@
+using FiscalLabService.Domain.Enums;
 using FiscalLabService.Domain.ValueObjects;
 
 namespace FiscalLabService.Domain.Entities;
@@ -5,6 +6,7 @@ namespace FiscalLabService.Domain.Entities;
 public class Visit
 {
     public string Id { get; set; } = string.Empty;
+    public VisitStatus Status { get; set; } = VisitStatus.InProgress;
     public BasicInformation BasicInformation { get; set; } = null!;
     public SugarcaneBalance SugarcaneBalance { get; set; } = null!;
     public DesintegratorProbe DesintegratorProbe { get; set; } = null!;

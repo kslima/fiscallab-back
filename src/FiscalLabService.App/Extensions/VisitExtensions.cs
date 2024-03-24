@@ -12,6 +12,7 @@ public static class VisitExtensions
         return new VisitDto
         {
             Id = source.Id,
+            Status = source.Status,
             BasicInformation = source.BasicInformation.AsBasicInformationDto(),
             SugarcaneBalance = source.SugarcaneBalance.AsSugarcaneBalanceDto(),
             DesintegratorProbe = source.DesintegratorProbe.AsDesintegratorProbeDto(),
@@ -247,6 +248,7 @@ public static class VisitExtensions
         return new Visit
         {
             Id = source.Id,
+            Status = source.Status,
             BasicInformation = source.BasicInformation.AsBasicInformation(),
             SugarcaneBalance = source.SugarcaneBalance.AsSugarcaneBalance(),
             DesintegratorProbe = source.DesintegratorProbe.AsDesintegratorProbe(),
