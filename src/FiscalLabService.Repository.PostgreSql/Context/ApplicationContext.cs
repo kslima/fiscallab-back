@@ -1,10 +1,12 @@
 ﻿using FiscalLabService.Domain.Entities;
 using FiscalLabService.Repository.PostgreSql.Resources;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FiscalLabService.Repository.PostgreSql.Context;
 
-public sealed class ApplicationContext : DbContext
+public sealed class ApplicationContext : IdentityDbContext<IdentityUser>
 {
     public DbSet<Plant> Plants { get; set; }
     public DbSet<Association> Associations { get; set; }

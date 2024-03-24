@@ -1,7 +1,10 @@
 using System.Text.Json.Serialization;
 using FiscalLabService.API.Handlers;
 using FiscalLabService.App.Extensions;
+using FiscalLabService.Identity.Extensions;
+using FiscalLabService.Repository.PostgreSql.Context;
 using FiscalLabService.Repository.PostgreSql.Extensions;
+using Microsoft.AspNetCore.Identity;
 using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,8 +27,9 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 builder.Services
-    .AddSqLiteRepositoryDependencies(builder.Configuration)
-    .AddAppDependencies(builder.Configuration);
+    .AddPostgresRepositoryDependencies(builder.Configuration)
+    .AddAppDependencies(builder.Configuration)
+    .AddIdentityDependencies(builder.Configuration);
 
 const string devCorsPolicy = "devCorsPolicy";
 builder.Services.AddCors(options =>

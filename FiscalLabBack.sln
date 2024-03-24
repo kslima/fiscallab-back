@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiscalLabService.Repository
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiscalLabService.Shared", "src\FiscalLabService.Shared\FiscalLabService.Shared.csproj", "{06474672-9E77-43BD-A255-0C1B8CE57173}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiscalLabService.Identity", "src\FiscalLabService.Identity\FiscalLabService.Identity.csproj", "{596EC7BD-0B30-4B9E-AAC8-1BC4783EB5B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,7 @@ Global
 		{64C88C0E-E679-435B-8931-EE7DFAB19C06} = {36F5CDCA-7CB7-4734-8CA6-49F044775916}
 		{DCEAB664-1A22-4917-B443-8A755D516A18} = {36F5CDCA-7CB7-4734-8CA6-49F044775916}
 		{06474672-9E77-43BD-A255-0C1B8CE57173} = {36F5CDCA-7CB7-4734-8CA6-49F044775916}
+		{596EC7BD-0B30-4B9E-AAC8-1BC4783EB5B9} = {36F5CDCA-7CB7-4734-8CA6-49F044775916}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8572C785-B589-4D07-BC4E-D108A57659FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -45,5 +48,9 @@ Global
 		{06474672-9E77-43BD-A255-0C1B8CE57173}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06474672-9E77-43BD-A255-0C1B8CE57173}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06474672-9E77-43BD-A255-0C1B8CE57173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{596EC7BD-0B30-4B9E-AAC8-1BC4783EB5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{596EC7BD-0B30-4B9E-AAC8-1BC4783EB5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{596EC7BD-0B30-4B9E-AAC8-1BC4783EB5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{596EC7BD-0B30-4B9E-AAC8-1BC4783EB5B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

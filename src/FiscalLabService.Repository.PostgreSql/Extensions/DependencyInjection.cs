@@ -11,7 +11,7 @@ namespace FiscalLabService.Repository.PostgreSql.Extensions;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddSqLiteRepositoryDependencies(
+    public static IServiceCollection AddPostgresRepositoryDependencies(
         this IServiceCollection services,
         IConfiguration configuration)
     {
@@ -21,7 +21,8 @@ public static class DependencyInjection
                     builder => { builder.EnableRetryOnFailure(2, TimeSpan.FromSeconds(5), null); })
                 .EnableSensitiveDataLogging()
         );
-
+        services.AddSingleton(postgresOptions);
+        
         var seedDataOptions = configuration
             .GetRequiredSection(nameof(SeedDataOptions))
             .Get<SeedDataOptions>()!;
@@ -33,6 +34,7 @@ public static class DependencyInjection
         services.AddScoped<IMenuRepository, MenuRepository>();
         services.AddScoped<IVisitPageRepository, VisitPageRepository>();
         services.AddScoped<IVisitRepository, VisitRepository>();
+        
         return services;
     }
 
