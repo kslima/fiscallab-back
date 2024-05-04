@@ -2,9 +2,7 @@ using System.Text.Json.Serialization;
 using FiscalLabService.API.Handlers;
 using FiscalLabService.App.Extensions;
 using FiscalLabService.Identity.Extensions;
-using FiscalLabService.Repository.PostgreSql.Context;
 using FiscalLabService.Repository.PostgreSql.Extensions;
-using Microsoft.AspNetCore.Identity;
 using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +50,8 @@ if (!app.Environment.IsProduction())
 }
 
 app.UseForwardedHeaders();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

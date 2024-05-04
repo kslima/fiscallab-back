@@ -32,6 +32,7 @@ public class Result<TResult>
     public bool IsFailure => !IsSuccess;
     
     public Error? Error { get; }
+    public Error[] Errors { get; set; }
 
     public static Result<TResult> Success(TResult data) => new(true, Error.None, data);
 

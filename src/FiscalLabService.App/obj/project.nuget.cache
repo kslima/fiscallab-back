@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "RW9yixtaiQYhy8fJN3dFL5DKsz7UiLJOV+57jlUuZoczt0RkDeS8IuD1Zy52fJs+KPwrm8I3EdQkDYXBr6YjrA==",
+  "dgSpecHash": "WKOM/bM2utRjmzkc18owTyOWjQVdtMbcZbL1FuOY2rAiLJXjz3Hbga92cX3r8Ov0nuQGQRqCXVux+Zp6X9Mdog==",
   "success": true,
   "projectFilePath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.App\\FiscalLabService.App.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\bouncycastle.cryptography\\2.3.0\\bouncycastle.cryptography.2.3.0.nupkg.sha512",
+    "C:\\Users\\kleuber.lima\\.nuget\\packages\\fluentvalidation\\11.9.1\\fluentvalidation.11.9.1.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp\\7.3.0.1\\harfbuzzsharp.7.3.0.1.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp.nativeassets.macos\\7.3.0.1\\harfbuzzsharp.nativeassets.macos.7.3.0.1.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp.nativeassets.win32\\7.3.0.1\\harfbuzzsharp.nativeassets.win32.7.3.0.1.nupkg.sha512",

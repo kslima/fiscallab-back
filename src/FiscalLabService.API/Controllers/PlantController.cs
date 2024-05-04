@@ -1,10 +1,12 @@
-﻿using FiscalLabService.App.Interfaces;
-using FiscalLabService.App.Models;
+﻿using FiscalLabService.API.Extensions;
+using FiscalLabService.App.Dtos.Request;
+using FiscalLabService.App.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiscalLabService.API.Controllers;
 
-[ApiController]
+[ApiController, Authorize]
 [Route("plants")]
 public class PlantController : ControllerBase
 {
@@ -15,11 +17,22 @@ public class PlantController : ControllerBase
         _plantService = plantService;
     }
 
-    [HttpPost("upsert")]
-    public async Task<IActionResult> UpsertAsync(UpsertPlantsModel model)
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync(CreatePlantRequest request)
     {
-        var result = await _plantService.UpsertAsync(model);
-        return Ok(result);
+        var result = await _plantService.CreateAsync(request);
+        return result.IsFailure
+            ? StatusCode(result.Error!.Code.GetErrorStatusCode(), result)
+            : Created(string.Empty, result);
+    }
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAsync([FromRoute] string id, CreatePlantRequest request)
+    {
+        var result = await _plantService.UpdateAsync(id, request);
+        return result.IsFailure
+            ? StatusCode(result.Error!.Code.GetErrorStatusCode(), result)
+            : Ok(result);
     }
     
     [HttpGet]

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FiscalLabService.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b734515bc9ded176fdc198087a9834bff971b14")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59a1d6cc1aee66386814a2676266b6195fa49eb0")]
 [assembly: System.Reflection.AssemblyProductAttribute("FiscalLabService.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FiscalLabService.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "5+p9wcWQFDKJ9aF57iBBQ5EopEgmHAy64KrBbuME3Bv0OMfYsbKcWm52iivdjaYhpntfupeDa4pS6F8aYH25Zw==",
+  "dgSpecHash": "k9//158JGrIuQjThzuLJx9367A+axYh2Mlkj/YxbB+ot+xjkKx3XaRKB40OXndYs17+es9tYfDqETslZ8hhaZQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.API\\FiscalLabService.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\bouncycastle.cryptography\\2.3.0\\bouncycastle.cryptography.2.3.0.nupkg.sha512",
+    "C:\\Users\\kleuber.lima\\.nuget\\packages\\fluentvalidation\\11.9.1\\fluentvalidation.11.9.1.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp\\7.3.0.1\\harfbuzzsharp.7.3.0.1.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp.nativeassets.linux\\7.3.0.1\\harfbuzzsharp.nativeassets.linux.7.3.0.1.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\harfbuzzsharp.nativeassets.macos\\7.3.0.1\\harfbuzzsharp.nativeassets.macos.7.3.0.1.nupkg.sha512",

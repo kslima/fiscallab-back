@@ -5,7 +5,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": false,
       "launchUrl": "swagger",
-      "applicationUrl": "https://192.168.5.144:7001",
+      "applicationUrl": "https://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "EMAIL_TASK_CRON_EXPRESSION": "0 */30 * * * *",

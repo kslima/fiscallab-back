@@ -53,7 +53,6 @@ public static class DependencyInjection
 
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = jwtOptions.SecurityKey,
-
             ClockSkew = TimeSpan.Zero
         };
 
@@ -65,6 +64,7 @@ public static class DependencyInjection
             })
             .AddJwtBearer(options =>
             {
+                options.IncludeErrorDetails = true;
                 options.TokenValidationParameters = tokenValidationParameters;
             });
         return services;

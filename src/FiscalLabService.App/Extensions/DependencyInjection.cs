@@ -1,7 +1,10 @@
-﻿using FiscalLabService.App.Interfaces;
+﻿using FiscalLabService.App.Dtos.Request;
+using FiscalLabService.App.Interfaces;
 using FiscalLabService.App.Resources;
 using FiscalLabService.App.Services;
+using FiscalLabService.App.Validators;
 using FiscalLabService.Shared.Extensions;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +14,16 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddAppDependencies(this IServiceCollection services, IConfiguration configuration)
     {
+        var validationMessageOptions = configuration
+            .GetSection(nameof(ValidationMessageOptions))
+            .Get<ValidationMessageOptions>();
+        validationMessageOptions ??= new ValidationMessageOptions();
+        services.AddSingleton(validationMessageOptions);
+        
+        services.AddScoped<IValidator<CreatePlantRequest>, CreatePlantRequestValidator>();
         services.AddScoped<IPlantService, PlantService>();
+        
+        
         services.AddScoped<IAssociationService, AssociationService>();
         services.AddScoped<IMenuService, MenuService>();
         services.AddScoped<IVisitPageService, VisitPageService>();

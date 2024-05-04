@@ -196,3 +196,4 @@ C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\Fiscal
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\logo.png
+C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.API\bin\Debug\net8.0\FluentValidation.dll

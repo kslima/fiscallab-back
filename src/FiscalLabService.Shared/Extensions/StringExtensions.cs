@@ -42,4 +42,9 @@ public static class StringExtensions
             return false;
         }
     }
+    
+    public static bool IsOnlyNumber(this string? value)
+    {
+        return value?.All(char.IsDigit) ?? false;
+    }
 }

@@ -62,15 +62,16 @@ public class IdentityService : IIdentityService
         var tokenClaims = await GetClaims(user!);
         
         var expireAt = DateTime.Now.AddDays(_jwtOptions.Expiration);
-        var jwt = new JwtSecurityToken(
-            issuer: _jwtOptions.Issuer,
-            audience: _jwtOptions.Audience,
-            claims: tokenClaims,
-            notBefore: DateTime.Now,
-            expires: expireAt,
-            signingCredentials: new SigningCredentials(_jwtOptions.SecurityKey, SecurityAlgorithms.HmacSha512)
-        );
-        var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+        
+        var tokenDescriptor = new SecurityTokenDescriptor {
+            Issuer =  _jwtOptions.Issuer,
+            Audience = _jwtOptions.Audience,
+            Subject = new ClaimsIdentity(tokenClaims),
+            Expires= expireAt,
+            SigningCredentials= new SigningCredentials(_jwtOptions.SecurityKey, SecurityAlgorithms.HmacSha512) };
+        
+        var securityToken = new JwtSecurityTokenHandler().CreateToken(tokenDescriptor);
+        var token = new JwtSecurityTokenHandler().WriteToken(securityToken);
         return Result<LoginResponse>.Success(new LoginResponse { Success = true, Token = token, ExpireAt = expireAt});
     }
 
@@ -80,11 +81,11 @@ public class IdentityService : IIdentityService
         var roles = await _userManager.GetRolesAsync(user);
 
         claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
+        claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+        claims.Add(new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)));
+        claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)));
         claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email!));
         claims.Add(new Claim(ClaimTypes.Name, user.Email!));
-        claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-        claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, DateTime.Now.ToString(CultureInfo.InvariantCulture)));
-        claims.Add(new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString(CultureInfo.InvariantCulture)));
         
         foreach (var role in roles)
         {
