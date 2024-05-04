@@ -28,52 +28,72 @@ public class VisitDocument(VisitDto model) : IDocument
     private void ComposeHeader(IContainer container)
     {
         var titleStyle = TextStyle.Default
-            .FontSize(20)
+            .FontSize(16)
             .Bold()
             .FontColor(DocumentConstants.HeaderTitleColor);
-        
+
         var descriptionStyle = TextStyle.Default
             .FontSize(8)
             .SemiBold()
             .FontColor(DocumentConstants.HeaderSubTitleColor);
 
-        container.Row(row =>
-        {
-            row.RelativeItem()
-                .Column(column =>
+        container
+            .Table(table =>
+            {
+                table.ColumnsDefinition(columns =>
                 {
-                    column.Item().Text("Grupo Esdra - Visita Analítica").Style(titleStyle);
-                    column.Item()
-                        .Text(text =>
-                        {
-                            text
-                                .Span(DocumentConstants.HeaderDescription)
-                                .Style(descriptionStyle);
-                        });
+                    columns.RelativeColumn();
+                    columns.RelativeColumn();
+                    columns.RelativeColumn();
+                    columns.RelativeColumn();
                 });
-        });
+
+                table.ExtendLastCellsToTableBottom();
+
+                table
+                    .Cell()
+                    .ColumnSpan(4)
+                    .Width(100)
+                    .Image("logo.png")
+                    .WithRasterDpi(500);
+
+                table
+                    .Cell()
+                    .ColumnSpan(4)
+                    .AlignBottom()
+                    .AlignCenter()
+                    .Text("Relatório Visita Analítica")
+                    .Style(titleStyle);
+
+                table
+                    .Cell()
+                    .ColumnSpan(4)
+                    .Text(text =>
+                    {
+                        text
+                            .Span(DocumentConstants.HeaderDescription)
+                            .Style(descriptionStyle);
+                    });
+            });
     }
 
     private void ComposeContent(IContainer container)
     {
-        container.PaddingVertical(20).Column(column =>
+        container.PaddingVertical(5).Column(column =>
         {
-            column.Spacing(10);
-
-            column.Item().Element(ComposeBasicData);
-            column.Item().Element(ComposeCaneBalance);
-            column.Item().Element(e => e.PageBreak());
-            column.Item().Element(ComposeDesintegratorProbe);
-            column.Item().Element(ComposeAnalyticalBalanceAndTemp);
-            column.Item().Element(e => e.PageBreak());
-            column.Item().Element(ComposePressRefractometer);
-            column.Item().Element(ComposeClarificationSaccharimeter);
-            column.Item().Element(e => e.PageBreak());
-            column.Item().Element(ComposeBenchmarkingEquipment);
-            column.Item().Element(ComposeResultComparison);
+            column.Spacing(5);
+            column.Item().EnsureSpace().Element(ComposeBasicData);
+            column.Item().EnsureSpace().Element(ComposeCaneBalance);
+            column.Item().EnsureSpace().Element(ComposeDesintegratorProbe);
+            column.Item().EnsureSpace().Element(ComposeAnalyticalBalanceAndTemp);
+            column.Item().EnsureSpace().Element(ComposePressRefractometer);
+            column.Item().EnsureSpace().Element(ComposeClarificationSaccharimeter);
+            column.Item().EnsureSpace().Element(ComposeBenchmarkingEquipment);
+            column.Item().EnsureSpace().Element(ComposeResultComparison);
+            column.Item().EnsureSpace().Element(ComposeConclusion);
             foreach (var modelImage in Model.Images)
             {
-                column.Item().Element(c => ComposeImages(c, modelImage));
+                column.Item().EnsureSpace().Element(c => ComposeImages(c, modelImage));
             }
         });
     }
@@ -177,7 +197,7 @@ public class VisitDocument(VisitDto model) : IDocument
 
                 foreach (var modelBalanceTest in Model.BalanceTests)
                 {
-                    table.Cell().ValueCell(modelBalanceTest.TruckNumber);
+                    table.Cell().ValueCell(modelBalanceTest.Identification);
                     table.Cell().ColumnSpan(2).DecimalValueCell(modelBalanceTest.InputBalanceWeight);
                     table.Cell().ColumnSpan(2).DecimalValueCell(modelBalanceTest.OutputBalanceWeight);
                     table.Cell().DecimalValueCell(modelBalanceTest.InputBalanceWeight -
@@ -580,10 +600,9 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(7).ValueCell(Model.SystemConsistency.Observations);
             });
     }
-    
-    private void ComposeImages(IContainer container, ImageDto image)
+
+    private void ComposeConclusion(IContainer container)
     {
-        var imageBytes = Convert.FromBase64String(image.Url.Split(",")[1]);
         container
             .Table(table =>
             {
@@ -591,17 +610,37 @@ public class VisitDocument(VisitDto model) : IDocument
                 {
                     columns.RelativeColumn();
                     columns.RelativeColumn();
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
-                    columns.RelativeColumn();
                 });
 
                 table.ExtendLastCellsToTableBottom();
+                table.Cell().ColumnSpan(2).LabelTitleCell("Conclusão");
 
-                table.Cell().ColumnSpan(6).Image(imageBytes);
-                table.Cell().ColumnSpan(6).SubLabelCell("Descrição");
-                table.Cell().ColumnSpan(6).ValueCell(image.Description);
+                table.Cell().ColumnSpan(1).SubLabelCell("Desempenho do Fiscal");
+                table.Cell().ColumnSpan(1).SubLabelCell("Desempenho Laboratório");
+                table.Cell().ColumnSpan(1).ValueCell(Model.Conclusion.InspectorPerformance);
+                table.Cell().ColumnSpan(1).ValueCell(Model.Conclusion.LaboratoryReceptivity);
+
+                table.Cell().ColumnSpan(2).SubLabelCell("Pendências");
+                table.Cell().ColumnSpan(2).ValueCell(Model.Conclusion.Pendencies);
+
+                table.Cell().ColumnSpan(2).SubLabelCell("Observações Sobre a Visita");
+                table.Cell().ColumnSpan(2).ValueCell(Model.Conclusion.Observations);
+            });
+    }
+
+    private void ComposeImages(IContainer container, ImageDto image)
+    {
+        var imageBytes = Convert.FromBase64String(image.Url.Split(",")[1]);
+        container
+            .Table(table =>
+            {
+                table.ColumnsDefinition(columns => { columns.RelativeColumn(); });
+
+                table.ExtendLastCellsToTableBottom();
+
+                table.Cell().AlignCenter().Width(5, Unit.Inch).Image(imageBytes).WithCompressionQuality(ImageCompressionQuality.High);
+                table.Cell().AlignCenter().Width(5, Unit.Inch).SubLabelCell("Descrição");
+                table.Cell().AlignCenter().Width(5, Unit.Inch).ValueCell(image.Description);
             });
     }
 

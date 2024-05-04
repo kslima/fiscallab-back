@@ -88,8 +88,8 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
                 
                 balanceTest.HasKey("id");
                 
-                balanceTest.Property(e => e.TruckNumber)
-                    .HasColumnName("truck_number")
+                balanceTest.Property(e => e.Identification)
+                    .HasColumnName("identification")
                     .IsRequired();
                 
                 balanceTest.Property(e => e.InputBalanceWeight)

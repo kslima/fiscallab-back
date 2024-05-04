@@ -1,7 +1,6 @@
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using FiscalLabService.App.Dtos.Request;
 using FiscalLabService.App.Dtos.Response;
 using FiscalLabService.App.Interfaces;
@@ -62,7 +61,7 @@ public class IdentityService : IIdentityService
         var user = await _userManager.FindByEmailAsync(email);
         var tokenClaims = await GetClaims(user!);
         
-        var expireAt = DateTime.Now.AddMinutes(_jwtOptions.Expiration);
+        var expireAt = DateTime.Now.AddDays(_jwtOptions.Expiration);
         var jwt = new JwtSecurityToken(
             issuer: _jwtOptions.Issuer,
             audience: _jwtOptions.Audience,
@@ -82,10 +81,11 @@ public class IdentityService : IIdentityService
 
         claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
         claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email!));
+        claims.Add(new Claim(ClaimTypes.Name, user.Email!));
         claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
         claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, DateTime.Now.ToString(CultureInfo.InvariantCulture)));
         claims.Add(new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString(CultureInfo.InvariantCulture)));
-
+        
         foreach (var role in roles)
         {
             claims.Add(new Claim("role", role));

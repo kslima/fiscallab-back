@@ -4,6 +4,7 @@ using FiscalLabService.Identity.Context;
 using FiscalLabService.Identity.Resources;
 using FiscalLabService.Identity.Services;
 using FiscalLabService.Repository.PostgreSql.Resources;
+using FiscalLabService.Shared.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,9 @@ public static class DependencyInjection
         var jwtOptions = configuration
             .GetSection(nameof(JwtOptions))
             .Get<JwtOptions>() ?? new JwtOptions();
-        jwtOptions.SecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.Key));
+
+        var jwtKey = configuration.GetRequiredValue<string>("JWT_KEY");
+        jwtOptions.SecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey));
 
         services.AddSingleton(jwtOptions);
 
