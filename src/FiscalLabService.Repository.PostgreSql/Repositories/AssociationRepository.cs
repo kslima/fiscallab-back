@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using FiscalLabService.Domain.Entities;
 using FiscalLabService.Domain.Interfaces;
 using FiscalLabService.Repository.PostgreSql.Context;
@@ -11,6 +12,19 @@ public class AssociationRepository : IAssociationRepository
     public AssociationRepository(ApplicationContext context)
     {
         _context = context;
+    }
+
+    public async Task<Association> CreateAsync(Association association)
+    {
+        await _context.Associations.AddAsync(association);
+        await _context.SaveChangesAsync();
+        return association;
+    }
+
+    public Task<bool> ExistsAsync(Expression<Func<Association, bool>> predicate)
+    {
+        return _context.Associations
+            .AnyAsync(predicate);
     }
 
     public async Task<List<Association>> CreateManyAsync(List<Association> associations)
@@ -42,10 +56,26 @@ public class AssociationRepository : IAssociationRepository
         return associationsToUpdate;
     }
 
+    public async Task<Association> UpdateAsync(string id, Association association)
+    {
+        var associationToUpdate = await _context.Associations
+            .AsNoTracking()
+            .Where(p => p.Id.Equals(id))
+            .SingleAsync();
+        
+        associationToUpdate.Name = association.Name;
+        associationToUpdate.Address.City = association.Address.City;
+        associationToUpdate.Address.State = association.Address.State;
+        associationToUpdate.Emails = association.Emails;
+        
+        _context.Associations.Update(associationToUpdate);
+        await _context.SaveChangesAsync();
+        return associationToUpdate;
+    }
+
     public async Task<List<Association>> GetByIdsAsync(List<string> ids)
     {
         return await _context.Associations
-            .AsNoTracking()
             .Where(p => ids.Contains(p.Id))
             .ToListAsync();
     }

@@ -23,8 +23,9 @@ public static class DependencyInjection
         services.AddScoped<IValidator<CreatePlantRequest>, CreatePlantRequestValidator>();
         services.AddScoped<IPlantService, PlantService>();
         
-        
+        services.AddScoped<IValidator<CreateAssociationRequest>, CreateAssociationRequestValidator>();
         services.AddScoped<IAssociationService, AssociationService>();
+        
         services.AddScoped<IMenuService, MenuService>();
         services.AddScoped<IVisitPageService, VisitPageService>();
         services.AddScoped<IVisitService, VisitService>();

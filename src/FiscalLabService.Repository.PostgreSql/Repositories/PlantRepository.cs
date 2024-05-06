@@ -84,7 +84,7 @@ public class PlantRepository : IPlantRepository
     public async Task<List<Plant>> GetByIdsAsync(List<string> ids)
     {
         return await _context.Plants
-            .AsNoTracking()
+          
             .Where(p => ids.Contains(p.Id))
             .ToListAsync();
     }

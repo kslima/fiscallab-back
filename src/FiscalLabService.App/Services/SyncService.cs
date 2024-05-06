@@ -16,10 +16,8 @@ public class SyncService(
 {
     public async Task<Result<SyncResult>> SyncDataASync(SyncModel syncModel)
     {
-        var plants = await SyncPlantsASync(syncModel.Plants);
-        var associations = await SyncAssociations(syncModel.Associations);
-        var menus = await SyncMenus(syncModel.Menus);
-
+        var plants = await plantRepository.GetByIdsAsync(syncModel.Visits.Select(x => x.BasicInformation.PlantId).ToList());
+        var associations = await associationRepository.GetByIdsAsync(syncModel.Visits.Select(x => x.BasicInformation.AssociationId).ToList());
         syncModel.Visits.ToList().ForEach(x =>
         {
             x.BasicInformation.Plant = plants.Single(a => a.Id.Equals(x.BasicInformation.PlantId));
@@ -27,12 +25,8 @@ public class SyncService(
             x.SyncedAt = DateTime.UtcNow;
         });
         var visits = await SyncVisits(syncModel.Visits);
-
         return Result<SyncResult>.Success(new SyncResult
         {
-            Plants = plants,
-            Associations = associations,
-            Menus = menus,
             Visits = visits
         });
     }

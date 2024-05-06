@@ -35,7 +35,8 @@ public class PlantService : IPlantService
             return Result<CreatePlantResponse>.Failure(new Error(error.ErrorCode, error.ErrorMessage));
         }
 
-        var plantAlreadyExists = await _plantRepository.ExistsAsync(p => p.Cnpj.Equals(request.Cnpj));
+        var plantAlreadyExists = await _plantRepository.ExistsAsync(p =>
+            !string.IsNullOrWhiteSpace(request.Cnpj) && p.Cnpj.Equals(request.Cnpj));
         if (plantAlreadyExists)
         {
             return Result<CreatePlantResponse>.Failure(new Error(_validationMessages.DuplicatedPlantCode,
@@ -45,7 +46,7 @@ public class PlantService : IPlantService
         var plant = await _plantRepository.CreateAsync(request.AsPlant());
         return Result<CreatePlantResponse>.Success(plant.AsCreatePlantResponse());
     }
-    
+
     public async Task<Result<CreatePlantResponse>> UpdateAsync(string id, CreatePlantRequest request)
     {
         var validationResult = await _createPlantValidator.ValidateAsync(request);
@@ -61,12 +62,12 @@ public class PlantService : IPlantService
             return Result<CreatePlantResponse>.Failure(new Error(_validationMessages.PlantNotFoundCode,
                 _validationMessages.PlantNotFoundMessage));
         }
-        
+
         var plant = await _plantRepository.UpdateAsync(id, request.AsPlant());
         return Result<CreatePlantResponse>.Success(plant.AsCreatePlantResponse());
     }
-    
-    public async Task<Result<List<PlantDto>>> GetAllAsync()
+
+    public async Task<Result<List<PlantDto>>> ListAsync()
     {
         var plants = await _plantRepository.ListAsync();
 

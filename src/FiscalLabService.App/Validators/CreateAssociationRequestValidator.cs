@@ -3,11 +3,14 @@ using FluentValidation;
 
 namespace FiscalLabService.App.Validators;
 
-public class CreatePlantRequestValidator : AbstractValidator<CreatePlantRequest>
+public class CreateAssociationRequestValidator : AbstractValidator<CreateAssociationRequest>
 {
-    public CreatePlantRequestValidator()
+    public CreateAssociationRequestValidator()
     {
         RuleFor(x => x.Name)
+            .NotEmpty();
+        
+        RuleFor(x => x.Emails)
             .NotEmpty();
         
         RuleFor(x => x.Address.City)

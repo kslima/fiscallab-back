@@ -1,12 +1,11 @@
 ﻿using FiscalLabService.API.Extensions;
 using FiscalLabService.App.Dtos.Request;
 using FiscalLabService.App.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiscalLabService.API.Controllers;
 
-[ApiController, Authorize]
+[ApiController]
 [Route("plants")]
 public class PlantController : ControllerBase
 {
@@ -36,9 +35,9 @@ public class PlantController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> ListAsync()
     {
-        var result = await _plantService.GetAllAsync();
+        var result = await _plantService.ListAsync();
         return Ok(result);
     }
 }

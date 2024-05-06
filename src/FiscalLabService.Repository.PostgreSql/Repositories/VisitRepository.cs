@@ -129,6 +129,8 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
             .Include(v => v.BasicInformation.Association)
             .Include(v => v.Images)
             .Include(v => v.BalanceTests)
+            .OrderByDescending(x => x.CreatedAt)
+            .Take(15)
             .ToListAsync();
     }
 }

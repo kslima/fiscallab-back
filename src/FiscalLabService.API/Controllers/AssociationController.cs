@@ -1,5 +1,6 @@
-﻿using FiscalLabService.App.Interfaces;
-using FiscalLabService.App.Models;
+﻿using FiscalLabService.API.Extensions;
+using FiscalLabService.App.Dtos.Request;
+using FiscalLabService.App.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiscalLabService.API.Controllers;
@@ -15,17 +16,28 @@ public class AssociationController : ControllerBase
         _associationService = associationService;
     }
 
-    [HttpPost("upsert")]
-    public async Task<IActionResult> UpsertAsync(UpsertAssociationsModel model)
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync(CreateAssociationRequest request)
     {
-        var result = await _associationService.UpsertAsync(model);
-        return Ok(result);
+        var result = await _associationService.CreateAsync(request);
+        return result.IsFailure
+            ? StatusCode(result.Error!.Code.GetErrorStatusCode(), result)
+            : Created(string.Empty, result);
+    }
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAsync([FromRoute] string id, CreateAssociationRequest request)
+    {
+        var result = await _associationService.UpdateAsync(id, request);
+        return result.IsFailure
+            ? StatusCode(result.Error!.Code.GetErrorStatusCode(), result)
+            : Ok(result);
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> ListAsync()
     {
-        var result = await _associationService.GetAllAsync();
+        var result = await _associationService.ListAsync();
         return Ok(result);
     }
 }
