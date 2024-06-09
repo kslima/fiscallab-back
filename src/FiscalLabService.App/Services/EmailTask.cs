@@ -4,6 +4,7 @@ using FiscalLabService.App.Interfaces;
 using FiscalLabService.App.Models;
 using FiscalLabService.App.Resources;
 using FiscalLabService.Domain.Entities;
+using FiscalLabService.Domain.Enums;
 using FiscalLabService.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

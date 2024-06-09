@@ -135,6 +135,10 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("synced_at");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
                     b.HasKey("Id");
 
                     b.ToTable("visits", (string)null);
@@ -849,11 +853,6 @@ namespace FiscalLabService.Repository.PostgreSql.Migrations
                                 .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("clarification_saccharimeter_observations9");
-
-                            b1.Property<string>("Pressure")
-                                .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("clarification_saccharimeter_pressure");
 
                             b1.Property<string>("QuartzPattern")
                                 .IsRequired()

@@ -389,12 +389,10 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ValueCell(Model.ClarificationSaccharimeter.Agitation);
                 table.Cell().ValueCell(Model.ClarificationSaccharimeter.HasDilution);
                 table.Cell().ValueCell(Model.ClarificationSaccharimeter.Clarifier);
-                table.Cell().SubLabelCell("Pressão");
-                table.Cell().SubLabelCell("Qtd. de clarificante (200ml)");
+                table.Cell().ColumnSpan(2).SubLabelCell("Qtd. de clarificante (200ml)");
                 table.Cell().SubLabelCell("Volume clarificado");
                 table.Cell().SubLabelCell("100ml após limpeza do sacarimetro");
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.Pressure);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.ClarifierAmount);
+                table.Cell().ColumnSpan(2).ValueCell(Model.ClarificationSaccharimeter.ClarifierAmount);
                 table.Cell().ValueCell(Model.ClarificationSaccharimeter.BottleClarifiedVolume);
                 table.Cell().ValueCell(Model.ClarificationSaccharimeter.BottleAfterClarifiedVolume);
                 table.Cell().ColumnSpan(4).SubLabelCell("Observações");

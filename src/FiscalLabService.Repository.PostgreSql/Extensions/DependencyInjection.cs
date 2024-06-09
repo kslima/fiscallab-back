@@ -15,6 +15,9 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        var visitOptions = LoadVisitOptions(configuration);
+        services.AddSingleton(visitOptions);
+        
         var postgresOptions = LoadPostgresOptions(configuration);
         services.AddDbContext<ApplicationContext>(options =>
             options.UseNpgsql(postgresOptions.ConnectionString,
@@ -51,5 +54,15 @@ public static class DependencyInjection
         postgresOptions.Database = configuration.GetRequiredValue<string>("POSTGRES_DB");
 
         return postgresOptions;
+    }
+    
+    private static VisitOptions LoadVisitOptions(IConfiguration configuration)
+    {
+        var visitOptions = configuration
+            .GetSection(nameof(VisitOptions))
+            .Get<VisitOptions>() ?? new VisitOptions();
+
+        visitOptions.DefaultPageSize = configuration.GetRequiredValue<int>("DEFAULT_VISIT_PAGE_SIZE");
+        return visitOptions;
     }
 }

@@ -7,9 +7,10 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7001",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_ENVIRONMENT": "Local",
         "EMAIL_TASK_CRON_EXPRESSION": "0 */30 * * * *",
-        "VISIT_EMAIL_TEMPLATE_PATH": "../FiscalLabService.API/visit.html"
+        "VISIT_EMAIL_TEMPLATE_PATH": "../FiscalLabService.API/visit.html",
+        "DEFAULT_VISIT_PAGE_SIZE": "30"
       }
     }
   }

@@ -1,30 +1,44 @@
 ﻿using FiscalLabService.Domain.Entities;
+using FiscalLabService.Domain.Enums;
 using FiscalLabService.Domain.Interfaces;
+using FiscalLabService.Domain.Models;
 using FiscalLabService.Repository.PostgreSql.Context;
+using FiscalLabService.Repository.PostgreSql.Extensions;
+using FiscalLabService.Repository.PostgreSql.Resources;
 using Microsoft.EntityFrameworkCore;
 
 namespace FiscalLabService.Repository.PostgreSql.Repositories;
 
-public class VisitRepository(ApplicationContext context) : IVisitRepository
+public class VisitRepository : IVisitRepository
 {
+    private readonly ApplicationContext _context;
+    private readonly VisitOptions _visitOptions;
+    public VisitRepository(
+        ApplicationContext context,
+        VisitOptions visitOptions)
+    {
+        _context = context;
+        _visitOptions = visitOptions;
+    }
+
     public async Task<Visit> CreateAsync(Visit visit)
     {
-        await context.Visits.AddAsync(visit);
-        await context.SaveChangesAsync();
+        await _context.Visits.AddAsync(visit);
+        await _context.SaveChangesAsync();
         return await GetById(visit.Id);
     }
 
     public async Task<List<Visit>> CreateManyAsync(List<Visit> visits)
     {
-        await context.Visits.AddRangeAsync(visits);
-        await context.SaveChangesAsync();
+        await _context.Visits.AddRangeAsync(visits);
+        await _context.SaveChangesAsync();
         return await GetByIds(visits.Select(x => x.Id).ToArray());
     }
 
     public async Task<List<Visit>> UpdateManyAsync(List<Visit> visits)
     {
         var visitIds = visits.Select(p => p.Id);
-        var visitsToUpdate = context.Visits
+        var visitsToUpdate = _context.Visits
             .Where(p => visitIds.Contains(p.Id))
             .ToList();
         
@@ -43,32 +57,37 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
             visit.FinishedAt = updatedVisit.FinishedAt;
             visit.Images = updatedVisit.Images;
             visit.BalanceTests = updatedVisit.BalanceTests;
-            
             visit.SyncedAt = DateTime.UtcNow;
-
-            if (visit.NotifiedByEmailAt is not null) continue;
-            
+            visit.UpdatedAt = DateTime.UtcNow;
             visit.NotifyByEmail = updatedVisit.NotifyByEmail;
         }
         
-        context.Visits.UpdateRange(visitsToUpdate);
-        await context.SaveChangesAsync();
+        _context.Visits.UpdateRange(visitsToUpdate);
+        await _context.SaveChangesAsync();
         return visitsToUpdate;
     }
 
     public async Task DeleteManyAsync(List<Visit> visits)
     {
         var visitIds = visits.Select(p => p.Id);
-        var visitsToDelete = context.Visits
+        var visitsToDelete = _context.Visits
             .Where(p => visitIds.Contains(p.Id))
             .ToList();
-        context.Visits.RemoveRange(visitsToDelete);
-        await context.SaveChangesAsync();
+        _context.Visits.RemoveRange(visitsToDelete);
+        await _context.SaveChangesAsync();
+    }
+    
+    public async Task<int> DeleteAsync(string id)
+    {
+        var visit = await _context.Visits
+            .SingleAsync(x => x.Id.Equals(id));
+         _context.Visits.Remove(visit);
+        return await _context.SaveChangesAsync();
     }
 
     private async Task<List<Visit>> GetByIds(string[] ids)
     {
-        return await context.Visits
+        return await _context.Visits
             .AsNoTracking()
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
@@ -78,7 +97,7 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
 
     public async Task<Visit> GetById(string id)
     {
-        return await context.Visits
+        return await _context.Visits
             .AsNoTracking()
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
@@ -87,19 +106,20 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
 
     public async Task MarkAsSentByEmail(string id)
     {
-        var visit = context.Visits
+        var visit = _context.Visits
             .Single(p => p.Id.Equals(id));
 
+        visit.Status = VisitStatus.Done;
         visit.NotifiedByEmailAt = DateTime.UtcNow;
+        visit.UpdatedAt = DateTime.UtcNow;
         
-        context.Visits.Update(visit);
-        await context.SaveChangesAsync();
+        _context.Visits.Update(visit);
+        await _context.SaveChangesAsync();
     }
 
     public async Task<List<Visit>> GetAllMarkedForMailing()
     {
-        return await context.Visits
-            .AsNoTracking()
+        return await _context.Visits
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
             .Include(v => v.Images)
@@ -111,7 +131,7 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
 
     public async Task<List<Visit>> GetByIdsAsync(string[] ids)
     {
-        return await context.Visits
+        return await _context.Visits
             .AsNoTracking()
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
@@ -123,14 +143,35 @@ public class VisitRepository(ApplicationContext context) : IVisitRepository
 
     public async Task<List<Visit>> ListAsync()
     {
-        return await context.Visits
+        return await _context.Visits
             .AsNoTracking()
+            .Where(v => v.Status != VisitStatus.Done)
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
             .Include(v => v.Images)
             .Include(v => v.BalanceTests)
             .OrderByDescending(x => x.CreatedAt)
-            .Take(15)
+            .Take(_visitOptions.DefaultPageSize)
             .ToListAsync();
+    }
+
+    public async Task<PagedList<Visit>> ListAsync(VisitParameters parameters)
+    {
+        var query = _context.Visits
+            .AsNoTracking();
+        
+        if (parameters.Status is not null)
+        {
+            query = query
+                .Where(s => s.Status == parameters.Status);
+        }
+        
+        return await query
+            .Include(v => v.BasicInformation.Plant)
+            .Include(v => v.BasicInformation.Association)
+            .Include(v => v.Images)
+            .Include(v => v.BalanceTests)
+            .OrderByDescending(s => s.CreatedAt)
+            .ExecutePagedQueryAsync(parameters);
     }
 }

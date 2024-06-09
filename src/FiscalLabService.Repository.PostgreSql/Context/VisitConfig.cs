@@ -27,6 +27,9 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
             .IsRequired()
             .HasColumnName("created_at");
         
+        builder.Property(p => p.UpdatedAt)
+            .HasColumnName("updated_at");
+        
         builder.Property(p => p.FinishedAt)
             .HasColumnName("finished_at")
             .HasConversion(PostgresHelper.DateTimeToUtcConverter());
@@ -465,12 +468,7 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
                     .Property(p => p.Clarifier)
                     .IsRequired()
                     .HasColumnName("clarification_saccharimeter_clarifier");
-
-                navigationBuilder
-                    .Property(p => p.Pressure)
-                    .IsRequired()
-                    .HasColumnName("clarification_saccharimeter_pressure");
-
+                
                 navigationBuilder
                     .Property(p => p.ClarifierAmount)
                     .IsRequired()

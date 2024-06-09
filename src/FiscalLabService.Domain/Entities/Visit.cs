@@ -18,6 +18,7 @@ public class Visit
     public Conclusion Conclusion { get; set; } = null!;
     public bool NotifyByEmail { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? UpdatedAt { get; set; }
     public DateTime? FinishedAt { get; set; }
     public DateTime? SyncedAt { get; set; }
     public DateTime? NotifiedByEmailAt { get; set; }

@@ -33,6 +33,8 @@ public class Result<TResult>
     
     public Error? Error { get; }
     public Error[] Errors { get; set; }
+    
+    public Metadata? Metadata { get; set; }
 
     public static Result<TResult> Success(TResult data) => new(true, Error.None, data);
 

@@ -145,7 +145,6 @@ public static class VisitExtensions
             Agitation = source.Agitation,
             HasDilution = source.HasDilution,
             Clarifier = source.Clarifier,
-            Pressure = source.Pressure,
             ClarifierAmount = source.ClarifierAmount,
             BottleClarifiedVolume = source.BottleClarifiedVolume,
             BottleAfterClarifiedVolume = source.BottleAfterClarifiedVolume,
@@ -259,15 +258,11 @@ public static class VisitExtensions
             SystemConsistency = source.SystemConsistency.AsSystemConsistency(),
             Conclusion = source.Conclusion.AsConclusion(),
             CreatedAt = source.CreatedAt,
-            NotifyByEmail = source.IsFinished,
+            NotifyByEmail = source.NotifyByEmail,
+            SyncedAt = source.SyncedAt,
             FinishedAt = source.FinishedAt,
-            NotifiedByEmailAt = source.SentAt,
-            Images = source.Images.Select(i => new Image
-            {
-                Name = i.Name,
-                Url = i.Url,
-                Description = i.Description
-            }).ToList()
+            NotifiedByEmailAt = source.NotifiedByEmailAt,
+            BalanceTests = source.BalanceTests
         };
     }
     
@@ -379,7 +374,6 @@ public static class VisitExtensions
             Agitation = source.Agitation,
             HasDilution = source.HasDilution,
             Clarifier = source.Clarifier,
-            Pressure = source.Pressure,
             ClarifierAmount = source.ClarifierAmount,
             BottleClarifiedVolume = source.BottleClarifiedVolume,
             BottleAfterClarifiedVolume = source.BottleAfterClarifiedVolume,
