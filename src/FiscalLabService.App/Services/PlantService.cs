@@ -47,6 +47,12 @@ public class PlantService : IPlantService
         return Result<CreatePlantResponse>.Success(plant.AsCreatePlantResponse());
     }
 
+    public async Task<Result<bool>> DeleteAsync(string id)
+    {
+        var deleteResult = await _plantRepository.DeleteAsync(id);
+        return deleteResult == 1 ? Result<bool>.Success(true) : Result<bool>.Failure(Error.None);
+    }
+    
     public async Task<Result<CreatePlantResponse>> UpdateAsync(string id, CreatePlantRequest request)
     {
         var validationResult = await _createPlantValidator.ValidateAsync(request);

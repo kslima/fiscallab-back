@@ -70,6 +70,12 @@ public class AssociationService : IAssociationService
         return Result<CreateAssociationResponse>.Success(association.AsCreateAssociationRequest());
     }
 
+    public async Task<Result<bool>> DeleteAsync(string id)
+    {
+        var deleteResult = await _associationRepository.DeleteAsync(id);
+        return deleteResult == 1 ? Result<bool>.Success(true) : Result<bool>.Failure(Error.None);
+    }
+
     public async Task<Result<UpsertAssociationsDto>> UpsertAsync(UpsertAssociationsModel model)
     {
         var toUpsertAssociationsIds = model.Associations.Select(a => a.Id).ToList();

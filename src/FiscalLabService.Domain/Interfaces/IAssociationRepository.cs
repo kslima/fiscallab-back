@@ -11,5 +11,6 @@ public interface IAssociationRepository
     Task<List<Association>> UpdateManyAsync(List<Association> associations);
     Task<Association> UpdateAsync(string id, Association association);
     Task<List<Association>> GetByIdsAsync(List<string> ids);
+    Task<int> DeleteAsync(string id);
     Task<List<Association>> ListAsync();
 }

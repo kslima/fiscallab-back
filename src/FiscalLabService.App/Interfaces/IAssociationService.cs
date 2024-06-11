@@ -10,6 +10,7 @@ public interface IAssociationService
 {
     Task<Result<CreateAssociationResponse>> CreateAsync(CreateAssociationRequest request);
     Task<Result<CreateAssociationResponse>> UpdateAsync(string id, CreateAssociationRequest request);
+    Task<Result<bool>> DeleteAsync(string id);
     Task<Result<UpsertAssociationsDto>> UpsertAsync(UpsertAssociationsModel model);
     Task<Result<List<AssociationDto>>> ListAsync();
 }

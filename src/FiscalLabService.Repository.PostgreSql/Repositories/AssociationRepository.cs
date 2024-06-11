@@ -80,6 +80,14 @@ public class AssociationRepository : IAssociationRepository
             .ToListAsync();
     }
 
+    public async Task<int> DeleteAsync(string id)
+    {
+        var association = await _context.Associations
+            .SingleAsync(x => x.Id.Equals(id));
+        _context.Associations.Remove(association);
+        return await _context.SaveChangesAsync();
+    }
+
     public async Task<List<Association>> ListAsync()
     {
         return await _context.Associations

@@ -11,6 +11,7 @@ public interface IPlantRepository
     Task<Plant> UpdateAsync(string id, Plant plant);
     Task<List<Plant>> UpdateManyAsync(List<Plant> plants);
     Task<Plant?> GetByIdAsync(string id);
+    Task<int> DeleteAsync(string id);
     Task<List<Plant>> GetByIdsAsync(List<string> ids);
     Task<List<Plant>> ListAsync();
 }

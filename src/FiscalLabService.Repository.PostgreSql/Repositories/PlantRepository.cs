@@ -81,6 +81,14 @@ public class PlantRepository : IPlantRepository
             .FirstOrDefaultAsync();
     }
     
+    public async Task<int> DeleteAsync(string id)
+    {
+        var association = await _context.Plants
+            .SingleAsync(x => x.Id.Equals(id));
+        _context.Plants.Remove(association);
+        return await _context.SaveChangesAsync();
+    }
+    
     public async Task<List<Plant>> GetByIdsAsync(List<string> ids)
     {
         return await _context.Plants

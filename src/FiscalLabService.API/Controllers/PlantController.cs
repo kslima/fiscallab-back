@@ -34,6 +34,13 @@ public class PlantController : ControllerBase
             : Ok(result);
     }
     
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] string id)
+    {
+        var response = await _plantService.DeleteAsync(id);
+        return Accepted(response);
+    }
+    
     [HttpGet]
     public async Task<IActionResult> ListAsync()
     {
