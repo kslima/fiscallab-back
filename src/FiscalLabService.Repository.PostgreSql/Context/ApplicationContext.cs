@@ -13,6 +13,7 @@ public sealed class ApplicationContext : IdentityDbContext<IdentityUser>
     public DbSet<Menu> Menus { get; set; }
     public DbSet<VisitPage> VisitPages { get; set; }
     public DbSet<Visit> Visits { get; set; }
+    public DbSet<Image> Images { get; set; }
 
     private readonly SeedDataOptions _seedDataOptions;
     
@@ -30,6 +31,7 @@ public sealed class ApplicationContext : IdentityDbContext<IdentityUser>
         modelBuilder.ApplyConfiguration(new MenuConfig());
         modelBuilder.ApplyConfiguration(new VisitPageConfig(_seedDataOptions));
         modelBuilder.ApplyConfiguration(new VisitConfig());
+        modelBuilder.ApplyConfiguration(new ImageConfig());
         base.OnModelCreating(modelBuilder);
     }
 }

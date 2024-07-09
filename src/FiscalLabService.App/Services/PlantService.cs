@@ -1,6 +1,7 @@
 using FiscalLabService.App.Dtos;
 using FiscalLabService.App.Dtos.Request;
 using FiscalLabService.App.Dtos.Response;
+using FiscalLabService.App.Dtos.Shared;
 using FiscalLabService.App.Extensions;
 using FiscalLabService.App.Interfaces;
 using FiscalLabService.App.Resources;

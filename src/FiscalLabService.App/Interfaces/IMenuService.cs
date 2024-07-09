@@ -1,4 +1,5 @@
 ﻿using FiscalLabService.App.Dtos;
+using FiscalLabService.App.Dtos.Shared;
 using FiscalLabService.App.Models;
 using FiscalLabService.Shared.Responses;
 

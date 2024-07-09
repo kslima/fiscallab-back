@@ -1,3 +1,5 @@
+using FiscalLabService.App.Dtos.Shared;
+
 namespace FiscalLabService.App.Dtos.Request;
 
 public class CreateAssociationRequest

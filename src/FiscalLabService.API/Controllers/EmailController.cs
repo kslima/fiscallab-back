@@ -15,7 +15,7 @@ public class EmailController(IEmailSender emailSender, IVisitService visitServic
     {
         var visit = await visitService.GetByIdAsync("69cdcef7-3670-4884-b73d-24f5edf37ed9");
         
-        var pdf = new VisitDocument(visit.Data!);
+        var pdf = new VisitDocument(visit.Data!, []);
         var pdfBytes = pdf.GeneratePdf();
         
         await emailSender.SendEmailAsync(model);

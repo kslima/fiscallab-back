@@ -1,4 +1,4 @@
-using FiscalLabService.App.Dtos;
+using FiscalLabService.App.Dtos.Shared;
 using FiscalLabService.App.Extensions;
 using FiscalLabService.App.Interfaces;
 using FiscalLabService.App.Models;
@@ -39,40 +39,40 @@ public class VisitService : IVisitService
         await _visitRepository.CreateManyAsync(visits);
         return Result<bool>.Success(true);
     }
-    
+
     public async Task<Result<bool>> UpsertAsync(List<VisitModel> visitModels)
     {
         var planIds = visitModels
-            .Select(x => x.BasicInformation.PlantId)
+            .Select(x => x.BasicInformation.Plant.Id)
             .ToList();
-        
+
         var plants = await _plantRepository.GetByIdsAsync(planIds);
-        
+
         var associationIds = visitModels
-            .Select(x => x.BasicInformation.AssociationId)
+            .Select(x => x.BasicInformation.Association.Id)
             .ToList();
         var associations = await _associationRepository.GetByIdsAsync(associationIds);
 
         var visits = visitModels
             .Select(x => x.AsVisit())
             .ToList();
-        
+
         visits.ForEach(x =>
         {
             x.BasicInformation.Plant = plants.Single(a => a.Id.Equals(x.BasicInformation.PlantId));
             x.BasicInformation.Association = associations.Single(a => a.Id.Equals(x.BasicInformation.AssociationId));
             x.SyncedAt = DateTime.UtcNow;
         });
-        
+
         var visitIds = visits
             .Where(v => v.Status != VisitStatus.Done)
             .Select(a => a.Id)
             .ToArray();
-        
+
         var existingVisits = await _visitRepository.GetByIdsAsync(visitIds);
         var toUpdateVisits = new List<Visit>();
         var toInsertVisits = new List<Visit>();
-        
+
         foreach (var visit in visits)
         {
             var toUpsertVisit = existingVisits.Find(a => a.Id.Equals(visit.Id));
@@ -87,7 +87,7 @@ public class VisitService : IVisitService
 
         await _visitRepository.UpdateManyAsync(toUpdateVisits);
         await _visitRepository.CreateManyAsync(toInsertVisits);
-        
+
         return Result<bool>.Success(true);
     }
 

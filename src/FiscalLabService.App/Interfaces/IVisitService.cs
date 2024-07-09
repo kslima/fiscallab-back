@@ -1,5 +1,7 @@
 ﻿using FiscalLabService.App.Dtos;
+using FiscalLabService.App.Dtos.Shared;
 using FiscalLabService.App.Models;
+using FiscalLabService.Domain.Entities;
 using FiscalLabService.Shared.Responses;
 
 namespace FiscalLabService.App.Interfaces;

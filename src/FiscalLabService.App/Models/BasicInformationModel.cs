@@ -1,9 +1,11 @@
+using FiscalLabService.App.Dtos.Shared;
+
 namespace FiscalLabService.App.Models;
 
 public class BasicInformationModel
 {
-    public string PlantId { get; set; } = null!;
-    public string AssociationId { get; set; } = null!;
+    public PlantDto Plant { get; set; } = null!;
+    public AssociationDto Association { get; set; } = null!;
     public string Consultant { get; set; } = string.Empty;
     public string Inspector { get; set; } = string.Empty;
     public string Leader { get; set; } = string.Empty;

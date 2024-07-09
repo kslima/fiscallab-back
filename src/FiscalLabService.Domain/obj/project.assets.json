@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Domain\\FiscalLabService.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Domain\\FiscalLabService.Domain.csproj",
       "projectName": "FiscalLabService.Domain",
-      "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Domain\\FiscalLabService.Domain.csproj",
+      "projectPath": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Domain\\FiscalLabService.Domain.csproj",
       "packagesPath": "C:\\Users\\kleuber.lima\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Domain\\obj\\",
+      "outputPath": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kleuber.lima\\AppData\\Roaming\\NuGet\\NuGet.Config",

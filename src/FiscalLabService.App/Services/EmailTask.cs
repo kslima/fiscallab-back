@@ -1,4 +1,5 @@
 using FiscalLabService.App.Documents;
+using FiscalLabService.App.Dtos.Shared;
 using FiscalLabService.App.Extensions;
 using FiscalLabService.App.Interfaces;
 using FiscalLabService.App.Models;
@@ -66,15 +67,26 @@ public class EmailTask : BackgroundService
         using var scope = _serviceScopeFactory.CreateScope();
         var visitRepository = scope.ServiceProvider.GetRequiredService<IVisitRepository>();
         var visitsToSend = await visitRepository.GetAllMarkedForMailing();
+        
+        var imageRepository = scope.ServiceProvider.GetRequiredService<IImageRepository>();
+
+        var visitIds = visitsToSend.Select(x => x.Id).ToList();
+        var images = await imageRepository.ListByVisitsAsync(visitIds);
+        
         _logger.LogInformation("Visits to send: {VisitToSend}", visitsToSend.Count);
         if (visitsToSend.Count == 0) return;
-
         var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
+        
         foreach (var visit in visitsToSend)
         {
             try
             {
-                var email = CreateEmail(visit);
+                var visitImages = images
+                    .Where(x => x.VisitId.Equals(visit.Id))
+                    .Select(x => x.MapToImage())
+                    .ToList();
+                
+                var email = CreateEmail(visit, visitImages);
                 await emailSender.SendEmailAsync(email);
                 await visitRepository.MarkAsSentByEmail(visit.Id);
             }
@@ -85,13 +97,13 @@ public class EmailTask : BackgroundService
             }
         }
     }
-    private EmailModel CreateEmail(Visit visit)
+    private EmailModel CreateEmail(Visit visit, List<ImageDto> images)
     {
         var bodyContent = File
             .ReadAllText(_emailTaskOptions.TemplatePath)
             .Replace("{greeting}", GetGreeting());
         
-        var pdf = new VisitDocument(visit.AsVisitDto());
+        var pdf = new VisitDocument(visit.AsVisitDto(), images);
         var pdfBytes = pdf.GeneratePdf();
         
         var attachment = new EmailAttachmentModel

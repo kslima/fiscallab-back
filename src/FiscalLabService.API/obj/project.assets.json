@@ -2057,7 +2057,10 @@
         },
         "runtime": {
           "bin/placeholder/FiscalLabService.App.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "FiscalLabService.Domain/1.0.0": {
         "type": "project",
@@ -5571,11 +5574,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.API\\FiscalLabService.API.csproj",
+      "projectUniqueName": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.API\\FiscalLabService.API.csproj",
       "projectName": "FiscalLabService.API",
-      "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.API\\FiscalLabService.API.csproj",
+      "projectPath": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.API\\FiscalLabService.API.csproj",
       "packagesPath": "C:\\Users\\kleuber.lima\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.API\\obj\\",
+      "outputPath": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kleuber.lima\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5592,14 +5595,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.App\\FiscalLabService.App.csproj": {
-              "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.App\\FiscalLabService.App.csproj"
+            "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.App\\FiscalLabService.App.csproj": {
+              "projectPath": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.App\\FiscalLabService.App.csproj"
             },
-            "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Identity\\FiscalLabService.Identity.csproj": {
-              "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Identity\\FiscalLabService.Identity.csproj"
+            "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Identity\\FiscalLabService.Identity.csproj": {
+              "projectPath": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Identity\\FiscalLabService.Identity.csproj"
             },
-            "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\FiscalLabService.Repository.PostgreSql.csproj": {
-              "projectPath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\FiscalLabService.Repository.PostgreSql.csproj"
+            "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\FiscalLabService.Repository.PostgreSql.csproj": {
+              "projectPath": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Repository.PostgreSql\\FiscalLabService.Repository.PostgreSql.csproj"
             }
           }
         }

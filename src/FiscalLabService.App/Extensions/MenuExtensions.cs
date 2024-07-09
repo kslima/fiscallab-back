@@ -1,4 +1,5 @@
 using FiscalLabService.App.Dtos;
+using FiscalLabService.App.Dtos.Shared;
 using FiscalLabService.Domain.Entities;
 
 namespace FiscalLabService.App.Extensions;

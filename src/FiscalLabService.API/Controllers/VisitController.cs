@@ -1,5 +1,6 @@
 ﻿using FiscalLabService.App.Documents;
 using FiscalLabService.App.Dtos.Request;
+using FiscalLabService.App.Dtos.Shared;
 using FiscalLabService.App.Extensions;
 using FiscalLabService.App.Interfaces;
 using FiscalLabService.App.Models;
@@ -17,11 +18,16 @@ public class VisitController : ControllerBase
 {
     private readonly IVisitService _visitService;
     private readonly IVisitRepository _visitRepository;
+    private readonly IImageService _imageService;
 
-    public VisitController(IVisitService visitService, IVisitRepository visitRepository)
+    public VisitController(
+        IVisitService visitService,
+        IVisitRepository visitRepository,
+        IImageService imageService)
     {
         _visitService = visitService;
         _visitRepository = visitRepository;
+        _imageService = imageService;
     }
 
     [HttpPost]
@@ -66,9 +72,54 @@ public class VisitController : ControllerBase
     public async Task<IActionResult> GeneratePdfAsync([FromRoute] string id)
     {
         var visit = await _visitService.GetByIdAsync(id);
+        var images = await _imageService.ListByVisitAsync(id);
+        var imageDtos = images.Data!
+            .Select(x => x.MapToImageDto())
+            .ToList();
         
-        var pdf = new VisitDocument(visit.Data!);
+        var pdf = new VisitDocument(visit.Data!, imageDtos);
         var pdfBytes = pdf.GeneratePdf();
         return File(pdfBytes, "application/pdf", "visit.pdf");
+    }
+    
+    [HttpPost("{id}/images")]
+    public async Task<IActionResult> ReplaceImagesAsync([FromRoute(Name = "id")] string visitId)
+    {
+        var images = new List<ImageDto>();
+        var formCollection = await Request.ReadFormAsync();
+        var files = formCollection.Files;
+        foreach (var file in files.Where(f => f.Length > 0))
+        {
+            var imageId = file.Name["file_".Length..];
+            var name = formCollection[$"name_{imageId}"].ToString();
+            var description = formCollection[$"description_{imageId}"].ToString();
+            
+            using var memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream);
+            images.Add(new ImageDto
+            {
+                Id = imageId,
+                Name = name,
+                Description = description,
+                Data = memoryStream.ToArray()
+            });
+        }
+
+        var response = await _imageService.ReplaceImagesAsync(visitId, images);
+        return Ok(response);
+    }
+    
+    [HttpGet("{id}/images")]
+    public async Task<IActionResult> ListImagesAsync([FromRoute(Name = "id")] string id)
+    {
+        var images = await _imageService.ListByVisitAsync(id);
+        return Ok(images);
+    }
+    
+    [HttpDelete("{id}/images/{imageId}")]
+    public async Task<IActionResult> DeleteImageAsync([FromRoute] string id, [FromRoute] string imageId)
+    {
+        var result = await _imageService.DeleteAsync(id, imageId);
+        return Accepted(result);
     }
 }

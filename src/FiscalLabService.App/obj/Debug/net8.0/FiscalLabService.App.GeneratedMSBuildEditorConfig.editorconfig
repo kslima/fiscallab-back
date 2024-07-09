@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FiscalLabService.App
-build_property.ProjectDir = C:\Users\kleuber.lima\Documents\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\
+build_property.ProjectDir = C:\Users\kleuber.lima\OneDrive\Documentos\development\grupoesdra\fiscallab-back\src\FiscalLabService.App\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

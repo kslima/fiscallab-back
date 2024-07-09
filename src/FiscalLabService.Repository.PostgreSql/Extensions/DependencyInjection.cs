@@ -20,8 +20,7 @@ public static class DependencyInjection
         
         var postgresOptions = LoadPostgresOptions(configuration);
         services.AddDbContext<ApplicationContext>(options =>
-            options.UseNpgsql(postgresOptions.ConnectionString,
-                    builder => { builder.EnableRetryOnFailure(2, TimeSpan.FromSeconds(5), null); })
+            options.UseNpgsql(postgresOptions.ConnectionString)
                 .EnableSensitiveDataLogging()
         );
         services.AddSingleton(postgresOptions);
@@ -37,6 +36,7 @@ public static class DependencyInjection
         services.AddScoped<IMenuRepository, MenuRepository>();
         services.AddScoped<IVisitPageRepository, VisitPageRepository>();
         services.AddScoped<IVisitRepository, VisitRepository>();
+        services.AddScoped<IImageRepository, ImageRepository>();
         
         return services;
     }

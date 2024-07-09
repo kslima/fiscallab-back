@@ -1,6 +1,7 @@
 using FiscalLabService.App.Dtos;
 using FiscalLabService.App.Dtos.Request;
 using FiscalLabService.App.Dtos.Response;
+using FiscalLabService.App.Dtos.Shared;
 using FiscalLabService.Domain.Entities;
 using FiscalLabService.Domain.ValueObjects;
 

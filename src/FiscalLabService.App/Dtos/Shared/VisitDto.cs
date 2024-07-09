@@ -1,6 +1,6 @@
 using FiscalLabService.Domain.Enums;
 
-namespace FiscalLabService.App.Dtos;
+namespace FiscalLabService.App.Dtos.Shared;
 
 public class VisitDto
 {
@@ -19,6 +19,5 @@ public class VisitDto
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? FinishedAt { get; set; }
     public DateTime? NotifiedByEmailAt { get; set; }
-    public List<ImageDto> Images { get; set; } = [];
     public List<BalanceTestDto> BalanceTests { get; set; } = [];
 }

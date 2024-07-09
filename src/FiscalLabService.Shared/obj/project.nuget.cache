@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WGXKbdMJ9qMrET7weAYx+jjwdk2UDc2zEVtb0TyUXqy3bSQ44JtVOJGELrz1p6OIJ0H2VpbSWLp0XLdKf9Fjjw==",
+  "dgSpecHash": "MVkjsgUcs4OPAvEBvNdOrb/HcBd2bgFDiI1aX/BVCQQ4AwuWkYkPziXVms+f7QNuDC8apSUl0aFxOitwHfg//w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kleuber.lima\\Documents\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Shared\\FiscalLabService.Shared.csproj",
+  "projectFilePath": "C:\\Users\\kleuber.lima\\OneDrive\\Documentos\\development\\grupoesdra\\fiscallab-back\\src\\FiscalLabService.Shared\\FiscalLabService.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "C:\\Users\\kleuber.lima\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

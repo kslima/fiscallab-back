@@ -1,6 +1,6 @@
 using FiscalLabService.Domain.Enums;
 
-namespace FiscalLabService.App.Dtos;
+namespace FiscalLabService.App.Dtos.Shared;
 
 public class SystemConsistencyDto
 {

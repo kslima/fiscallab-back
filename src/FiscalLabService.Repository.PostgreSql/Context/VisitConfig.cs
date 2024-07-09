@@ -47,35 +47,6 @@ public class VisitConfig : IEntityTypeConfiguration<Visit>
             .HasColumnName("notify_by_email");
         
         builder
-            .OwnsMany(a => a.Images, image =>
-            {
-                image.ToTable("visit_images");
-                
-                image
-                    .WithOwner()
-                    .HasForeignKey("visit_id");
-                
-                image.Property<int>("id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("integer")
-                    .UseIdentityByDefaultColumn();
-                
-                image.HasKey("id");
-                
-                image.Property(e => e.Name)
-                    .HasColumnName("name")
-                    .IsRequired();
-                
-                image.Property(e => e.Url)
-                    .HasColumnName("url")
-                    .IsRequired();
-                
-                image.Property(e => e.Description)
-                    .HasColumnName("description")
-                    .IsRequired();
-            });
-
-        builder
             .OwnsMany(a => a.BalanceTests, balanceTest =>
             {
                 balanceTest.ToTable("visit_balance_tests");

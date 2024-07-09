@@ -1,6 +1,6 @@
 ﻿using FiscalLabService.Domain.ValueObjects;
 
-namespace FiscalLabService.App.Dtos;
+namespace FiscalLabService.App.Dtos.Shared;
 
 public class BalanceTestDto
 {

@@ -55,7 +55,6 @@ public class VisitRepository : IVisitRepository
             visit.SystemConsistency = updatedVisit.SystemConsistency;
             visit.Conclusion = updatedVisit.Conclusion;
             visit.FinishedAt = updatedVisit.FinishedAt;
-            visit.Images = updatedVisit.Images;
             visit.BalanceTests = updatedVisit.BalanceTests;
             visit.SyncedAt = DateTime.UtcNow;
             visit.UpdatedAt = DateTime.UtcNow;
@@ -122,7 +121,6 @@ public class VisitRepository : IVisitRepository
         return await _context.Visits
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
-            .Include(v => v.Images)
             .Include(v => v.BalanceTests)
             .Where(x => x.NotifyByEmail)
             .Where(x => x.NotifiedByEmailAt == null)
@@ -135,7 +133,6 @@ public class VisitRepository : IVisitRepository
             .AsNoTracking()
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
-            .Include(v => v.Images)
             .Include(v => v.BalanceTests)
             .Where(p => ids.Contains(p.Id))
             .ToListAsync();
@@ -148,7 +145,6 @@ public class VisitRepository : IVisitRepository
             .Where(v => v.Status != VisitStatus.Done)
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
-            .Include(v => v.Images)
             .Include(v => v.BalanceTests)
             .OrderByDescending(x => x.CreatedAt)
             .Take(_visitOptions.DefaultPageSize)
@@ -169,7 +165,6 @@ public class VisitRepository : IVisitRepository
         return await query
             .Include(v => v.BasicInformation.Plant)
             .Include(v => v.BasicInformation.Association)
-            .Include(v => v.Images)
             .Include(v => v.BalanceTests)
             .OrderByDescending(s => s.CreatedAt)
             .ExecutePagedQueryAsync(parameters);

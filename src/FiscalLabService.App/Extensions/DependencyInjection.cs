@@ -30,6 +30,7 @@ public static class DependencyInjection
         services.AddScoped<IVisitPageService, VisitPageService>();
         services.AddScoped<IVisitService, VisitService>();
         services.AddScoped<ISyncService, SyncService>();
+        services.AddScoped<IImageService, ImageService>();
         
         var emailOptions = configuration
             .GetSection(nameof(EmailOptions))
@@ -57,7 +58,7 @@ public static class DependencyInjection
         
         services.AddScoped<IEmailSender, EmailSender>();
         
-        //services.AddHostedService<EmailTask>();
+        services.AddHostedService<EmailTask>();
         return services;
     }
 }

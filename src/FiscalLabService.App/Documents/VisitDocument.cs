@@ -1,12 +1,15 @@
-﻿using FiscalLabService.App.Dtos;
+﻿using FiscalLabService.App.Dtos.Shared;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
 namespace FiscalLabService.App.Documents;
 
-public class VisitDocument(VisitDto model) : IDocument
+public class VisitDocument(
+    VisitDto visit,
+    List<ImageDto> images) : IDocument
 {
-    private VisitDto Model { get; } = model;
+    private VisitDto Visit { get; } = visit;
+    private List<ImageDto> Images { get; } = images;
     public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
     public DocumentSettings GetSettings() => DocumentSettings.Default;
 
@@ -91,10 +94,7 @@ public class VisitDocument(VisitDto model) : IDocument
             column.Item().EnsureSpace().Element(ComposeBenchmarkingEquipment);
             column.Item().EnsureSpace().Element(ComposeResultComparison);
             column.Item().EnsureSpace().Element(ComposeConclusion);
-            foreach (var modelImage in Model.Images)
-            {
-                column.Item().EnsureSpace().Element(c => ComposeImages(c, modelImage));
-            }
+            column.Item().EnsureSpace().Element(ComposeImages);
         });
     }
 
@@ -121,17 +121,17 @@ public class VisitDocument(VisitDto model) : IDocument
 
                 table.Cell()
                     .ValueCell(
-                        $"{Model.BasicInformation.VisitDate.ToString("dd/MM/yyyy")} {Model.BasicInformation.VisitTime.ToString("HH:mm:ss")}");
-                table.Cell().ValueCell(Model.BasicInformation.Consultant);
-                table.Cell().ValueCell(Model.BasicInformation.Plant.Name);
-                table.Cell().ValueCell(Model.BasicInformation.Association.Name);
+                        $"{Visit.BasicInformation.VisitDate.ToString("dd/MM/yyyy")} {Visit.BasicInformation.VisitTime.ToString("HH:mm:ss")}");
+                table.Cell().ValueCell(Visit.BasicInformation.Consultant);
+                table.Cell().ValueCell(Visit.BasicInformation.Plant.Name);
+                table.Cell().ValueCell(Visit.BasicInformation.Association.Name);
 
                 table.Cell().SubLabelCell("Líder do Turno");
                 table.Cell().SubLabelCell("Fiscal do Turno");
                 table.Cell().ColumnSpan(2).SubLabelCell("Encarregado(a) Lab. Sacarose");
-                table.Cell().ValueCell(Model.BasicInformation.Leader);
-                table.Cell().ValueCell(Model.BasicInformation.Inspector);
-                table.Cell().ColumnSpan(2).ValueCell(Model.BasicInformation.LaboratoryLeader);
+                table.Cell().ValueCell(Visit.BasicInformation.Leader);
+                table.Cell().ValueCell(Visit.BasicInformation.Inspector);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.BasicInformation.LaboratoryLeader);
             });
     }
 
@@ -157,37 +157,37 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(2).SubLabelCell("Balança de Entrada");
                 table.Cell().ColumnSpan(2).SubLabelCell("Balança de Saída");
                 table.Cell().ColumnSpan(2).SubLabelCell("Sorteio de Cargas");
-                table.Cell().ColumnSpan(2).ValueCell(Model.SugarcaneBalance.InScale);
-                table.Cell().ColumnSpan(2).ValueCell(Model.SugarcaneBalance.OutScale);
-                table.Cell().ColumnSpan(2).ValueCell(Model.SugarcaneBalance.CargoDraw);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.SugarcaneBalance.InScale);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.SugarcaneBalance.OutScale);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.SugarcaneBalance.CargoDraw);
                 table.Cell().ColumnSpan(6).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(6).ValueCell(Model.SugarcaneBalance.ScaleObservations);
+                table.Cell().ColumnSpan(6).ValueCell(Visit.SugarcaneBalance.ScaleObservations);
 
                 table.Cell().ColumnSpan(6).LabelCell("Calibragens");
                 table.Cell().ColumnSpan(1).SubLabelCell("1º Calibração");
                 table.Cell().ColumnSpan(1).SubLabelCell("2º Calibração");
                 table.Cell().ColumnSpan(2).SubLabelCell("Orgão Responsavel");
                 table.Cell().ColumnSpan(2).SubLabelCell("Certificado de Calibração");
-                table.Cell().ColumnSpan(1).ValueCell(Model.SugarcaneBalance.Calibration1);
-                table.Cell().ColumnSpan(1).ValueCell(Model.SugarcaneBalance.Calibration2);
-                table.Cell().ColumnSpan(2).ValueCell(Model.SugarcaneBalance.ResponsibleBody);
-                table.Cell().ColumnSpan(2).ValueCell(Model.SugarcaneBalance.CalibrationCertificate);
+                table.Cell().ColumnSpan(1).ValueCell(Visit.SugarcaneBalance.Calibration1);
+                table.Cell().ColumnSpan(1).ValueCell(Visit.SugarcaneBalance.Calibration2);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.SugarcaneBalance.ResponsibleBody);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.SugarcaneBalance.CalibrationCertificate);
                 table.Cell().ColumnSpan(6).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(6).ValueCell(Model.SugarcaneBalance.Observations1);
+                table.Cell().ColumnSpan(6).ValueCell(Visit.SugarcaneBalance.Observations1);
 
                 table.Cell().ColumnSpan(6).LabelCell("Porcentagens Analisadas");
                 table.Cell().ColumnSpan(1).SubLabelCell("Usina");
                 table.Cell().ColumnSpan(1).SubLabelCell("Fornecedor");
                 table.Cell().ColumnSpan(2).SubLabelCell("Usina/Fazenda");
                 table.Cell().ColumnSpan(2).SubLabelCell("Fornecedor/Fazenda");
-                table.Cell().ColumnSpan(1).ValueCell(Model.SugarcaneBalance.PlantPercentage);
-                table.Cell().ColumnSpan(1).ValueCell(Model.SugarcaneBalance.ProviderPercentage);
-                table.Cell().ColumnSpan(2).ValueCell(Model.SugarcaneBalance.PlantFarmPercentage);
-                table.Cell().ColumnSpan(2).ValueCell(Model.SugarcaneBalance.FarmProviderPercentage);
+                table.Cell().ColumnSpan(1).ValueCell(Visit.SugarcaneBalance.PlantPercentage);
+                table.Cell().ColumnSpan(1).ValueCell(Visit.SugarcaneBalance.ProviderPercentage);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.SugarcaneBalance.PlantFarmPercentage);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.SugarcaneBalance.FarmProviderPercentage);
                 table.Cell().ColumnSpan(6).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(6).ValueCell(Model.SugarcaneBalance.Observations2);
+                table.Cell().ColumnSpan(6).ValueCell(Visit.SugarcaneBalance.Observations2);
 
-                if (Model.BalanceTests.Count == 0) return;
+                if (Visit.BalanceTests.Count == 0) return;
 
                 table.Cell().ColumnSpan(6).LabelCell("Testes");
                 table.Cell().SubLabelCell("Placa");
@@ -195,7 +195,7 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(2).SubLabelCell("Saída");
                 table.Cell().SubLabelCell("Variação");
 
-                foreach (var modelBalanceTest in Model.BalanceTests)
+                foreach (var modelBalanceTest in Visit.BalanceTests)
                 {
                     table.Cell().ValueCell(modelBalanceTest.Identification);
                     table.Cell().ColumnSpan(2).DecimalValueCell(modelBalanceTest.InputBalanceWeight);
@@ -229,21 +229,21 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().SubLabelCell("Descarrega tubo após furo");
                 table.Cell().SubLabelCell("Coleta");
                 table.Cell().SubLabelCell("Quantidade de amostra suficiente");
-                table.Cell().ValueCell(Model.DesintegratorProbe.ProbeType);
-                table.Cell().ValueCell(Model.DesintegratorProbe.TubeInserted);
-                table.Cell().ValueCell(Model.DesintegratorProbe.TubeDischarged);
-                table.Cell().ValueCell(Model.DesintegratorProbe.Collect);
-                table.Cell().ValueCell(Model.DesintegratorProbe.SampleAmount);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.ProbeType);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.TubeInserted);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.TubeDischarged);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.Collect);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.SampleAmount);
                 table.Cell().SubLabelCell("Extração do caldo");
                 table.Cell().SubLabelCell("Posição da carga");
                 table.Cell().SubLabelCell("Coroa dentada");
                 table.Cell().ColumnSpan(2).SubLabelCell("Tipo coroa");
-                table.Cell().ValueCell(Model.DesintegratorProbe.BrothExtraction);
-                table.Cell().ValueCell(Model.DesintegratorProbe.LoadPosition);
-                table.Cell().ValueCell(Model.DesintegratorProbe.ToothedCrown);
-                table.Cell().ColumnSpan(2).ValueCell(Model.DesintegratorProbe.ToothedCrownType);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.BrothExtraction);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.LoadPosition);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.ToothedCrown);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.DesintegratorProbe.ToothedCrownType);
                 table.Cell().ColumnSpan(5).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(5).ValueCell(Model.DesintegratorProbe.Observations3);
+                table.Cell().ColumnSpan(5).ValueCell(Visit.DesintegratorProbe.Observations3);
 
 
                 table.Cell().ColumnSpan(5).LabelCell("Desintegrador");
@@ -252,24 +252,24 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().SubLabelCell("Conservação facas");
                 table.Cell().SubLabelCell("RPM do Desintegrador");
                 table.Cell().SubLabelCell("Conservaçao contra-faca");
-                table.Cell().ValueCell(Model.DesintegratorProbe.HomogeneousSamples);
-                table.Cell().ValueCell(Model.DesintegratorProbe.CleanMixer);
-                table.Cell().ValueCell(Model.DesintegratorProbe.KnifeConservation);
-                table.Cell().ValueCell(Model.DesintegratorProbe.DesintegratorRpm);
-                table.Cell().ValueCell(Model.DesintegratorProbe.AgainstKnifeConservation);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.HomogeneousSamples);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.CleanMixer);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.KnifeConservation);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.DesintegratorRpm);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.AgainstKnifeConservation);
                 table.Cell().SubLabelCell("Índice de preparo");
                 table.Cell().SubLabelCell("Distância faca/contra-faca");
                 table.Cell().SubLabelCell("Ultima troca navalhas");
                 table.Cell().ColumnSpan(2).SubLabelCell("Conservação martelo");
-                table.Cell().ValueCell(Model.DesintegratorProbe.PreparationIndex);
-                table.Cell().ValueCell(Model.DesintegratorProbe.KnifeAgainstKnifeDistance);
-                var sharpenedOrReplacedKnifeAt = Model.DesintegratorProbe.SharpenedOrReplacedKnifeAt == null
+                table.Cell().ValueCell(Visit.DesintegratorProbe.PreparationIndex);
+                table.Cell().ValueCell(Visit.DesintegratorProbe.KnifeAgainstKnifeDistance);
+                var sharpenedOrReplacedKnifeAt = Visit.DesintegratorProbe.SharpenedOrReplacedKnifeAt == null
                     ? "-"
-                    : Model.DesintegratorProbe.SharpenedOrReplacedKnifeAt.Value.ToString("dd/MM/yyyy");
+                    : Visit.DesintegratorProbe.SharpenedOrReplacedKnifeAt.Value.ToString("dd/MM/yyyy");
                 table.Cell().ValueCell(sharpenedOrReplacedKnifeAt);
-                table.Cell().ColumnSpan(2).ValueCell(Model.DesintegratorProbe.HammerConservation);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.DesintegratorProbe.HammerConservation);
                 table.Cell().ColumnSpan(5).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(5).ValueCell(Model.DesintegratorProbe.Observations4);
+                table.Cell().ColumnSpan(5).ValueCell(Visit.DesintegratorProbe.Observations4);
             });
     }
 
@@ -296,19 +296,19 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().SubLabelCell("Balança aferida");
                 table.Cell().SubLabelCell("Balança nivelada");
                 table.Cell().SubLabelCell("Balança com certificado de calibração");
-                table.Cell().ValueCell(Model.AnalyticalBalance.HomogeneousWeight);
-                table.Cell().ValueCell(Model.AnalyticalBalance.FinalWeight);
-                table.Cell().ValueCell(Model.AnalyticalBalance.CalibratedBalance);
-                table.Cell().ValueCell(Model.AnalyticalBalance.LeveledBalance);
-                table.Cell().ValueCell(Model.AnalyticalBalance.CalibrationCertificateBalance);
+                table.Cell().ValueCell(Visit.AnalyticalBalance.HomogeneousWeight);
+                table.Cell().ValueCell(Visit.AnalyticalBalance.FinalWeight);
+                table.Cell().ValueCell(Visit.AnalyticalBalance.CalibratedBalance);
+                table.Cell().ValueCell(Visit.AnalyticalBalance.LeveledBalance);
+                table.Cell().ValueCell(Visit.AnalyticalBalance.CalibrationCertificateBalance);
                 table.Cell().ColumnSpan(5).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(5).ValueCell(Model.AnalyticalBalance.Observations6);
+                table.Cell().ColumnSpan(5).ValueCell(Visit.AnalyticalBalance.Observations6);
 
                 table.Cell().ColumnSpan(5).LabelCell("Temperatura");
                 table.Cell().ColumnSpan(1).SubLabelCell("Média (20ºC ± 5)");
-                table.Cell().ColumnSpan(4).ValueCell(Model.AnalyticalBalance.AverageAmbientTemperature);
+                table.Cell().ColumnSpan(4).ValueCell(Visit.AnalyticalBalance.AverageAmbientTemperature);
                 table.Cell().ColumnSpan(5).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(5).ValueCell(Model.AnalyticalBalance.Observations5);
+                table.Cell().ColumnSpan(5).ValueCell(Visit.AnalyticalBalance.Observations5);
             });
     }
 
@@ -337,14 +337,14 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().SubLabelCell("Pressão");
                 table.Cell().SubLabelCell("Temporizador");
                 table.Cell().SubLabelCell("Limpeza da prensa");
-                table.Cell().ValueCell(Model.PressRefractometer.PressureGaugeCertificated);
-                table.Cell().ValueCell(Model.PressRefractometer.DiscardCup);
-                table.Cell().ValueCell(Model.PressRefractometer.CollectorBottle);
-                table.Cell().ValueCell(Model.PressRefractometer.Pressure);
-                table.Cell().ValueCell(Model.PressRefractometer.Timer);
-                table.Cell().ValueCell(Model.PressRefractometer.PressCleaning);
+                table.Cell().ValueCell(Visit.PressRefractometer.PressureGaugeCertificated);
+                table.Cell().ValueCell(Visit.PressRefractometer.DiscardCup);
+                table.Cell().ValueCell(Visit.PressRefractometer.CollectorBottle);
+                table.Cell().ValueCell(Visit.PressRefractometer.Pressure);
+                table.Cell().ValueCell(Visit.PressRefractometer.Timer);
+                table.Cell().ValueCell(Visit.PressRefractometer.PressCleaning);
                 table.Cell().ColumnSpan(6).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(6).ValueCell(Model.PressRefractometer.Observations7);
+                table.Cell().ColumnSpan(6).ValueCell(Visit.PressRefractometer.Observations7);
 
                 table.Cell().ColumnSpan(6).LabelCell("Refratômetro");
                 table.Cell().SubLabelCell("Hômogenização do caldo");
@@ -353,14 +353,14 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().SubLabelCell("Aferição");
                 table.Cell().SubLabelCell("Limpeza");
                 table.Cell().SubLabelCell("Temperatura interna");
-                table.Cell().ValueCell(Model.PressRefractometer.BrothHomogenization);
-                table.Cell().ValueCell(Model.PressRefractometer.RefractometerCalibrationCertificate);
-                table.Cell().ValueCell(Model.PressRefractometer.PrecisionReading);
-                table.Cell().ValueCell(Model.PressRefractometer.BrothHomogenization);
-                table.Cell().ValueCell(Model.PressRefractometer.PressCleaning);
-                table.Cell().ValueCell(Model.PressRefractometer.InternalTemperature);
+                table.Cell().ValueCell(Visit.PressRefractometer.BrothHomogenization);
+                table.Cell().ValueCell(Visit.PressRefractometer.RefractometerCalibrationCertificate);
+                table.Cell().ValueCell(Visit.PressRefractometer.PrecisionReading);
+                table.Cell().ValueCell(Visit.PressRefractometer.BrothHomogenization);
+                table.Cell().ValueCell(Visit.PressRefractometer.PressCleaning);
+                table.Cell().ValueCell(Visit.PressRefractometer.InternalTemperature);
                 table.Cell().ColumnSpan(6).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(6).ValueCell(Model.PressRefractometer.Observations8);
+                table.Cell().ColumnSpan(6).ValueCell(Visit.PressRefractometer.Observations8);
             });
     }
 
@@ -385,18 +385,18 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().SubLabelCell("Agitação");
                 table.Cell().SubLabelCell("Houve diluição");
                 table.Cell().SubLabelCell("Clarificante");
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.Bottle);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.Agitation);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.HasDilution);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.Clarifier);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.Bottle);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.Agitation);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.HasDilution);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.Clarifier);
                 table.Cell().ColumnSpan(2).SubLabelCell("Qtd. de clarificante (200ml)");
                 table.Cell().SubLabelCell("Volume clarificado");
                 table.Cell().SubLabelCell("100ml após limpeza do sacarimetro");
-                table.Cell().ColumnSpan(2).ValueCell(Model.ClarificationSaccharimeter.ClarifierAmount);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.BottleClarifiedVolume);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.BottleAfterClarifiedVolume);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.ClarificationSaccharimeter.ClarifierAmount);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.BottleClarifiedVolume);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.BottleAfterClarifiedVolume);
                 table.Cell().ColumnSpan(4).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(4).ValueCell(Model.ClarificationSaccharimeter.Observations9);
+                table.Cell().ColumnSpan(4).ValueCell(Visit.ClarificationSaccharimeter.Observations9);
 
                 table.Cell().ColumnSpan(4).ColumnSpan(4).LabelCell("Sacarímetro");
 
@@ -404,20 +404,20 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().SubLabelCell("Aferição");
                 table.Cell().SubLabelCell("Padrão quartzo");
                 table.Cell().SubLabelCell("Resultado quartzo");
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.Stabilization);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.Benchmarking);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.QuartzPattern);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.QuartzResult);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.Stabilization);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.Benchmarking);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.QuartzPattern);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.QuartzResult);
                 table.Cell().SubLabelCell("Leitura quartzo");
                 table.Cell().SubLabelCell("Certificado de calibração");
                 table.Cell().SubLabelCell("Limpeza tubo");
                 table.Cell().SubLabelCell("Cooler de resfriamento limpo");
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.QuartzReading);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.CalibrationCertificate);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.TubeCleaning);
-                table.Cell().ValueCell(Model.ClarificationSaccharimeter.ClearCollingCooler);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.QuartzReading);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.CalibrationCertificate);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.TubeCleaning);
+                table.Cell().ValueCell(Visit.ClarificationSaccharimeter.ClearCollingCooler);
                 table.Cell().ColumnSpan(4).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(4).ValueCell(Model.ClarificationSaccharimeter.Observations10);
+                table.Cell().ColumnSpan(4).ValueCell(Visit.ClarificationSaccharimeter.Observations10);
             });
     }
 
@@ -450,10 +450,10 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(2).SubLabelCell("Tacômetro");
                 table.Cell().ColumnSpan(2).SubLabelCell("Paquímetro");
 
-                table.Cell().ColumnSpan(3).ValueCell(Model.BenchmarkingEquipment.LoadCell);
-                table.Cell().ColumnSpan(3).ValueCell(Model.BenchmarkingEquipment.Thermometer);
-                table.Cell().ColumnSpan(2).ValueCell(Model.BenchmarkingEquipment.Tachometer);
-                table.Cell().ColumnSpan(2).ValueCell(Model.BenchmarkingEquipment.Pachymeter);
+                table.Cell().ColumnSpan(3).ValueCell(Visit.BenchmarkingEquipment.LoadCell);
+                table.Cell().ColumnSpan(3).ValueCell(Visit.BenchmarkingEquipment.Thermometer);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.BenchmarkingEquipment.Tachometer);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.BenchmarkingEquipment.Pachymeter);
 
 
                 table.Cell().ColumnSpan(10).LabelCell("Pesos Padrões");
@@ -461,9 +461,9 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(3).SubLabelCell("100gm");
                 table.Cell().ColumnSpan(3).SubLabelCell("1gm");
 
-                table.Cell().ColumnSpan(4).ValueCell(Model.BenchmarkingEquipment.Gm500);
-                table.Cell().ColumnSpan(3).ValueCell(Model.BenchmarkingEquipment.Gm100);
-                table.Cell().ColumnSpan(3).ValueCell(Model.BenchmarkingEquipment.Gm1);
+                table.Cell().ColumnSpan(4).ValueCell(Visit.BenchmarkingEquipment.Gm500);
+                table.Cell().ColumnSpan(3).ValueCell(Visit.BenchmarkingEquipment.Gm100);
+                table.Cell().ColumnSpan(3).ValueCell(Visit.BenchmarkingEquipment.Gm1);
 
                 table.Cell().ColumnSpan(4).LabelCell("Linearidade/Repetitividade-Sacarose(PA)");
                 table.Cell().ColumnSpan(6).LabelCell("Refratômetro(Faixa)");
@@ -473,11 +473,11 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(2).SubLabelCell("20º");
                 table.Cell().ColumnSpan(2).SubLabelCell("30º");
 
-                table.Cell().ColumnSpan(4).ValueCell(Model.BenchmarkingEquipment.SucroseTest);
+                table.Cell().ColumnSpan(4).ValueCell(Visit.BenchmarkingEquipment.SucroseTest);
 
-                table.Cell().ColumnSpan(2).ValueCell(Model.BenchmarkingEquipment.Range10);
-                table.Cell().ColumnSpan(2).ValueCell(Model.BenchmarkingEquipment.Range20);
-                table.Cell().ColumnSpan(2).ValueCell(Model.BenchmarkingEquipment.Range30);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.BenchmarkingEquipment.Range10);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.BenchmarkingEquipment.Range20);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.BenchmarkingEquipment.Range30);
 
 
                 table.Cell().ColumnSpan(10).LabelCell("Sacarímetro");
@@ -487,12 +487,12 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(3).SubLabelCell("75z");
                 table.Cell().ColumnSpan(3).SubLabelCell("100z");
 
-                table.Cell().ColumnSpan(2).ValueCell(Model.BenchmarkingEquipment.Z25);
-                table.Cell().ColumnSpan(2).ValueCell(Model.BenchmarkingEquipment.Z50);
-                table.Cell().ColumnSpan(3).ValueCell(Model.BenchmarkingEquipment.Z75);
-                table.Cell().ColumnSpan(3).ValueCell(Model.BenchmarkingEquipment.Z100);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.BenchmarkingEquipment.Z25);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.BenchmarkingEquipment.Z50);
+                table.Cell().ColumnSpan(3).ValueCell(Visit.BenchmarkingEquipment.Z75);
+                table.Cell().ColumnSpan(3).ValueCell(Visit.BenchmarkingEquipment.Z100);
                 table.Cell().ColumnSpan(10).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(10).ValueCell(Model.BenchmarkingEquipment.Observations11);
+                table.Cell().ColumnSpan(10).ValueCell(Visit.BenchmarkingEquipment.Observations11);
 
                 table.Cell().ColumnSpan(10).LabelCell("Moagem");
                 table.Cell().ColumnSpan(2).SubLabelCell("Previsto");
@@ -501,11 +501,11 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(2).SubLabelCell("Safra Passada");
                 table.Cell().ColumnSpan(2).SubLabelCell("Variação Entre Safras");
 
-                table.Cell().ColumnSpan(2).DecimalValueCell(Model.BenchmarkingEquipment.ExpectedCrop);
-                table.Cell().ColumnSpan(2).DecimalValueCell(Model.BenchmarkingEquipment.AccomplishedCrop);
-                table.Cell().ColumnSpan(2).DecimalValueCell(Model.BenchmarkingEquipment.PercentageRealized);
-                table.Cell().ColumnSpan(2).DecimalValueCell(Model.BenchmarkingEquipment.PreviousCrop);
-                table.Cell().ColumnSpan(2).DecimalValueCell(Model.BenchmarkingEquipment.VariationBetweenCrops);
+                table.Cell().ColumnSpan(2).DecimalValueCell(Visit.BenchmarkingEquipment.ExpectedCrop);
+                table.Cell().ColumnSpan(2).DecimalValueCell(Visit.BenchmarkingEquipment.AccomplishedCrop);
+                table.Cell().ColumnSpan(2).DecimalValueCell(Visit.BenchmarkingEquipment.PercentageRealized);
+                table.Cell().ColumnSpan(2).DecimalValueCell(Visit.BenchmarkingEquipment.PreviousCrop);
+                table.Cell().ColumnSpan(2).DecimalValueCell(Visit.BenchmarkingEquipment.VariationBetweenCrops);
 
                 table.Cell().ColumnSpan(10).LabelCell("Resultados Analíticos");
 
@@ -515,14 +515,14 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(3).SubLabelCell("Variação");
 
                 table.Cell().ColumnSpan(1).SubLabelCell("Fibra");
-                table.Cell().ColumnSpan(3).DecimalValueCell(Model.BenchmarkingEquipment.CurrentFiber);
-                table.Cell().ColumnSpan(3).DecimalValueCell(Model.BenchmarkingEquipment.PreviousFiber);
-                table.Cell().ColumnSpan(3).DecimalValueCell(Model.BenchmarkingEquipment.FiberVariation);
+                table.Cell().ColumnSpan(3).DecimalValueCell(Visit.BenchmarkingEquipment.CurrentFiber);
+                table.Cell().ColumnSpan(3).DecimalValueCell(Visit.BenchmarkingEquipment.PreviousFiber);
+                table.Cell().ColumnSpan(3).DecimalValueCell(Visit.BenchmarkingEquipment.FiberVariation);
 
                 table.Cell().ColumnSpan(1).SubLabelCell("ATR");
-                table.Cell().ColumnSpan(3).DecimalValueCell(Model.BenchmarkingEquipment.CurrentAtr);
-                table.Cell().ColumnSpan(3).DecimalValueCell(Model.BenchmarkingEquipment.PreviousAtr);
-                table.Cell().ColumnSpan(3).DecimalValueCell(Model.BenchmarkingEquipment.AtrVariation);
+                table.Cell().ColumnSpan(3).DecimalValueCell(Visit.BenchmarkingEquipment.CurrentAtr);
+                table.Cell().ColumnSpan(3).DecimalValueCell(Visit.BenchmarkingEquipment.PreviousAtr);
+                table.Cell().ColumnSpan(3).DecimalValueCell(Visit.BenchmarkingEquipment.AtrVariation);
             });
     }
 
@@ -554,13 +554,16 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().ColumnSpan(1).SubLabelCell("BRIX");
                 table.Cell().ColumnSpan(1).SubLabelCell("Leitura Sacarimétrica");
 
-                table.Cell().ColumnSpan(1).ValueCell(Model.SystemConsistency.Oc);
-                table.Cell().ColumnSpan(1).ValueCell(Model.SystemConsistency.Farm);
-                table.Cell().ColumnSpan(1).ValueCell(Model.SystemConsistency.Owner);
-                table.Cell().ColumnSpan(1).ValueCell(Model.SystemConsistency.Clarifier.ToString());
-                table.Cell().ColumnSpan(1).DecimalValueCell(Model.SystemConsistency.PlantSugarcaneAnalysis.Pbu);
-                table.Cell().ColumnSpan(1).DecimalValueCell(Model.SystemConsistency.PlantSugarcaneAnalysis.Brix);
-                table.Cell().ColumnSpan(1).DecimalValueCell(Model.SystemConsistency.PlantSugarcaneAnalysis.Ls);
+                table.Cell().ColumnSpan(1).ValueCell(Visit.SystemConsistency.Oc);
+                table.Cell().ColumnSpan(1).ValueCell(Visit.SystemConsistency.Farm);
+                table.Cell().ColumnSpan(1).ValueCell(Visit.SystemConsistency.Owner);
+                table.Cell().ColumnSpan(1)
+                    .ValueCell((Visit.SystemConsistency.Clarifier == null
+                        ? string.Empty
+                        : Visit.SystemConsistency.Clarifier.ToString()) ?? string.Empty);
+                table.Cell().ColumnSpan(1).DecimalValueCell(Visit.SystemConsistency.PlantSugarcaneAnalysis.Pbu);
+                table.Cell().ColumnSpan(1).DecimalValueCell(Visit.SystemConsistency.PlantSugarcaneAnalysis.Brix);
+                table.Cell().ColumnSpan(1).DecimalValueCell(Visit.SystemConsistency.PlantSugarcaneAnalysis.Ls);
 
                 table.Cell().SubLabelCell(string.Empty);
                 table.Cell().SubLabelCell("Pureza");
@@ -571,31 +574,31 @@ public class VisitDocument(VisitDto model) : IDocument
                 table.Cell().SubLabelCell("ATR");
 
                 table.Cell().SubLabelCell("Usina");
-                table.Cell().DecimalValueCell(Model.SystemConsistency.PlantSugarcaneAnalysis.Purity);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.PlantSugarcaneAnalysis.Pol);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.PlantSugarcaneAnalysis.Fiber);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.PlantSugarcaneAnalysis.Pcc);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.PlantSugarcaneAnalysis.Ar);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.PlantSugarcaneAnalysis.Atr);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.PlantSugarcaneAnalysis.Purity);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.PlantSugarcaneAnalysis.Pol);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.PlantSugarcaneAnalysis.Fiber);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.PlantSugarcaneAnalysis.Pcc);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.PlantSugarcaneAnalysis.Ar);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.PlantSugarcaneAnalysis.Atr);
 
                 table.Cell().SubLabelCell("Consecana");
-                table.Cell().DecimalValueCell(Model.SystemConsistency.ConsecanaSugarcaneAnalysis.Purity);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.ConsecanaSugarcaneAnalysis.Pol);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.ConsecanaSugarcaneAnalysis.Fiber);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.ConsecanaSugarcaneAnalysis.Pcc);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.ConsecanaSugarcaneAnalysis.Ar);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.ConsecanaSugarcaneAnalysis.Atr);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.ConsecanaSugarcaneAnalysis.Purity);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.ConsecanaSugarcaneAnalysis.Pol);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.ConsecanaSugarcaneAnalysis.Fiber);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.ConsecanaSugarcaneAnalysis.Pcc);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.ConsecanaSugarcaneAnalysis.Ar);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.ConsecanaSugarcaneAnalysis.Atr);
 
                 table.Cell().SubLabelCell("Variação");
-                table.Cell().DecimalValueCell(Model.SystemConsistency.DifferencePurity);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.DifferencePol);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.DifferenceFiber);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.DifferencePcc);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.DifferenceAr);
-                table.Cell().DecimalValueCell(Model.SystemConsistency.DifferenceAtr);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.DifferencePurity);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.DifferencePol);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.DifferenceFiber);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.DifferencePcc);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.DifferenceAr);
+                table.Cell().DecimalValueCell(Visit.SystemConsistency.DifferenceAtr);
 
                 table.Cell().ColumnSpan(7).SubLabelCell("Observações");
-                table.Cell().ColumnSpan(7).ValueCell(Model.SystemConsistency.Observations);
+                table.Cell().ColumnSpan(7).ValueCell(Visit.SystemConsistency.Observations);
             });
     }
 
@@ -615,30 +618,64 @@ public class VisitDocument(VisitDto model) : IDocument
 
                 table.Cell().ColumnSpan(1).SubLabelCell("Desempenho do Fiscal");
                 table.Cell().ColumnSpan(1).SubLabelCell("Desempenho Laboratório");
-                table.Cell().ColumnSpan(1).ValueCell(Model.Conclusion.InspectorPerformance);
-                table.Cell().ColumnSpan(1).ValueCell(Model.Conclusion.LaboratoryReceptivity);
+                table.Cell().ColumnSpan(1).ValueCell(Visit.Conclusion.InspectorPerformance);
+                table.Cell().ColumnSpan(1).ValueCell(Visit.Conclusion.LaboratoryReceptivity);
 
                 table.Cell().ColumnSpan(2).SubLabelCell("Pendências");
-                table.Cell().ColumnSpan(2).ValueCell(Model.Conclusion.Pendencies);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.Conclusion.Pendencies);
 
                 table.Cell().ColumnSpan(2).SubLabelCell("Observações Sobre a Visita");
-                table.Cell().ColumnSpan(2).ValueCell(Model.Conclusion.Observations);
+                table.Cell().ColumnSpan(2).ValueCell(Visit.Conclusion.Observations);
             });
     }
 
-    private void ComposeImages(IContainer container, ImageDto image)
+    private void ComposeImages(IContainer container)
     {
-        var imageBytes = Convert.FromBase64String(image.Url.Split(",")[1]);
         container
-            .Table(table =>
+            .Column(column =>
             {
-                table.ColumnsDefinition(columns => { columns.RelativeColumn(); });
+                column.Spacing(10);
+                for (var i = 0; i < Images.Count; i += 2)
+                {
+                    var i2 = i;
+                    column.Item().Row(row =>
+                    {
+                        row.Spacing(10);
 
-                table.ExtendLastCellsToTableBottom();
+                        var i1 = i2;
+                        row.RelativeItem()
+                            .Column(innerColumn =>
+                            {
+                                row.Spacing(20);
+                                innerColumn
+                                    .Item()
+                                    .Border(0.3f)
+                                    .Image(Images[i1].Data);
+                                innerColumn.Item()
+                                    .ValueCell(Images[i1].Description);
+                            });
 
-                table.Cell().AlignCenter().Width(5, Unit.Inch).Image(imageBytes).WithCompressionQuality(ImageCompressionQuality.High);
-                table.Cell().AlignCenter().Width(5, Unit.Inch).SubLabelCell("Descrição");
-                table.Cell().AlignCenter().Width(5, Unit.Inch).ValueCell(image.Description);
+                        if (i2 + 1 < Images.Count)
+                        {
+                            row.RelativeItem()
+                                .Column(innerColumn =>
+                                {
+                                    row.Spacing(10);
+                                    innerColumn
+                                        .Item()
+                                        .Border(0.3f)
+                                        .Image(Images[i2 + 1].Data);
+                                    innerColumn
+                                        .Item()
+                                        .ValueCell(Images[i2 + 1].Description);
+                                });
+                        }
+                        else
+                        {
+                            row.RelativeItem();
+                        }
+                    });
+                }
             });
     }
 

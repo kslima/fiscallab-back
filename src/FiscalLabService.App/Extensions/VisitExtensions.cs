@@ -1,4 +1,5 @@
 using FiscalLabService.App.Dtos;
+using FiscalLabService.App.Dtos.Shared;
 using FiscalLabService.App.Models;
 using FiscalLabService.Domain.Entities;
 using FiscalLabService.Domain.ValueObjects;
@@ -26,12 +27,6 @@ public static class VisitExtensions
             NotifiedByEmailAt = source.NotifiedByEmailAt,
             CreatedAt = source.CreatedAt,
             FinishedAt = source.FinishedAt,
-            Images = source.Images.Select(i => new ImageDto
-            {
-                Name = i.Name,
-                Url = i.Url,
-                Description = i.Description
-            }).ToList(),
             BalanceTests = source.BalanceTests.Select(i => new BalanceTestDto(i)).ToList()
         };
     }
@@ -257,7 +252,7 @@ public static class VisitExtensions
             BenchmarkingEquipment = source.BenchmarkingEquipment.AsBenchmarkingEquipment(),
             SystemConsistency = source.SystemConsistency.AsSystemConsistency(),
             Conclusion = source.Conclusion.AsConclusion(),
-            CreatedAt = source.CreatedAt,
+            CreatedAt = source.CreatedAt.ToUniversalTime(),
             NotifyByEmail = source.NotifyByEmail,
             SyncedAt = source.SyncedAt,
             FinishedAt = source.FinishedAt,
@@ -270,8 +265,8 @@ public static class VisitExtensions
     {
         return new BasicInformation
         {
-            PlantId = source.PlantId,
-            AssociationId = source.AssociationId,
+            PlantId = source.Plant.Id,
+            AssociationId = source.Association.Id,
             Consultant = source.Consultant,
             Inspector = source.Inspector,
             Leader = source.Leader,
@@ -324,7 +319,7 @@ public static class VisitExtensions
             CleanMixer = source.CleanMixer,
             DesintegratorRpm = source.DesintegratorRpm,
             PreparationIndex = source.PreparationIndex,
-            SharpenedOrReplacedKnifeAt = source.SharpenedOrReplacedKnifeAt,
+            SharpenedOrReplacedKnifeAt = source.SharpenedOrReplacedKnifeAt?.ToUniversalTime(),
             Observations4 = source.Observations4,
         };
     }
